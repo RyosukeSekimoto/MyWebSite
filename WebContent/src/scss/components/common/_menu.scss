@@ -1,0 +1,20 @@
+.Menu {
+  display: flex;
+  justify-content: flex-end;
+  &__item {
+    display: block;
+    padding-left: $space-unit * 2;
+    color: $color-main-text;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: capitalize;
+    @include mq-sp {
+      font-size: 1.2rem;
+      padding-left: $space-unit;
+    }
+  }
+  &__item--white {
+    color: $color-white;
+  }
+}

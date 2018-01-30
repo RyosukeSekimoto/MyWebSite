@@ -1,0 +1,35 @@
+.purchaseResultTitle {
+    @include mq-sp {
+      font-size: 2.2rem;
+      margin: $space-unit 0;
+    };
+}
+
+.purchaseResultSummary {
+    width: 720px;
+    padding: 0 $space-unit / 2;
+    text-align: center;
+    @include mq-sp {
+      width: 100%;
+    }
+    & th {
+      padding-bottom: 5px;
+      font-size: 1.4rem;
+      @include mq-sp {
+        padding-bottom: 8px;
+      };
+    }
+    & td {
+      font-size: 1.8rem;
+      @include mq-sp {
+        font-size: 1.6rem;
+      }
+    }
+    & td:last-child {
+      @include price-font;
+    }
+    & th,
+    & td {
+      width: 33.333333%;
+    }
+}

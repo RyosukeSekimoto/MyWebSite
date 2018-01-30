@@ -1,0 +1,17 @@
+.Footer {
+    height: 80px;
+    border-top: 1px solid $color-line;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space-unit / 2;
+    color: $color-main-text;
+    &__head {
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    @include mq-sp {
+      height: 60px;
+    };
+}

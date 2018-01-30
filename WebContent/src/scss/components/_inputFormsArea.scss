@@ -1,0 +1,90 @@
+.InputFormsArea {
+  width: 580px;
+  margin: $space-unit auto 0;
+  font-size: 1.4rem;
+  background-color: $color-base-second;
+  padding: 40px $space-unit * 3 $space-unit;
+  @include mq-sp {
+    width: 100%;
+    margin: 0;
+    padding: $space-unit $space-unit / 2 $space-unit;
+  }
+  &__title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: normal;
+    margin-bottom: $space-unit;
+    &.reviewProductName {
+      font-size: 1.8rem;
+      text-align: left;
+      & span {
+        font-weight: bold;
+      }
+    }
+  }
+  &__formList {
+    margin-bottom: $space-unit * 2;
+  }
+  &__formItem {
+    margin-bottom: $space-unit;
+    & p {
+      font-weight: bold;
+      margin-bottom: $space-unit / 5;
+    }
+    & input[type="text"],
+    & input[type="password"],
+    & input[type="date"] {
+      display: block;
+      border: 1px solid $color-line;
+      background-color: $color-base;
+      width: 100%;
+      height: 44px;
+      font-size: 1.6rem;
+      padding: 8px 10px;
+    }
+    & select {
+      width: 100%;
+      height: 44px;
+      font-size: 1.6rem;
+      padding: 8px 10px;
+      border-radius: 0;
+      border: 1px solid $color-line;
+      background-color: $color-base;
+      outline: none;
+    }
+    & textarea {
+      width: 100%;
+      height: 150px;
+      font-size: 1.4rem;
+      padding: 8px 10px;
+      border: 1px solid $color-line;
+      background-color: $color-base;
+      outline: none;
+    }
+    & input[type="file"] {
+      font-size: 1.2rem;
+    }
+  }
+  &__formItem:last-child {
+    margin-bottom: 0;
+  }
+  &__linkText {
+    text-align: center;
+    text-decoration: underline;
+  }
+  &__productPhotos {
+    & li {
+      font-size: 1.2rem;
+      margin-bottom: $space-unit;
+      & img {
+        margin-top: 5px;
+        display: block;
+        width: 360px;
+        height: 360px;
+      }
+    }
+    & li:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

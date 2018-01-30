@@ -1,0 +1,19 @@
+.Paging {
+  text-align: center;
+  font-size: 1.6rem;
+  &__item {
+    display: inline-block;
+    padding: 6px;
+    @include mq-sp {
+      padding: 6px 10px;
+    };
+  }
+  &__item.number a {
+    color: $color-off-text;
+  }
+  &__item.number a.active {
+    font-weight: bold;
+    color: inherit;
+    pointer-events:none;
+    }
+}

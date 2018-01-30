@@ -1,0 +1,119 @@
+//検索フォーム
+.Search {
+    background-color: $color-base-second;
+    margin-bottom: $space-unit * 2 / 3;
+    padding: 12px;
+    @include mq-sp {
+      margin-bottom: $space-unit / 2;
+    };
+    &__title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+        @include mq-sp {
+          font-size: 1.3rem;
+        };
+    }
+    &__searchInput {
+        @include placeholderColor($color-off-text);
+        width: 149px;
+        height: 25px;
+        vertical-align:top;
+        background-color: $color-base;
+        padding: 0px 6px;
+        border: none;
+        font-size: 1.1rem;
+        @include mq-sp {
+          width: 87%;
+          height: 40px;
+          padding: 6px 8px;
+          font-size: 1.3rem;
+        };
+    }
+    &__searchSubmit {
+        width: 25px;
+        height: 25px;
+        vertical-align:top;
+        background-color: $color-main-text;
+        background-image: url('#{$image-path}top/search-image.png');
+        background-position: center;
+        background-size: auto 55%;
+        padding: 5px;
+        border: none;
+        cursor: pointer;
+        @include mq-sp {
+          width: 13%;
+          height: 40px;
+        }
+    }
+}
+
+//カテゴリーリンク
+.Categorys {
+    &__listItem a {
+        display: block;
+        height: 46px;
+        line-height: 46px;
+        vertical-align: center;
+        border-bottom: 1px solid $color-line;
+        @include mq-sp {
+          position: relative;
+        }
+    }
+    &__list {
+      @include mq-sp {
+        display: none;
+      }
+    }
+    &__listItem:last-child a {
+        border-bottom: none;
+    }
+    &__image {
+        border: 2px solid $color-base-second;
+        margin-bottom: 4px;
+    }
+    &__title {
+        position: relative;
+        font-size: 1.6rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        pointer-events: none;
+        @include mq-sp {
+          pointer-events: all;
+          border-top: 1px solid $color-line;
+          border-bottom: 1px solid $color-line;
+          padding: 12px 4px;
+          margin-bottom: 0;
+        };
+    }
+    &__titleArrow {
+      position: absolute;
+      right: 8px;
+      width: 20px;
+      & img {
+        width: 100%;
+        height: auto;
+      }
+      @include mq-pc {
+        display: none;
+      };
+    }
+    &__text {
+        display: inline-block;
+        width: 184px;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        @include mq-sp {
+          padding-left: 4px;
+        }
+    }
+    &__arrow {
+        margin-bottom: 4px;
+        @include mq-sp {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+        };
+    }
+}

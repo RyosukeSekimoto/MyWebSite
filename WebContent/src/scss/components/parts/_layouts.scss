@@ -1,0 +1,145 @@
+//layouts
+
+.l-column {
+  flex: 0 1 $base-content-width;
+  max-width: $base-content-width;
+  padding: 0 $space-unit;
+  margin: 0 auto;
+  @include mq-sp {
+    padding: 0 $space-unit / 2;
+  };
+}
+
+.l-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.l-row-left {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.l-content {
+  display: flex;
+  justify-content: space-between;
+  flex: 0 1 $base-content-width;
+  flex-wrap: nowrap;
+  margin: ($column-space + 80px) auto 0;
+  padding: 0 $space-unit;
+  max-width: $base-content-width;
+  @include mq-sp {
+      flex-direction: column;
+      padding: 0 $space-unit / 2;
+      margin: ($column-space / 2 + 60px) auto 0;
+  }
+}
+
+.l-main {
+  flex: 0 2 auto;
+  max-width: $main-content-width;
+  margin: 0 auto;
+  @include mq-sp {
+    flex: 1 1 100%;
+    margin: 0;
+  };
+}
+
+.l-sub {
+  flex: 0 0 200px;
+  margin-right: $column-space;
+  @include mq-sp {
+    margin-right: 0px;
+    flex: 1 1 100%;
+    margin-bottom: $space-unit / 2;
+  }
+}
+
+.l-main-Column {
+  flex: 0 1 $main-content-width;
+  max-width: $main-content-width;
+  margin: 0 auto;
+}
+
+.l-main-halfColumn {
+  flex: 1 0 0px;
+  max-width: ($main-content-width - $column-space) / 2;
+  margin-right: $column-space;
+  &:nth-child(even) {
+    margin-right: 0;
+  }
+  @include mq-sp {
+    display: block;
+    max-width: none;
+    flex: 1 1 100%;
+    margin-right: 0;
+  };
+}
+
+.l-main-tripartitionColumn {
+  flex: 1 0 0px;
+  max-width: ($main-content-width - $column-space * 2) / 3;
+  margin-right: $column-space;
+  &:last-child {
+    margin-right: 0;
+  }
+  @include mq-sp {
+    display: block;
+    max-width: none;
+    flex: 1 1 100%;
+    margin-right: 0;
+    margin-bottom: $space-unit;
+  };
+}
+
+.l-w580-quaterColumn {
+  flex: 1 0 0px;
+  max-width: (580px - 10 * 3) / 4;
+  margin-right: 10px;
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+  @include mq-sp {
+    max-width: 25%;
+    margin-right: 5px;
+  };
+}
+
+.l-w360-quaterColumn {
+  flex: 1 0 0px;
+  max-width: (360px - 5 * 3) / 4;
+  margin-right: 5px;
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+}
+
+//buttonLayout
+
+.b-one-center {
+  text-align: center;
+}
+
+.b-one-right {
+  text-align: right;
+}
+
+.b-two-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & .btnLeft {
+    margin-right: $space-unit * 2;
+    @include mq-sp {
+      margin-right: 0;
+      margin-bottom: $space-unit / 2;
+    };
+  }
+  @include mq-sp {
+    flex-direction: column;
+    margin-right: none;
+  };
+}

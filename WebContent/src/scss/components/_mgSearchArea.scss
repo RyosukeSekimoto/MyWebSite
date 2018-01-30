@@ -1,0 +1,63 @@
+.MgSearchArea {
+  background-color: $color-base-second;
+  padding: $space-unit * 2 / 3 $space-unit;
+  font-size: 1.2rem;
+  &__formLabel {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  &__wrapper {
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+    margin-bottom: $space-unit * 2 / 3;
+  }
+  &__item {
+    flex: 0 1 25%;
+    margin-right: $space-unit * 2 / 3;
+    & input[type="text"] {
+      padding: 5px 8px;
+      height: 30px;
+      width: 100%;
+      background-color: $color-base;
+      border: 1px solid $color-line;
+    }
+    & select {
+      padding: 5px 8px;
+      height: 30px;
+      width: 100%;
+      border-radius: 0;
+      background-color: $color-base;
+      border: 1px solid $color-line;
+    }
+  }
+  &__item:last-child {
+    margin-right: 0;
+  }
+  &__item:last-child {
+    flex: 0 1 50%;
+  }
+  &__dateInputWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    & input {
+      padding: 5px 8px;
+      height: 30px;
+      flex: 0 1 50%;
+      background-color: $color-base;
+      border: 1px solid $color-line;
+    }
+  }
+  &__searchButton {
+    text-align: center;
+    & input[type="submit"] {
+      font-size: 1.2rem;
+      padding: 6px $space-unit;
+      color: $color-white;
+      background-color: $color-main-text;
+      cursor: pointer;
+    }
+  }
+}

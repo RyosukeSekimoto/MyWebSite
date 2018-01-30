@@ -1,0 +1,28 @@
+.Breadcrumb {
+  background-color: $color-base;
+  padding: 0 5px;
+  font-size: 1.2rem;
+  &__item {
+    display: inline;
+  }
+  &__item:last-child a {
+    pointer-events: none;
+    text-decoration: none;
+  }
+  &__item a {
+    text-decoration: underline;
+  }
+  &__item::after {
+    display: inline-block;
+    content: ">";
+    padding:0 10px;
+  }
+  &__item:last-child::after {
+    content: "";
+  }
+  @include mq-sp {
+    padding: 5px 0;
+    background-color: $color-base;
+    border: none;
+  }
+}

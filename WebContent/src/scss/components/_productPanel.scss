@@ -1,0 +1,69 @@
+.ProductPanel {
+  transition: .2s;
+  @include mq-sp {
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+  };
+  &__main {
+    display: block;
+    padding-top: $space-unit / 3;
+    @include mq-sp {
+      display: inline-block;
+      flex: 1 1 65%;
+      padding-top: 0;
+    }
+  }
+  &__sub {
+    display: block;
+    position: relative;
+    @include mq-sp {
+      display: inline-block;
+      flex: 1 1 35%;
+      margin-right: $space-unit / 2;
+    }
+  }
+  &__thumb {
+    width: 100%;
+    height: auto;
+    border: 2px solid $color-base-second;
+  }
+  &--badge {
+    position: absolute;
+    background-image: url('#{$image-path}top/4-6-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 15px;
+    top: 15px;
+    width: 26px;
+    height: 20px;
+    font-size: 1.0rem;
+    text-align: center;
+    padding-top: 7px;
+    color: $color-white;
+    @include mq-sp {
+      left: 10px;
+      top: 10px;
+    }
+  }
+  &--badge.first {
+    background-image: url('#{$image-path}top/1-bg.png');
+  }
+  &--badge.second {
+    background-image: url('#{$image-path}top/2-bg.png');
+  }
+  &--badge.third {
+    background-image: url('#{$image-path}top/3-bg.png');
+  }
+  &__body {
+    margin-top: 4px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  &:hover {
+    opacity: .8;
+    @include mq-sp {
+      opacity: 1.0;
+    };
+  }
+}

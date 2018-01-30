@@ -1,0 +1,61 @@
+.Profile {
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 2.0;
+  margin-bottom: $space-unit;
+  &__image {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    @include mq-sp {
+      width: 200px;
+      height: 200px;
+    };
+  }
+  &__sub {
+    padding-top: $space-unit / 2;
+    margin-bottom: $space-unit / 2;
+  }
+  &__name {
+    font-size: 2.0rem;
+    font-weight: normal;
+    @include mq-sp {
+      font-size: 1.8rem;
+    };
+  }
+  &__detail {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: $space-unit;
+    @include mq-sp {
+      margin-bottom: $space-unit / 2;
+    };
+  }
+  &__desc {
+    text-align: left;
+  }
+}
+
+.OwnerDetail {
+  font-size: 1.4rem;
+  background-color: $color-base-second;
+  padding: 0 $space-unit * 2 $space-unit;
+  margin-bottom: $space-unit;
+  &__title {
+    text-align: center;
+    padding: $space-unit 0px;
+    @include title-font;
+    font-size: 2.6rem;
+  }
+  &__label {
+    font-weight: bold;
+    margin-bottom: $space-unit / 6;
+  }
+  &__param {
+    font-size: 1.4rem;
+    margin-bottom: $space-unit;
+  }
+  @include mq-sp {
+    padding: 0 $space-unit / 2 $space-unit;
+  }
+}

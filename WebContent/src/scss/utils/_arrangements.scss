@@ -1,0 +1,62 @@
+//マージン調整css
+.u-mb15px {
+  margin-bottom: 15px;
+}
+
+.u-mb30px {
+  margin-bottom: 30px;
+  @include mq-sp {
+    margin-bottom: $space-unit / 2;
+  };
+}
+
+.u-mb60px {
+  margin-bottom: 60px;
+  @include mq-sp {
+    margin-bottom: $space-unit;
+  };
+}
+
+.u-mb90px {
+  margin-bottom: 90px;
+  @include mq-sp {
+    margin-bottom: 60px;
+  };
+}
+
+.u-mb100px {
+  margin-bottom: 100px;
+  @include mq-sp {
+    margin-bottom: 60px;
+  };
+}
+
+//180度回転させるクラス
+.rotated {
+  transform: rotate(180deg);
+}
+
+//y方向にオーバーフロウ
+.overflowY {
+  max-height: 300px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+//文字カラーを赤にする
+.textColorRed {
+  color: $color-red;
+}
+
+//テキストをセンターにする
+.textCenter {
+  text-align: center;
+}
+
+//バリデーション
+.validation {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: -10px;
+  color: $color-red;
+}

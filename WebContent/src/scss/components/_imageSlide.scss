@@ -1,0 +1,48 @@
+.ImageSlide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 40px;
+    // 画像のラッパー
+    &__main {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    // 画像1つ分
+    &__item {
+        flex: 0 0 100%;
+    }
+    // 画像本体：高さに合わせてアス比を保つ指定
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+    // インジケーター領域
+    &__sub {
+        margin-top: $space-unit / 4;
+        width: 100%;
+        text-align: center;
+    }
+    // インジケーターの○ひとつぶん
+    &__dot {
+        display: inline-block;
+        overflow: hidden;
+        margin-right: $space-unit / 5;
+        width: 16px;
+        height: 4px;
+        border: 1px solid $color-main-text;
+        text-indent: 100%;
+        cursor: pointer;
+        transition: .2s;
+        &:last-child {
+            margin-right: 0;
+        }
+        &:hover {
+            background: $color-main-text;
+        }
+        &.isActive {
+            background: $color-main-text;
+        }
+    }
+}

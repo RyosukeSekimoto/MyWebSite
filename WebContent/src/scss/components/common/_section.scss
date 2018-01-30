@@ -1,0 +1,17 @@
+.Section {
+  display: block;
+  margin-bottom: $space-unit * 2;
+  &__item {
+    margin-bottom: $space-unit;
+    @include mq-sp {
+      margin-bottom: 0;
+    }
+  }
+  &--borderBottom {
+    border-bottom: 1px solid $color-line;
+    padding-bottom: $space-unit / 2;
+  }
+  &__item:last-child {
+    margin-bottom: $space-unit;
+  }
+}

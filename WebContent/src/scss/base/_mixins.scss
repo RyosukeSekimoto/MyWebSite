@@ -1,0 +1,42 @@
+//fonts
+@mixin title-font() {
+  font-family: $font-sub;
+}
+
+@mixin price-font() {
+  font-family: $font-price;
+}
+
+//プレースホルダーのcolor変更
+@mixin placeholderColor($color) {
+    &:placeholder-shown {
+        color: $color;
+    }
+    &::-webkit-input-placeholder {
+        color:$color;
+    }
+    &:-moz-placeholder {
+        color:$color;
+        opacity: 1;
+    }
+    &::-moz-placeholder {
+        color:$color;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder {
+        color:$color;
+    }
+}
+
+//メディアクエリ
+@mixin mq-sp($max: $sp-max-width) {
+  @media only screen and(max-width: #{$max}) {
+    @content;
+  }
+}
+
+@mixin mq-pc($min: $pc-min-width) {
+  @media only screen and(min-width: #{$min}) {
+    @content;
+  }
+}

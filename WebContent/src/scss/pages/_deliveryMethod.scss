@@ -1,0 +1,46 @@
+.deliverySelect {
+  width: 25%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 1.4rem;
+  margin-left: 75%;
+  margin-top: $space-unit / 2;
+  @include mq-sp {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 0%;
+  }
+  & select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    position: relative;
+  	width: 100%;
+  	padding: 5px 12px;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+    border-radius: 0px;
+    outline: none;
+  	border: 1px solid $color-line;
+  }
+  & label {
+  	position: relative;
+  }
+  & label:after {
+  	display: block;
+  	content: "";
+  	position: absolute;
+  	top: 50%;
+  	right: 15px;
+  	width: 15px;
+  	height: 15px;
+  	margin-top: -8px;
+  	background-image: url('#{$image-path}top/arrow02.png');
+    background-repeat: no-repeat;
+  	background-size: 15px;
+  	pointer-events: none;
+  }
+}

@@ -1,0 +1,17 @@
+//画像アップロードサムネイル用css
+.reviewImage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid $color-line;
+  margin: 10px 0;
+}
+
+.profileImage img {
+  display: block;
+  width: 240px;
+  height: 240px;
+  border: 1px solid $color-line;
+  border-radius: 50%;
+  margin: 10px 0;
+}

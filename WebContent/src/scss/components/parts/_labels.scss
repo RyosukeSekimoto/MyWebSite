@@ -1,0 +1,81 @@
+.sectionLabel {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    margin-bottom: $space-unit;
+    line-height: 1;
+    color: $color-main-text;
+    font-size: 2.2rem;
+    font-weight: normal;
+
+    //フォントの読み込み
+    @include title-font;
+
+  &.japanese {
+      letter-spacing: 2px;
+      font-size: 2.2rem;
+  }
+  &::before,
+  &::after {
+      content: "";
+      display: block;
+      flex: 1 0 10%;
+      height: 0;
+      margin-bottom: 8px;
+      border-bottom: 1px solid $color-line;
+  }
+  &::before {
+      margin-right: 22px;
+      @include mq-sp {
+        margin-right: 15px;
+      }
+  }
+  &::after {
+      margin-left: 22px;
+      @include mq-sp {
+        margin-left: 15px;
+      }
+  }
+}
+
+.pageLabel {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    letter-spacing: 1px;
+    justify-content: space-around;
+    padding-top: 5px;
+    margin: $space-unit / 2 0px $space-unit;
+    line-height: 1.4;
+    color: $color-main-text;
+    font-size: 2.6rem;
+    font-weight: normal;
+    @include mq-sp {
+      font-size: 2.2rem;
+      margin: $space-unit / 2 0px $space-unit;
+    };
+
+    //フォントの読み込み
+    @include title-font;
+    &.japanese {
+        font-size: 2.4rem;
+        font-family: Avenir, "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium",
+        YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    }
+    &.japanese.search {
+        margin-bottom: -10px;
+    }
+}
+
+.logo {
+    color: $color-main-text;
+    font-size: 2.9rem;
+    padding: 10px;
+    margin-bottom: -6px;
+    //フォントの読み込み
+    @include title-font;
+    @include mq-sp {
+      font-size: 2.4rem;
+      padding: 5px;
+    }
+}

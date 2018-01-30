@@ -1,0 +1,34 @@
+.review-desc {
+  font-size: 1.4rem;
+  line-height: 2.0;
+}
+.photoList {
+  font-size: 1.4rem;
+}
+.photoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto $space-unit * 2;
+  @include mq-sp {
+    margin: 0 auto $space-unit;
+  };
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.photoImage {
+  flex: 1 1 auto;
+  max-width: 720px;
+  margin-bottom: $space-unit / 2;
+  & img {
+    width: 100%;
+    height: auto;
+  }
+}
+.photoDesc {
+  line-height: 2.0;
+  flex: 0 1 auto;
+  max-width: 720px;
+}

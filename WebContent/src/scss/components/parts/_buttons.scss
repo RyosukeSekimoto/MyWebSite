@@ -1,0 +1,69 @@
+//共通ボタンデザイン
+.button {
+  text-align: center;
+  color: $color-white;
+  min-width: 240px;
+  padding: 15px 20px;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 1;
+  transition: .2s;
+  cursor: pointer;
+  &.primary {
+    background-color: $color-red;
+  }
+  &.secondary {
+    background-color: $color-main-text;
+  }
+  &:hover {
+    opacity: .8;
+    @include mq-sp {
+      opacity: 1.0;
+    };
+  }
+  @include mq-sp {
+    min-width: 100%;
+    padding: 20px 20px;
+  };
+}
+
+.button-noFlame {
+  text-align: center;
+  color: $color-main-text;
+  text-decoration: underline;
+  min-width: 240px;
+  padding: 15px 20px;
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 1;
+  transition: .2s;
+  &:hover {
+    opacity: .8;
+    @include mq-sp {
+      opacity: 1.0;
+    };
+  }
+  @include mq-sp {
+    min-width: 100%;
+    padding: 20px 20px;
+  };
+}
+
+//固有デザインボタン
+.cartDeleteButton {
+  text-align: right;
+  & button {
+    text-decoration: underline;
+    color: $color-main-text;
+    font-size: 1.6rem;
+    font-weight: normal;
+    transition: .2s;
+    &:hover {
+      opacity: .8;
+    }
+    @include mq-sp {
+      font-size: 1.4rem;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.Header {
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    background-color: $color-base;
+    border-bottom: 1px solid $color-line;
+    &__wrapper {
+        height: 80px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        @include mq-sp {
+          height: 60px;
+        };
+    }
+    &__head {
+        flex: 1 1 auto;
+        text-align: left;
+    }
+    &__body {
+        flex: 3 1 auto;
+        font-size: 1.4rem;
+        @include mq-sp {
+          font-size: 1.2rem;
+        };
+    }
+    &--admin {
+      background-color: $color-main-text;
+    }
+}
