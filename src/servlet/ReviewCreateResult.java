@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -39,8 +39,8 @@ public class ReviewCreateResult extends HttpServlet {
 		String title = request.getParameter("title");
 		String reviewDesc = request.getParameter("reviewDesc");
 		String photoDesc = request.getParameter("photoDesc").isEmpty() ? null: request.getParameter("photoDesc");
-		Date createDate = new Date(Long.parseLong(request.getParameter("createDate")));
-		Date updateDate = new Date(Long.parseLong(request.getParameter("updateDate")));
+		Timestamp createDate = new Timestamp(Long.parseLong(request.getParameter("createDate")));
+		Timestamp updateDate = new Timestamp(Long.parseLong(request.getParameter("updateDate")));
 		String photoFileName = request.getParameter("photoFileName").isEmpty() ? null: request.getParameter("photoFileName");
 
 		//レビューデータをBeansに格納

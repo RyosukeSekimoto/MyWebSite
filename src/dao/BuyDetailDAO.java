@@ -21,7 +21,7 @@ public class BuyDetailDAO {
 		try {
 			con = DBManager.getConnection();
 			st = con.prepareStatement(
-					"INSERT INTO t_buy_detail(buy_id, item_id, itemName, itemPrice, quantity) VALUES(?,?,?,?,?)");
+					"INSERT INTO t_buy_detail(buy_id, item_id, item_name, item_price, quantity) VALUES(?,?,?,?,?)");
 			st.setInt(1, bddb.getBuyId());
 			st.setInt(2, bddb.getItemId());
 			st.setString(3, bddb.getItemName());
@@ -45,11 +45,11 @@ public class BuyDetailDAO {
 	}
 
 	/**
-	 * 購入IDによる購入情報検索
+	 * ユーザーIDによる購入情報検索
 	 * @param buyId
 	 * @return {BuyDataDetailBeans}
 	 */
-	public static ArrayList<BuyDetailDataBeans> getBuyDataBeansListByBuyId(int buyId) {
+	public ArrayList<BuyDetailDataBeans> getBuyDataBeansListByBuyId(int buyId) {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -66,6 +66,8 @@ public class BuyDetailDAO {
 				bddb.setId(rs.getInt("id"));
 				bddb.setBuyId(rs.getInt("buy_id"));
 				bddb.setItemId(rs.getInt("item_id"));
+				bddb.setItemName(rs.getString("item_name"));
+				bddb.setItemPrice(rs.getInt("item_price"));
 				buyDetailList.add(bddb);
 			}
 

@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -36,7 +36,7 @@ public class ReviewEditResult extends HttpServlet {
 		String title = request.getParameter("title");
 		String reviewDesc = request.getParameter("reviewDesc");
 		String photoDesc = request.getParameter("photoDesc").isEmpty() ? null: request.getParameter("photoDesc");
-		Date updateDate = new Date(Long.parseLong(request.getParameter("updateDate")));
+		Timestamp updateDate = new Timestamp(Long.parseLong(request.getParameter("updateDate")));
 		String photoFileName = request.getParameter("photoFileName").isEmpty() ? null: request.getParameter("photoFileName");
 
 		//レビューデータをBeansに格納
@@ -54,17 +54,14 @@ public class ReviewEditResult extends HttpServlet {
 		ReviewDAO reviewDao = new ReviewDAO();
 		reviewDao.updateReviewById(rdb, reviewId);
 
-		//レビューIDと商品名をリクエストスコープに保存
-		String itemName = (String)session.getAttribute("itemName");
+		//レビューIDをリクエストスコープに保存
 		request.setAttribute("reviewId", reviewId);
-		request.setAttribute("itemName", itemName);
 
 		//セッションを破棄
 		session.removeAttribute("rdb");
 		session.removeAttribute("imagePath");
 		session.removeAttribute("imageFileName");
 		session.removeAttribute("editReviewId");
-		session.removeAttribute("itemName");
 
 		//投稿完了ページへフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/reviewEditResult.jsp").forward(request, response);

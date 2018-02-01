@@ -4,8 +4,8 @@
 <%@ page import="model.BuyDetailDataBeans"%>
 <%@ page import="model.Helper"%>
 <%
-BuyDataBeans bdb = (BuyDataBeans)request.getAttribute("bdb");
 ArrayList<BuyDetailDataBeans> bddbList = (ArrayList<BuyDetailDataBeans>)request.getAttribute("bddbList");
+BuyDataBeans bdb = (BuyDataBeans)request.getAttribute("bdb");
 %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -24,12 +24,7 @@ ArrayList<BuyDetailDataBeans> bddbList = (ArrayList<BuyDetailDataBeans>)request.
         <div class="l-content">
             <main class="l-main">
                 <section class="Section u-mb90px">
-                    <h2 class="pageLabel purchaseResultTitle fadeIn animated u-mb60px">Thank you for shoping!</h2>
-                    <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/Index">トップに戻る</a>
-                        <a class="button secondary" href="/MyWebSite/Mypage">マイページへ</a>
-                    </div>
-                    <h2 class="sectionLabel japanese">購入詳細</h2>
+                    <h2 class="pageLabel japanese">購入詳細</h2>
                     <table class="purchaseResultSummary u-mb30px">
                         <thead>
                             <tr>
@@ -40,7 +35,7 @@ ArrayList<BuyDetailDataBeans> bddbList = (ArrayList<BuyDetailDataBeans>)request.
                         </thead>
                         <tbody>
                             <tr>
-                                <td><%= Helper.displayDate(bdb.getCreateDate()) %></td>
+                                <td><%= Helper.displayDateTime(bdb.getCreateDate()) %></td>
                                 <td><%= bdb.getDeliveryMethodName() %></td>
                                 <td><%= Helper.displayPrice(bdb.getTotalPrice()) %></td>
                             </tr>
@@ -54,17 +49,17 @@ ArrayList<BuyDetailDataBeans> bddbList = (ArrayList<BuyDetailDataBeans>)request.
                             </tr>
                         </thead>
                         <tbody>
-                        	<% for(BuyDetailDataBeans bddb: bddbList) { %>
+                        <% for(BuyDetailDataBeans bddb: bddbList) { %>
                             <tr>
                                 <td class="productName"><%= bddb.getItemName() %></td>
-                                <td class="price">¥<%= Helper.displayPrice(bddb.getItemPrice()) %></td>
+                                <td class="price"><%= Helper.displayPrice(bddb.getItemPrice()) %></td>
                             </tr>
-                            <% } %>
+                        <% } %>
                         </tbody>
                     </table>
                 </section>
                 <div class="UnderButtons u-mb60px">
-                    <div class="UnderButtons__Left"><a href="/MyWebSite/Index">トップに戻る</a></div>
+                    <div class="UnderButtons__Left"><a href="/MyWebSite/Mypage">マイページへ戻る</a></div>
                     <div id="page-top" class="UnderButtons__Right">
                         <a href="#">
                           <img src="./dist/images/top/toebeans.png" alt="" width="20" height="20">

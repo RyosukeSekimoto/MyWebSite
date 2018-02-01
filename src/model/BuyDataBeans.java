@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BuyDataBeans implements Serializable {
 
@@ -9,7 +9,7 @@ public class BuyDataBeans implements Serializable {
 	private int userId;
 	private int totalPrice;
 	private int deliveryMethodId;
-	private Date createDate;
+	private Timestamp createDate;
 
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
@@ -39,10 +39,10 @@ public class BuyDataBeans implements Serializable {
 	public void setDeliveryMethodId(int deliveryMethodId) {
 		this.deliveryMethodId = deliveryMethodId;
 	}
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 	public String getDeliveryMethodName() {

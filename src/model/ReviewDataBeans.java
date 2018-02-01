@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ReviewDataBeans implements Serializable {
 
@@ -12,8 +12,12 @@ public class ReviewDataBeans implements Serializable {
 	private String reviewDesc;
 	private String photoFileName;
 	private String photoDesc;
-	private Date createDate;
-	private Date updateDate;
+	private Timestamp createDate;
+	private Timestamp updateDate;
+
+	private String reviewerName;
+	private String reviewerFileName;
+	private String itemName;
 
 	public ReviewDataBeans() {}
 
@@ -73,22 +77,45 @@ public class ReviewDataBeans implements Serializable {
 		this.photoDesc = photoDesc;
 	}
 
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getUpdateDate() {
+	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
 
+	public String getReviewerName() {
+		return reviewerName;
+	}
+
+	public void setReviewerName(String reviewerName) {
+		this.reviewerName = reviewerName;
+	}
+
+	public String getReviewerFileName() {
+		return reviewerFileName;
+	}
+
+	public void setReviewerFileName(String reviewerFileName) {
+		this.reviewerFileName = reviewerFileName;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 
 
 }

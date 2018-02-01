@@ -1,4 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.UserDataBeans"%>
+<%@ page import="model.BuyDataBeans"%>
+<%@ page import="model.ReviewDataBeans"%>
+<%@ page import="model.Helper"%>
+<%@ page import="java.util.ArrayList"%>
+<%
+UserDataBeans loginUser = (UserDataBeans)session.getAttribute("loginUser");
+UserDataBeans udb = (UserDataBeans)request.getAttribute("udb");
+ArrayList<BuyDataBeans> bdbList = (ArrayList<BuyDataBeans>)request.getAttribute("bdbList");
+ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
+%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -18,58 +29,66 @@
                     <h2 class="pageLabel">My Page</h2>
                     <div class="Profile">
                         <div class="Profile__sub">
-                            <img src="./dist/images/top/mypage-profileImage.jpg" alt="" class="Profile__image">
+                            <img src="upload/<%= udb.getFileName() %>" alt="" class="Profile__image">
                         </div>
                         <div class="Profile__main">
                             <div class="Profile__head">
-                                <h2 class="Profile__name">ねこねこねこさん</h2>
+                                <h2 class="Profile__name"><%= udb.getPetName() %></h2>
                                 <div class="Profile__detail">
-                                    <p>スコティッシュ・フォールド（性別：<span class="Profile__sex">♂</span>）
-                                        <br>生年月日：<span class="Profile__birthDate">0000/00/00</span>
-                                        <br>オーナー：<span class="Profile__ownerName">オーナーの名前
+                                    <p><%= udb.getPetType() %>（性別：<span class="Profile__sex"><%= udb.getPetSex() %></span>）
+                                        <br>生年月日：<span class="Profile__birthDate"><%= Helper.displayDate(udb.getPetBirthDate()) %></span>
+                                        <br>オーナー：<span class="Profile__ownerName"><%= udb.getNickname() %>
                                     </p>
                                 </div>
                             </div>
                             <div class="Profile__body">
-                                <p class="Profile__desc">植物由来の原料を主原料とした安心・安全なスペシャル低刺激な全犬種用のドッグシャンプーです。アレルギーなどの肌のトラブルに悩む愛犬の皮膚に負担かけることなくお使いいただけます。また、香りに敏感な犬達です。香料も着色料も一切使用しておりません。</p>
+                            <% if(udb.getPetDesc() != null) { %>
+                                <p class="Profile__desc"><%= udb.getPetDesc() %></p>
+                            <% } %>
                             </div>
                         </div>
                     </div>
+                    <% if(loginUser != null) { %>
+                    <% if(loginUser.getId() == udb.getId()) {%>
                     <div class="OwnerDetail">
                         <h3 class="OwnerDetail__title">Owner detail</h3>
                         <div class="l-row">
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">ログインID</p>
-                                <p class="OwnerDetail__param">ここにログインIDが入ります。</p>
+                                <p class="OwnerDetail__param"><%= udb.getLoginId() %></p>
                             </div>
                             <div class="l-main-halfColumn">
-                                <p class="OwnerDetail__label">住所</p>
-                                <p class="OwnerDetail__param">ここにログインIDが入ります。ここにログインIDが入ります。ここにログインIDが入ります。ここにログインIDが入ります。</p>
+                                <p class="OwnerDetail__label">ニックネーム</p>
+                                <p class="OwnerDetail__param"><%= udb.getNickname() %></p>
                             </div>
                         </div>
                         <div class="l-row">
-                            <div class="l-main-halfColumn">
-                                <p class="OwnerDetail__label">ニックネーム</p>
-                                <p class="OwnerDetail__param">ここにログインIDが入ります。</p>
+                       		<div class="l-main-halfColumn">
+                                <p class="OwnerDetail__label">名前</p>
+                                <p class="OwnerDetail__param"><%= udb.getName() %></p>
                             </div>
                             <div class="l-main-halfColumn">
-                                <p class="OwnerDetail__label">登録日時</p>
-                                <p class="OwnerDetail__param">ここにログインIDが入ります。</p>
+                                <p class="OwnerDetail__label">住所</p>
+                                <p class="OwnerDetail__param"><%= udb.getAddress() %></p>
                             </div>
                         </div>
                         <div class="l-row u-mb30px">
                             <div class="l-main-halfColumn">
-                                <p class="OwnerDetail__label">名前</p>
-                                <p class="OwnerDetail__param">ここにログインIDが入ります。</p>
+                                <p class="OwnerDetail__label">登録日時</p>
+                                <p class="OwnerDetail__param"><%= Helper.displayDateTime(udb.getCreateDate()) %></p>
                             </div>
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">更新日時</p>
-                                <p class="OwnerDetail__param">ここにログインIDが入ります。</p>
+                                <p class="OwnerDetail__param"><%= Helper.displayDateTime(udb.getUpdateDate()) %></p>
                             </div>
                         </div>
-                        <div class="b-one-center"><a class="button secondary" href="profileEdit.html">プロフィールを編集する</a></div>
+                        <div class="b-one-center"><a class="button secondary" href="/MyWebSite/ProfileEdit">プロフィールを編集する</a></div>
                     </div>
+                    <% } %>
+                    <% } %>
                 </section>
+                <% if(loginUser != null) { %>
+                <% if(loginUser.getId() == udb.getId() && bdbList != null) {%>
                 <section class="Section u-mb100px">
                     <h2 class="sectionLabel japanese">購入履歴</h2>
                     <div class="overflowY">
@@ -83,185 +102,48 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <% for(BuyDataBeans bdb: bdbList) { %>
                                 <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
+                                    <td><%= Helper.displayDateTime(bdb.getCreateDate()) %></td>
+                                    <td><%= bdb.getDeliveryMethodName() %></td>
+                                    <td class="price"><%= Helper.displayPrice(bdb.getTotalPrice()) %></td>
+                                    <td><a href="/MyWebSite/PurchaseDetail?buyId=<%= bdb.getId() %>">詳細</a></td>
                                 </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0000/00/00</td>
-                                    <td>通常配送</td>
-                                    <td class="price">¥00000</td>
-                                    <td><a href="purchaseDetail.html">詳細</a></td>
-                                </tr>
+                            <% } %>
                             </tbody>
                         </table>
                     </div>
                 </section>
-                <section class="Section Section--borderBottom">
+                <% } %>
+                <% } %>
+       			<section class="Section Section--borderBottom">
                     <h2 class="sectionLabel">Review</h2>
+                    <%
+                    if(reviewList.size() == 0) {
+                    %>
+                    <p style="font-size: 14px; text-align: center; margin-bottom: 30px;">この商品のレビューはありません。あなたの声をお聞かせください。</p>
+                    <% } %>
                     <ul id="entry_list_more" class="">
-                        <li class="Review">
+						<%
+						for(ReviewDataBeans rdb: reviewList) {
+						%>
+							<li class="Review">
                             <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
+                                <img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt="">
+                                <p><%= rdb.getReviewerName() %></p>
                             </div>
                             <div class="Review__main">
                                 <div class="Review__head">
                                     <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
+                                        <a href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>"><%= rdb.getTitle() %></a>
                                     </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
+                                    <p class="Review__productName"><%= rdb.getItemName() %>のレビュー</p>
+                                    <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate()) %></p>
                                 </div>
                                 <div class="Review__body l-row-left"></div>
                             </div>
                         </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
+						<% } %>
                         <div id="more_btn" class="b-one-center button-noFlame">レビューをもっと見る</div>
                     </ul>
                 </section>

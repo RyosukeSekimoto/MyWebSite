@@ -28,7 +28,7 @@ public class ReviewDAO {
 			pStmt.setString(2, rdb.getReviewDesc());
 			pStmt.setString(3, rdb.getPhotoDesc());
 			pStmt.setString(4, rdb.getPhotoFileName());
-			pStmt.setDate(5, rdb.getUpdateDate());
+			pStmt.setTimestamp(5, rdb.getUpdateDate());
 			pStmt.setInt(6, reviewId);
 
 			int resultNum = pStmt.executeUpdate();
@@ -69,8 +69,8 @@ public class ReviewDAO {
 			st.setString(4, rdb.getReviewDesc());
 			st.setString(5, rdb.getPhotoFileName());
 			st.setString(6, rdb.getPhotoDesc());
-			st.setDate(7, rdb.getCreateDate());
-			st.setDate(8, rdb.getUpdateDate());
+			st.setTimestamp(7, rdb.getCreateDate());
+			st.setTimestamp(8, rdb.getUpdateDate());
 
 			st.executeUpdate();
 			System.out.println("inserting review has been completed");
@@ -90,8 +90,64 @@ public class ReviewDAO {
 	}
 
 	/**
+	 * 最新レビューを3件取得する
+	 * @return ArrayList<ProductDataBeans> reviewList
+	 */
+	public ArrayList<ReviewDataBeans> getLatestReviews() {
+
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT * FROM t_review"
+					+ " INNER JOIN t_user ON t_review.user_id = t_user.id"
+					+ " INNER JOIN m_item ON t_review.item_id = m_item.id"
+					+ " ORDER BY t_review.id DESC"
+					+ " LIMIT 3");
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<ReviewDataBeans> reviewList = new ArrayList<ReviewDataBeans>();
+
+			while (rs.next()) {
+				ReviewDataBeans review = new ReviewDataBeans();
+
+				review.setId(rs.getInt("id"));
+				review.setUserId(rs.getInt("user_id"));
+				review.setItemId(rs.getInt("item_id"));
+				review.setTitle(rs.getString("title"));
+				review.setReviewDesc(rs.getString("review_desc"));
+				review.setPhotoFileName(rs.getString("photo_file_name"));
+				review.setPhotoDesc(rs.getString("photo_desc"));
+				review.setCreateDate(rs.getTimestamp("create_date"));
+				review.setUpdateDate(rs.getTimestamp("update_date"));
+				review.setReviewerName(rs.getString("pet_name"));
+				review.setReviewerFileName(rs.getString("file_name"));
+				review.setItemName(rs.getString("item_name"));
+
+				reviewList.add(review);
+			}
+
+			System.out.println("Getting Latest reviews has been completed");
+			return reviewList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+		}
+		return null;
+	}
+
+	/**
 	 * 商品IDによるレビュー検索
-	 * @param productId
+	 * @param itemId
 	 * @return ArrayList<ProductDataBeans> reviewList
 	 */
 	public ArrayList<ReviewDataBeans> getReviewsByItemId(int itemId) {
@@ -101,7 +157,12 @@ public class ReviewDAO {
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT * FROM t_review WHERE item_id = ?");
+			st = con.prepareStatement(
+					"SELECT * FROM t_review"
+					+ " INNER JOIN t_user ON t_review.user_id = t_user.id"
+					+ " INNER JOIN m_item ON t_review.item_id = m_item.id"
+					+ " WHERE t_review.item_id = ?"
+					+ " ORDER BY t_review.id DESC");
 			st.setInt(1, itemId);
 
 			ResultSet rs = st.executeQuery();
@@ -117,8 +178,69 @@ public class ReviewDAO {
 				review.setReviewDesc(rs.getString("review_desc"));
 				review.setPhotoFileName(rs.getString("photo_file_name"));
 				review.setPhotoDesc(rs.getString("photo_desc"));
-				review.setCreateDate(rs.getDate("create_date"));
-				review.setUpdateDate(rs.getDate("update_date"));
+				review.setCreateDate(rs.getTimestamp("create_date"));
+				review.setUpdateDate(rs.getTimestamp("update_date"));
+				review.setReviewerName(rs.getString("pet_name"));
+				review.setReviewerFileName(rs.getString("file_name"));
+				review.setItemName(rs.getString("item_name"));
+
+				reviewList.add(review);
+			}
+
+			System.out.println("searching review by productId has been completed");
+			return reviewList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+		}
+		return null;
+	}
+
+	/**
+	 * ユーザーIDによるレビュー検索
+	 * @param userId
+	 * @return ArrayList<ProductDataBeans> reviewList
+	 */
+	public ArrayList<ReviewDataBeans> getReviewsByUserId(int userId) {
+
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT * FROM t_review"
+					+ " INNER JOIN t_user ON t_review.user_id = t_user.id"
+					+ " INNER JOIN m_item ON t_review.item_id = m_item.id"
+					+ " WHERE t_review.user_id = ?"
+					+ " ORDER BY t_review.id DESC");
+			st.setInt(1, userId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<ReviewDataBeans> reviewList = new ArrayList<ReviewDataBeans>();
+
+			while (rs.next()) {
+				ReviewDataBeans review = new ReviewDataBeans();
+
+				review.setId(rs.getInt("id"));
+				review.setUserId(rs.getInt("user_id"));
+				review.setItemId(rs.getInt("item_id"));
+				review.setTitle(rs.getString("title"));
+				review.setReviewDesc(rs.getString("review_desc"));
+				review.setPhotoFileName(rs.getString("photo_file_name"));
+				review.setPhotoDesc(rs.getString("photo_desc"));
+				review.setCreateDate(rs.getTimestamp("create_date"));
+				review.setUpdateDate(rs.getTimestamp("update_date"));
+				review.setReviewerName(rs.getString("pet_name"));
+				review.setReviewerFileName(rs.getString("file_name"));
+				review.setItemName(rs.getString("item_name"));
 
 				reviewList.add(review);
 			}
@@ -142,17 +264,21 @@ public class ReviewDAO {
 	/**
 	 * レビューIDによるレビュー検索
 	 * @param reviewId
-	 * @return ArrayList<ProductDataBeans> reviewList
+	 * @return ReviewDataBeans review
 	 */
-	public ReviewDataBeans getReviewsById(int itemId) {
+	public ReviewDataBeans getReviewsById(int reviewId) {
 
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT * FROM t_review WHERE id = ?");
-			st.setInt(1, itemId);
+			st = con.prepareStatement(
+					"SELECT * FROM t_review"
+					+ " INNER JOIN t_user ON t_review.user_id = t_user.id"
+					+ " INNER JOIN m_item ON t_review.item_id = m_item.id"
+					+ " WHERE t_review.id = ?");
+			st.setInt(1, reviewId);
 
 			ResultSet rs = st.executeQuery();
 
@@ -166,8 +292,11 @@ public class ReviewDAO {
 				review.setReviewDesc(rs.getString("review_desc"));
 				review.setPhotoFileName(rs.getString("photo_file_name"));
 				review.setPhotoDesc(rs.getString("photo_desc"));
-				review.setCreateDate(rs.getDate("create_date"));
-				review.setUpdateDate(rs.getDate("update_date"));
+				review.setCreateDate(rs.getTimestamp("create_date"));
+				review.setUpdateDate(rs.getTimestamp("update_date"));
+				review.setReviewerName(rs.getString("pet_name"));
+				review.setReviewerFileName(rs.getString("file_name"));
+				review.setItemName(rs.getString("item_name"));
 
 				System.out.println("searching review by reviewId has been completed");
 				return review;

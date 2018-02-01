@@ -32,7 +32,7 @@ public class ItemDAO {
 			if (rs.next()) {
 				idb.setId(rs.getInt("id"));
 				idb.setCategory(rs.getString("category_name"));
-				idb.setName(rs.getString("name"));
+				idb.setName(rs.getString("item_name"));
 				idb.setDetail(rs.getString("detail"));
 				idb.setPrice(rs.getInt("price"));
 				idb.setFirstFileName(rs.getString("first_file_name"));
@@ -82,7 +82,7 @@ public class ItemDAO {
 				st.setInt(2, pageMaxItemCount);
 			} else {
 				// 検索ワードで商品情報を検索
-				st = con.prepareStatement("SELECT * FROM m_item WHERE name like ? ORDER BY id ASC LIMIT ?,? ");
+				st = con.prepareStatement("SELECT * FROM m_item WHERE item_name like ? ORDER BY id ASC LIMIT ?,? ");
 				st.setString(1, "%" + searchWord + "%");
 				st.setInt(2, startiItemNum);
 				st.setInt(3, pageMaxItemCount);
@@ -97,7 +97,7 @@ public class ItemDAO {
 
 				idb.setId(rs.getInt("id"));
 				idb.setCategory(rs.getString("category_name"));
-				idb.setName(rs.getString("name"));
+				idb.setName(rs.getString("item_name"));
 				idb.setDetail(rs.getString("detail"));
 				idb.setPrice(rs.getInt("price"));
 				idb.setFirstFileName(rs.getString("first_file_name"));
@@ -142,7 +142,7 @@ public class ItemDAO {
 			if(searchWord.length() == 0) {
 				st = con.prepareStatement("select count(*) as cnt from m_item");
 			} else {
-				st = con.prepareStatement("select count(*) as cnt from m_item where name like ?");
+				st = con.prepareStatement("select count(*) as cnt from m_item where item_name like ?");
 				st.setString(1, "%" + searchWord + "%");
 			}
 
@@ -203,7 +203,7 @@ public class ItemDAO {
 
 				idb.setId(rs.getInt("id"));
 				idb.setCategory(rs.getString("category_name"));
-				idb.setName(rs.getString("name"));
+				idb.setName(rs.getString("item_name"));
 				idb.setDetail(rs.getString("detail"));
 				idb.setPrice(rs.getInt("price"));
 				idb.setFirstFileName(rs.getString("first_file_name"));

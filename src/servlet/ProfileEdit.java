@@ -14,13 +14,13 @@ import model.ImageFileUtil;
 import model.UserDataBeans;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class ProfileEdit
  */
-@WebServlet("/Register")
-public class Register extends HttpServlet {
+@WebServlet("/ProfileEdit")
+public class ProfileEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public Register() {
+    public ProfileEdit() {
         super();
     }
 
@@ -34,19 +34,9 @@ public class Register extends HttpServlet {
 		String imagePath = (String)session.getAttribute("imagePath");
 		String errorMsg = (String)session.getAttribute("errorMsg");
 
-		//空のBeansを作成
+		//セッションにユーザーがなければログインユーザーを代入
 		if(udb == null) {
-			udb = new UserDataBeans();
-			udb.setName("");
-			udb.setNickname("");
-			udb.setAddress("");
-			udb.setLoginId("");
-			udb.setPass("");
-			udb.setPetName("");
-			udb.setPetType("");
-			udb.setPetBirthDate(null);
-			udb.setPetSex("");
-			udb.setPetDesc("");
+			udb = (UserDataBeans)session.getAttribute("loginUser");
 		}
 
 		//保存した画像を画像を消去
@@ -64,9 +54,8 @@ public class Register extends HttpServlet {
 		session.removeAttribute("imageFileName");
 		session.removeAttribute("errorMsg");
 
-		//新規登録画面にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
+		//プロフィール編集画面にフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profileEdit.jsp");
 		dispatcher.forward(request, response);
 	}
-
 }

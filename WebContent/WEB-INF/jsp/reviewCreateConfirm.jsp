@@ -56,6 +56,8 @@ ItemDataBeans idb = (ItemDataBeans)session.getAttribute("idb");
                                     <% } %>
                                 </li>
                             </ul>
+                            <input type="hidden" name="userId" value="<%= rdb.getUserId() %>">
+                            <input type="hidden" name="itemId" value="<%= rdb.getItemId() %>">
                             <input type="hidden" name="createDate" value="<%= System.currentTimeMillis()%>" />
                         	<input type="hidden" name="updateDate" value="<%= System.currentTimeMillis()%>" />
                             <div class="b-one-center u-mb15px"><button type="submit" class="button primary">上記の内容で投稿する</button></div>

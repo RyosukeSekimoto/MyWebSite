@@ -36,12 +36,12 @@ String errorMsg = (String)request.getAttribute("errorMsg");
                                     <br>についてのレビュー
                                 </h3>
                                 <li class="InputFormsArea__formItem">
-                                    <p>タイトル</p>
-                                    <input type="text" name="title" value="<%= rdb.getTitle() %>">
+                                    <p>タイトル（必須）</p>
+                                    <input type="text" name="title" value="<%= rdb.getTitle() %>" required>
                                 </li>
                                 <li class="InputFormsArea__formItem">
-                                    <p>本文</p>
-                                    <textarea name="reviewDesc"><%= rdb.getReviewDesc() %></textarea>
+                                    <p>本文（必須）</p>
+                                    <textarea name="reviewDesc" required><%= rdb.getReviewDesc() %></textarea>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>写真</p>

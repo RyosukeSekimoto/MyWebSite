@@ -53,7 +53,7 @@ int itemCount = (int) request.getAttribute("itemCount");
 					%>
                         <a href="/MyWebSite/ProductDetail?itemId=<%= item.getId() %>" class="ProductPanel l-main-tripartitionColumn">
                             <div class="ProductPanel__sub">
-                                <img class="ProductPanel__thumb" src="upload/<%=item.getFirstFileName() %>" alt="">
+                                <img class="ProductPanel__thumb" src="upload/item/<%=item.getFirstFileName() %>" alt="">
                             </div>
                             <div class="ProductPanel__main">
                                 <p class="ProductPanel__head"><span class="categoryBadge"><%=item.getCategory()%></span></p>

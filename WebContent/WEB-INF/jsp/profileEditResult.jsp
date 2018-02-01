@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.ReviewDataBeans"%>
+<%@ page import="model.UserDataBeans"%>
 <%
-ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("deleteRdb");
+UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -19,13 +19,10 @@ ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("deleteRdb");
         <div class="l-content">
             <main class="l-main">
                 <section class="Section">
-                    <h2 class="pageLabel japanese u-mb60px">タイトル：<%= rdb.getTitle() %><br>このレビューを削除しますか？</h2>
+                    <h2 class="pageLabel u-mb60px japanese">プロフィールの編集完了</h2>
                     <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>">レビュー詳細に戻る</a>
-                        <form action="/MyWebSite/ReviewDelete" method="post">
-                        	<input class="button primary" type="submit" value="削除する">
-                        	<input type="hidden" name="reviewId" value="<%= rdb.getId() %>">
-                        </form>
+                        <a class="button secondary btnLeft" href="/MyWebSite/Index">トップに戻る</a>
+                        <a class="button secondary" href="/MyWebSite/Mypage?userId=<%= udb.getId() %>">マイページへ</a>
                     </div>
                 </section>
             </main>

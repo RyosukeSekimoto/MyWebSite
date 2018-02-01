@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.ItemDataBeans"%>
-<%@ page import="model.ReviewFullDataBeans"%>
+<%@ page import="model.ReviewDataBeans"%>
 <%@ page import="model.Helper"%>
 <%@ page import="java.util.ArrayList"%>
 <%
 ItemDataBeans idb = (ItemDataBeans)request.getAttribute("idb");
-ArrayList<ReviewFullDataBeans> rfdbList = (ArrayList<ReviewFullDataBeans>)request.getAttribute("rfdbList");
+ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
 %>
 
 <!DOCTYPE html>
@@ -39,25 +39,25 @@ ArrayList<ReviewFullDataBeans> rfdbList = (ArrayList<ReviewFullDataBeans>)reques
                   <div class="ProductDetail">
                       <div class="ProductDetail__sub">
                           <div class="ProductDetail__imagePanel">
-                              <div id="main" class="ProductDetail__mainImage"><img class="Image" src="upload/<%= idb.getFirstFileName() %>" alt=""></div>
+                              <div id="main" class="ProductDetail__mainImage"><img class="Image" src="upload/item/<%= idb.getFirstFileName() %>" alt=""></div>
                               <div id="navi" class="ProductDetail__imagethumbs l-row">
                                   <div class="l-w360-quaterColumn">
-                                    <a href="upload/<%= idb.getFirstFileName() %>">
+                                    <a href="upload/item/<%= idb.getFirstFileName() %>">
                                       <img class="ProductDetail__imageThumb" src="upload/<%= idb.getFirstFileName() %>" alt="">
                                     </a>
                                   </div>
                                   <div class="l-w360-quaterColumn">
-                                    <a href="upload/<%= idb.getSecondFileName() %>">
+                                    <a href="upload/item/<%= idb.getSecondFileName() %>">
                                       <img class="ProductDetail__imageThumb" src="upload/<%= idb.getSecondFileName() %>" alt="">
                                     </a>
                                   </div>
                                   <div class="l-w360-quaterColumn">
-                                    <a href="upload/<%= idb.getThirdFileName() %>">
+                                    <a href="upload/item/<%= idb.getThirdFileName() %>">
                                       <img class="ProductDetail__imageThumb" src="upload/<%= idb.getThirdFileName() %>" alt="">
                                     </a>
                                   </div>
                                   <div class="l-w360-quaterColumn">
-                                    <a href="upload/<%= idb.getForthFileName() %>">
+                                    <a href="upload/item/<%= idb.getForthFileName() %>">
                                       <img class="ProductDetail__imageThumb" src="upload/<%= idb.getForthFileName() %>" alt="">
                                     </a>
                                   </div>
@@ -88,26 +88,26 @@ ArrayList<ReviewFullDataBeans> rfdbList = (ArrayList<ReviewFullDataBeans>)reques
                 <section class="Section Section--borderBottom">
                     <h2 class="sectionLabel">Review</h2>
                     <%
-                    if(rfdbList.isEmpty()) {
+                    if(reviewList.size() == 0) {
                     %>
                     <p style="font-size: 14px; text-align: center; margin-bottom: 30px;">この商品のレビューはありません。あなたの声をお聞かせください。</p>
                     <% } %>
                     <ul id="entry_list_more" class="">
 						<%
-						for(ReviewFullDataBeans rfdb: rfdbList) {
+						for(ReviewDataBeans rdb: reviewList) {
 						%>
 							<li class="Review">
                             <div class="Review__sub">
-                                <img class="Review__writerImg" src="upload/<%= rfdb.getReviewerIconFileName() %>" alt="">
-                                <p><%= rfdb.getReviewer() %></p>
+                                <img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt="">
+                                <p><%= rdb.getReviewerName() %></p>
                             </div>
                             <div class="Review__main">
                                 <div class="Review__head">
                                     <p class="Review__title">
-                                        <a href="/MyWebSite/ReviewDetail?reviewId=<%= rfdb.getRdb().getId() %>&itemName=<%= idb.getName() %>"><%= rfdb.getRdb().getTitle() %></a>
+                                        <a href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>"><%= rdb.getTitle() %></a>
                                     </p>
-                                    <p class="Review__productName"><%= idb.getName() %>のレビュー</p>
-                                    <p class="Review__date">Posted: <time><%= rfdb.getRdb().getCreateDate() %></time></p>
+                                    <p class="Review__productName"><%= rdb.getItemName() %>のレビュー</p>
+                                    <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate()) %></p>
                                 </div>
                                 <div class="Review__body l-row-left"></div>
                             </div>

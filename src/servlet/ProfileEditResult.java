@@ -16,14 +16,14 @@ import dao.UserDAO;
 import model.UserDataBeans;
 
 /**
- * Servlet implementation class RegisterResult
+ * Servlet implementation class ProfileEditResult
  */
-@WebServlet("/RegisterResult")
+@WebServlet("/ProfileEditResult")
 @MultipartConfig(location="", maxFileSize=1024 * 1024 * 2)
-public class RegisterResult extends HttpServlet {
+public class ProfileEditResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public RegisterResult() {
+    public ProfileEditResult() {
         super();
     }
 
@@ -39,42 +39,44 @@ public class RegisterResult extends HttpServlet {
 		String address = request.getParameter("address");
 		String loginId = request.getParameter("loginId");
 		String pass = request.getParameter("pass");
-		Timestamp createDate = new Timestamp(Long.parseLong(request.getParameter("createDate")));
-		Timestamp updateDate = new Timestamp(Long.parseLong(request.getParameter("updateDate")));
 		String petName = request.getParameter("petName");
 		String petType = request.getParameter("petType");
 		Date petBirthDate = Date.valueOf(request.getParameter("petBirthDate"));
+		Timestamp updateDate = new Timestamp(Long.parseLong(request.getParameter("updateDate")));
 		String petSex = request.getParameter("petSex");
 		String petDesc = request.getParameter("petDesc").isEmpty() ? null: request.getParameter("petDesc");
 		String petIconFile = request.getParameter("petIconFile").isEmpty() ? "default.png": request.getParameter("petIconFile");
 
-		//ユーザーデータをBeansに格納
+		//ログインユーザーを取得
+		UserDataBeans loginUser = (UserDataBeans)session.getAttribute("loginUser");
+
+		//更新する値を格納
 		UserDataBeans udb = new UserDataBeans();
+		udb.setId(loginUser.getId());
 		udb.setName(name);
 		udb.setNickname(nickname);
 		udb.setAddress(address);
 		udb.setLoginId(loginId);
 		udb.setPass(pass);
-		udb.setCreateDate(createDate);
-		udb.setUpdateDate(updateDate);
 		udb.setPetName(petName);
 		udb.setPetType(petType);
 		udb.setPetBirthDate(petBirthDate);
 		udb.setPetSex(petSex);
 		udb.setPetDesc(petDesc);
 		udb.setFileName(petIconFile);
+		udb.setUpdateDate(updateDate);
 
-		//データベースに登録
+		//アップデート処理
 		UserDAO userDao = new UserDAO();
-		userDao.insertUser(udb);
+		userDao.updateUserProfile(udb);
 
 		//セッションを破棄
 		session.removeAttribute("udb");
 		session.removeAttribute("imagePath");
 		session.removeAttribute("imageFileName");
 
-		//登録完了ページへフォワード
-		request.getRequestDispatcher("/WEB-INF/jsp/registerResult.jsp").forward(request, response);
+		//投稿完了ページへフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/profileEditResult.jsp").forward(request, response);
 	}
 
 }

@@ -42,7 +42,7 @@ int pageIntNum = (int) request.getAttribute("pageIntNum");
 					%>
                         <a href="/MyWebSite/ProductDetail?itemId=<%= idb.getId() %>" class="ProductPanel l-main-tripartitionColumn">
                             <div class="ProductPanel__sub">
-                                <img class="ProductPanel__thumb" src="upload/<%=idb.getFirstFileName() %>" alt="">
+                                <img class="ProductPanel__thumb" src="upload/item/<%=idb.getFirstFileName() %>" alt="">
                             </div>
                             <div class="ProductPanel__main">
                                 <p class="ProductPanel__head"><span class="categoryBadge"><%=idb.getCategory()%></span></p>

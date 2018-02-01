@@ -59,7 +59,8 @@ public class PurchaseResult extends HttpServlet {
 		}
 
 		//購入完了ページ用の情報をリクエストスコープに保存
-		request.setAttribute("bdb", bdb);
+		BuyDataBeans resultbdb = buyDao.getBuyDataBeansByBuyId(buyId);
+		request.setAttribute("bdb", resultbdb);
 		ArrayList<BuyDetailDataBeans> bddbList = buyDetailDao.getBuyDataBeansListByBuyId(buyId);
 		request.setAttribute("bddbList", bddbList);
 

@@ -2,11 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.UserDataBeans"%>
 <%@ page import="model.ReviewDataBeans"%>
-<%@ page import="model.ReviewFullDataBeans"%>
+<%@ page import="model.Helper"%>
 <%
 UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
-ReviewFullDataBeans rfdb = (ReviewFullDataBeans)request.getAttribute("rfdb");
-String itemName = (String)request.getAttribute("itemName");
+ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("rdb");
 %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -27,43 +26,43 @@ String itemName = (String)request.getAttribute("itemName");
                     <h2 class="pageLabel">Review Detail</h2>
                     <div class="Review Review--detail">
                         <div class="Review__sub">
-                            <a href="/MyWebSite/MyPage"><img class="Review__writerImg" src="upload/<%= rfdb.getReviewerIconFileName() %>" alt=""></a>
-                            <p><a href="/MyWebSite/MyPage"><%= rfdb.getReviewer() %></a>さん</p>
+                            <a href="/MyWebSite/Mypage?userId=<%= rdb.getUserId() %>"><img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt=""></a>
+                            <p><a href="/MyWebSite/Mypage?userId=<%= rdb.getUserId() %>"><%= rdb.getReviewerName() %></a></p>
                         </div>
                         <div class="Review__main">
                             <div class="Review__head">
                                 <p class="Review__title">
-									<%= rfdb.getRdb().getTitle() %>
+									<%= rdb.getTitle() %>
                                 </p>
-                                <p class="Review__productName"><%= itemName %>のレビュー</p>
-                                <p class="Review__date">Posted: <%= rfdb.getRdb().getCreateDate() %></p>
+                                <p class="Review__productName"><%= rdb.getItemName() %>のレビュー</p>
+                                <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate()) %></p>
                             </div>
                         </div>
                     </div>
                     <div class="review-desc">
-                        <p><%= rfdb.getRdb().getReviewDesc() %></p>
+                        <p><%= rdb.getReviewDesc() %></p>
                     </div>
                 </section>
-                <% if(rfdb.getRdb().getPhotoFileName() != null) { %>
+                <% if(rdb.getPhotoFileName() != null) { %>
                 <section class="Section">
                     <h2 class="sectionLabel">Use image</h2>
                     <ul class="photoList">
                         <li class="photoItem">
-                            <div class="photoImage"><img src="upload/<%= rfdb.getRdb().getPhotoFileName() %>" alt=""></div>
-                            <% if(rfdb.getRdb().getPhotoDesc() != null) { %>
-                            <p class="photoDesc"><%= rfdb.getRdb().getPhotoDesc() %></p>
+                            <div class="photoImage"><img src="upload/review/<%= rdb.getPhotoFileName() %>" alt=""></div>
+                            <% if(rdb.getPhotoDesc() != null) { %>
+                            <p class="photoDesc"><%= rdb.getPhotoDesc() %></p>
                             <% } %>
                         </li>
                     </ul>
                 </section>
                 <% } %>
                 <div class="b-one-center u-mb100px">
-                    <a class="button secondary" href="/MyWebSite/ProductDetail?itemId=<%= rfdb.getRdb().getItemId() %>">この商品の詳細へ</a>
+                    <a class="button secondary" href="/MyWebSite/ProductDetail?itemId=<%= rdb.getItemId() %>">この商品の詳細へ</a>
                 </div>
-                <% if(udb != null && udb.getId() == rfdb.getRdb().getUserId()) { %>
+                <% if(udb != null && udb.getId() == rdb.getUserId()) { %>
                 <div class="b-two-center u-mb100px">
-                    <a class="button secondary btnLeft" href="/MyWebSite/ReviewEdit?reviewId=<%= rfdb.getRdb().getId() %>&itemName=<%= itemName %>">このレビューを編集する</a>
-                    <a class="button primary" href="/MyWebSite/ReviewDelete?reviewId=<%= rfdb.getRdb().getId() %>&itemName=<%= itemName %>">このレビューを削除する</a>
+                    <a class="button secondary btnLeft" href="/MyWebSite/ReviewEdit?reviewId=<%= rdb.getId() %>">このレビューを編集する</a>
+                    <a class="button primary" href="/MyWebSite/ReviewDelete?reviewId=<%= rdb.getId() %>">このレビューを削除する</a>
                 </div>
                 <% } %>
                 <div class="UnderButtons UnderButtons--rightOnly u-mb60px">

@@ -12,7 +12,6 @@ public class ReviewValidationLogic {
 		//必須項目に記入漏れがないか
 		if(rdb.getTitle().isEmpty() || rdb.getReviewDesc().isEmpty()) {
 			errorMsg += "必須項目の中に入力されていないものがあります。";
-			System.out.println("error-01!");
 		}
 
 		//写真と写真コメントがセットで入力されているか
@@ -20,7 +19,6 @@ public class ReviewValidationLogic {
 			System.out.println("error-02!");
 			if(part.getSize() == 0.0 && rdb.getPhotoFileName() == null) {
 				errorMsg += "写真がアップロードされていません";
-				System.out.println("error-03!");
 			}
 		}
 

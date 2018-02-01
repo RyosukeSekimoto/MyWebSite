@@ -21,52 +21,52 @@ ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("
         <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
         <div class="l-content">
             <main class="l-main">
-                <section class="Section u-mb90px">
-                    <h2 class="pageLabel japanese">カート</h2>
-                    <p><%= cartActionMessage %></p>
-                    <% if(cart.size() != 0) { %>
-                    <form class="" action="/MyWebSite/CartItemDelete" method="post">
-                        <table class="TableList TableList--cart">
-                            <thead>
-                                <tr>
-                                    <th>商品</th>
-                                    <th>単価</th>
-                                    <th>数量</th>
-                                    <th>削除</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <%
-                                int i = 1;
-                                for(CartItemBeans cib: cart) {
-                                i++;
-                                %>
-                                    <td class="cartProduct">
-                                        <div class="cartProductWrapper">
-                                            <div class="cartProductImage"><img src="upload/<%= cib.getIdb().getFirstFileName() %>" alt=""></div>
-                                            <p class="cartProductName"><a href="/MyWebSite/ProductDetail?itemId=<%= cib.getIdb().getId() %>"><%= cib.getIdb().getName() %></a></p>
-                                        </div>
-                                    </td>
-                                    <td class="price"><%= Helper.displayPrice(cib.getIdb().getPrice()) %></td>
-                                    <td class="inputCount"><input class="" type="number" name="quantity" min=1 value="<%= cib.getQuantity() %>" readonly></td>
-                                    <td class="delete">
-                                        <div class="chkbox">
-                                            <input type="checkbox" id="chkbox<%=i%>" name="deleteItemIdList" value="<%= cib.getIdb().getId() %>" />
-                                            <label for="chkbox<%=i%>">　</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                      <div class="cartDeleteButton"><button type="submit">チェックした商品をカートから削除する</button></div>
-                    </form>
-                    <% } %>
-                </section>
-                <% if(cart.size() != 0) { %>
-                <div class="b-one-center u-mb90px"><a class="button primary" href="/MyWebSite/DeliveryMethod">購入手続きへ</a></div>
-                <% } %>
+	            <form class="" action="/MyWebSite/CartAction" method="post">
+	                <section class="Section u-mb90px">
+	                    <h2 class="pageLabel japanese">カート</h2>
+	                    <p><%= cartActionMessage %></p>
+	                    <% if(cart.size() != 0) { %>
+	                        <table class="TableList TableList--cart">
+	                            <thead>
+	                                <tr>
+	                                    <th>商品</th>
+	                                    <th>単価</th>
+	                                    <th>数量</th>
+	                                    <th>削除</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr>
+	                                <%
+	                                int i = 0;
+	                                for(CartItemBeans cib: cart) {
+	                                i++;
+	                                %>
+	                                    <td class="cartProduct">
+	                                        <div class="cartProductWrapper">
+	                                            <div class="cartProductImage"><img src="upload/item/<%= cib.getIdb().getFirstFileName() %>" alt=""></div>
+	                                            <p class="cartProductName"><a href="/MyWebSite/ProductDetail?itemId=<%= cib.getIdb().getId() %>"><%= cib.getIdb().getName() %></a></p>
+	                                        </div>
+	                                    </td>
+	                                    <td class="price"><%= Helper.displayPrice(cib.getIdb().getPrice()) %></td>
+	                                    <td class="inputCount"><input class="" type="number" name="quantity" min=1 value="<%= cib.getQuantity() %>"></td>
+	                                    <td class="delete">
+	                                        <div class="chkbox">
+	                                            <input type="checkbox" id="chkbox<%=i%>" name="deleteItemIdList" value="<%= cib.getIdb().getId() %>" />
+	                                            <label for="chkbox<%=i%>">　</label>
+	                                        </div>
+	                                    </td>
+	                                </tr>
+	                                <% } %>
+	                            </tbody>
+	                        </table>
+	                      <div class="cartDeleteButton"><button type="submit" name="itemDelete">チェックした商品をカートから削除する</button></div>
+	                    <% } %>
+	                	</section>
+	                	<% if(cart.size() != 0) { %>
+						<div class="b-one-center u-mb90px"><button type="submit" name="purchase" class="button primary">購入手続きへ</button></div>
+              			<% } %>
+	                </form>
                 <div class="UnderButtons u-mb60px">
                     <div class="UnderButtons__Left"><a href="/MyWebSite/Index">トップに戻る</a></div>
                     <div id="page-top" class="UnderButtons__Right">

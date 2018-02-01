@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ItemDAO;
 import dao.ReviewDAO;
 import model.ImageFileUtil;
 import model.ReviewDataBeans;
@@ -44,14 +43,8 @@ public class ReviewEdit extends HttpServlet {
 			//セッションスコープにreviewIDを保存
 			session.setAttribute("editReviewId", reviewId);
 
-			//レビューから商品名を取得
-			ItemDAO itemDao = new ItemDAO();
-			String itemName = itemDao.getItemByItemId(rdb.getItemId()).getName();
-
 			//リクエストスコープに保存
 			request.setAttribute("rdb", rdb);
-			//セッションスコープに保存
-			session.setAttribute("itemName", itemName);
 
 		} else {
 			//セッションの情報を取得
@@ -86,9 +79,4 @@ public class ReviewEdit extends HttpServlet {
 		RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/jsp/reviewEdit.jsp");
 		dispacher.forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
 }

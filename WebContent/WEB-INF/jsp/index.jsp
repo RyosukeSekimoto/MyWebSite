@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.UserDataBeans"%>
+<%@ page import="model.ReviewDataBeans"%>
+<%@ page import="model.ItemDataBeans"%>
+<%@ page import="model.Helper"%>
+<%@ page import="java.util.ArrayList"%>
 <%
 UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
+ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
+ArrayList<ItemDataBeans> idbList = (ArrayList<ItemDataBeans>)request.getAttribute("idbList");
 %>
 
 <!DOCTYPE html>
@@ -41,139 +47,58 @@ UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
                 <section class="Section">
                     <h2 class="sectionLabel">By Popularity</h2>
                     <div class="Section__item l-row">
-                        <a href="productDetail.html" class="ProductPanel l-main-tripartitionColumn">
+                    <%
+                    int i = 0;
+                    for(ItemDataBeans idb: idbList) {
+                    i++;
+                    %>
+                        <a href="/MyWebSite/ProductDetail?itemId=<%= idb.getId() %>" class="ProductPanel l-main-tripartitionColumn">
                             <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge first">1</div>
-                                <img class="ProductPanel__thumb" src="./dist/images/top/sample-product.jpg" alt="">
+                                <div class="ProductPanel--badge
+                                <% if(i == 1) { %> first
+                                <% } else if(i == 2) { %> second
+                                <% } else if(i == 3) { %> third
+								<% } %>">
+								<%=i%>
+                                </div>
+                                <img class="ProductPanel__thumb" src="upload/item/<%= idb.getFirstFileName() %>" alt="">
                             </div>
                             <div class="ProductPanel__main">
-                                <p class="ProductPanel__head"><span class="categoryBadge">フード・おやつ</span></p>
+                                <p class="ProductPanel__head"><span class="categoryBadge"><%= idb.getCategory() %></span></p>
                                 <div class="ProductPanel__body">
-                                  マルチパーパスサークル　コーディネートセットマルチパーパスサークル　コーディネートセット<br>
-                                  <span>¥42,660(tax in)</span>
+                                <%= idb.getName() %><br>
+                                  <span>¥<%= Helper.displayPrice(idb.getPrice()) %>(tax in)</span>
                                 </div>
                             </div>
                         </a>
-                        <a href="productDetail.html" class="ProductPanel l-main-tripartitionColumn">
-                            <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge second">2</div>
-                                <img class="ProductPanel__thumb" src="./dist/images/top/sample-product.jpg" alt="">
-                            </div>
-                            <div class="ProductPanel__main">
-                                <p class="ProductPanel__head"><span class="categoryBadge">フード・おやつ</span></p>
-                                <div class="ProductPanel__body">
-                                  マルチパーパスサークル　コーディネートセットマルチパーパスサークル　コーディネートセット<br>
-                                  <span>¥42,660(tax in)</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="productDetail.html" class="ProductPanel l-main-tripartitionColumn">
-                            <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge third">3</div>
-                                <img class="ProductPanel__thumb" src="./dist/images/top/sample-product.jpg" alt="">
-                            </div>
-                            <div class="ProductPanel__main">
-                                <p class="ProductPanel__head"><span class="categoryBadge">フード・おやつ</span></p>
-                                <div class="ProductPanel__body">
-                                  マルチパーパスサークル　コーディネートセットマルチパーパスサークル　コーディネートセット<br>
-                                  <span>¥42,660(tax in)</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="Section__item l-row">
-                        <a href="productDetail.html" class="ProductPanel l-main-tripartitionColumn">
-                            <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge">4</div>
-                                <img class="ProductPanel__thumb" src="./dist/images/top/sample-product.jpg" alt="">
-                            </div>
-                            <div class="ProductPanel__main">
-                                <p class="ProductPanel__head"><span class="categoryBadge">フード・おやつ</span></p>
-                                <div class="ProductPanel__body">
-                                  マルチパーパスサークル　コーディネートセットマルチパーパスサークル　コーディネートセット<br>
-                                  <span>¥42,660(tax in)</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="productDetail.html" class="ProductPanel l-main-tripartitionColumn">
-                            <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge">5</div>
-                                <img class="ProductPanel__thumb" src="./dist/images/top/sample-product.jpg" alt="">
-                            </div>
-                            <div class="ProductPanel__main">
-                                <p class="ProductPanel__head"><span class="categoryBadge">フード・おやつ</span></p>
-                                <div class="ProductPanel__body">
-                                  マルチパーパスサークル　コーディネートセットマルチパーパスサークル　コーディネートセット<br>
-                                  <span>¥42,660(tax in)</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="productDetail.html" class="ProductPanel l-main-tripartitionColumn">
-                            <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge">6</div>
-                                <img class="ProductPanel__thumb" src="./dist/images/top/sample-product.jpg" alt="">
-                            </div>
-                            <div class="ProductPanel__main">
-                                <p class="ProductPanel__head"><span class="categoryBadge">フード・おやつ</span></p>
-                                <div class="ProductPanel__body">
-                                  マルチパーパスサークル　コーディネートセットマルチパーパスサークル　コーディネートセット<br>
-                                  <span>¥42,660(tax in)</span>
-                                </div>
-                            </div>
-                        </a>
+                    <% if(i % 3 == 0) {%>
+					</div>
+					<div class="Section__item l-row">
+					<% } %>
+                    <% } %>
                     </div>
                 </section>
                 <section class="Section">
                     <h2 class="sectionLabel">Latest　Review</h2>
                     <ul class="">
+                    <% for(ReviewDataBeans rdb: reviewList) { %>
                         <li class="Review">
                             <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
+                                <img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt="">
+                                <p><%= rdb.getReviewerName() %></p>
                             </div>
                             <div class="Review__main">
                                 <div class="Review__head">
                                     <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
+                                        <a href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>"><%= rdb.getTitle() %></a>
                                     </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
+                                    <p class="Review__productName"><%= rdb.getItemName() %></p>
+                                    <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate())%></p>
                                 </div>
                                 <div class="Review__body l-row-left"></div>
                             </div>
                         </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
-                        <li class="Review">
-                            <div class="Review__sub">
-                                <img class="Review__writerImg" src="./dist/images/top/profile.jpg" alt="">
-                                <p>ねこねこねこさん</p>
-                            </div>
-                            <div class="Review__main">
-                                <div class="Review__head">
-                                    <p class="Review__title">
-                                        <a href="reviewDetail.html">ここにタイトルが入ります。ここにタイトルが入ります。ここにタイトルが入ります。</a>
-                                    </p>
-                                    <p class="Review__productName">マルチパーパスサークルコーディネートセットのレビュー</p>
-                                    <p class="Review__date">Posted: <time>2018/01/01</time></p>
-                                </div>
-                                <div class="Review__body l-row-left"></div>
-                            </div>
-                        </li>
+                    <% } %>
                     </ul>
                 </section>
                 <div class="UnderButtons UnderButtons--rightOnly u-mb u-mb60px">

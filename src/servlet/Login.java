@@ -72,7 +72,7 @@ public class Login extends HttpServlet {
 			//リターンページ情報を破棄
 			session.removeAttribute("returnPageName");
 
-			if(returnPageName != null) {//なければトップへ
+			if(returnPageName != null) {
 				response.sendRedirect(returnPageName);
 			} else {
 				//トップにリダイレクト

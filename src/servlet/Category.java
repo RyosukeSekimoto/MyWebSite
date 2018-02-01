@@ -59,8 +59,4 @@ public class Category extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/jsp/category.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
 }

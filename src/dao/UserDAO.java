@@ -19,7 +19,7 @@ public class UserDAO {
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO t_user(name, nickname, address, login_id, password, create_date, update_date, pet_name, pet_type, pet_birth_date, pet_sex, pet_desc, file_name) "
+			st = con.prepareStatement("INSERT INTO t_user(name, nickname, address, login_id, password, create_date, update_date, pet_name, pet_type, pet_birth_date, pet_sex, pet_desc, file_name)"
 										+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			st.setString(1, udb.getName());
@@ -27,8 +27,8 @@ public class UserDAO {
 			st.setString(3, udb.getAddress());
 			st.setString(4, udb.getLoginId());
 			st.setString(5, Helper.encryption(udb.getPass()));
-			st.setDate(6, udb.getCreateDate());
-			st.setDate(7, udb.getUpdateDate());
+			st.setTimestamp(6, udb.getCreateDate());
+			st.setTimestamp(7, udb.getUpdateDate());
 			st.setString(8, udb.getPetName());
 			st.setString(9, udb.getPetType());
 			st.setDate(10, udb.getPetBirthDate());
@@ -50,6 +50,58 @@ public class UserDAO {
                     e.printStackTrace();
                 }
             }
+		}
+	}
+
+	/**
+	 * データの更新処理を行う
+	 * @param udb 対応したデータを保持しているJavaBeans
+	 */
+	public void updateUserProfile(UserDataBeans udb) {
+
+		Connection conn = null;
+
+		try {
+			//データベースへ接続
+			conn = DBManager.getConnection();
+
+			//UPDATE文を用意
+			String sql = "UPDATE t_user SET name = ?, nickname = ?, address = ?, login_id = ?, password = ?, update_date = ?,"
+						 + "pet_name = ?, pet_type = ?, pet_birth_date = ?, pet_sex = ?, pet_desc = ?, file_name = ? WHERE id = ?";
+
+			//UPDATEを実行
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, udb.getName());
+			pStmt.setString(2, udb.getNickname());
+			pStmt.setString(3, udb.getAddress());
+			pStmt.setString(4, udb.getLoginId());
+			pStmt.setString(5, udb.getPass());
+			pStmt.setTimestamp(6, udb.getUpdateDate());
+			pStmt.setString(7, udb.getPetName());
+			pStmt.setString(8, udb.getPetType());
+			pStmt.setDate(9, udb.getPetBirthDate());
+			pStmt.setString(10, udb.getPetSex());
+			pStmt.setString(11, udb.getPetDesc());
+			pStmt.setString(12, udb.getFileName());
+			pStmt.setInt(13, udb.getId());
+
+			int resultNum = pStmt.executeUpdate();
+
+			//追加された行数を出力
+			System.out.println(resultNum);
+			System.out.println("updating user has completed");
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//データベース切断
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -85,8 +137,8 @@ public class UserDAO {
 				udb.setAddress(rs.getString("address"));
 				udb.setLoginId(rs.getString("login_id"));
 				udb.setPass(rs.getString("password"));
-				udb.setCreateDate(rs.getDate("create_date"));
-				udb.setUpdateDate(rs.getDate("update_date"));
+				udb.setCreateDate(rs.getTimestamp("create_date"));
+				udb.setUpdateDate(rs.getTimestamp("update_date"));
 				udb.setPetName(rs.getString("pet_name"));
 				udb.setPetType(rs.getString("pet_type"));
 				udb.setPetBirthDate(rs.getDate("pet_birth_date"));
@@ -147,8 +199,8 @@ public class UserDAO {
 				udb.setAddress(rs.getString("address"));
 				udb.setLoginId(rs.getString("login_id"));
 				udb.setPass(rs.getString("password"));
-				udb.setCreateDate(rs.getDate("create_date"));
-				udb.setUpdateDate(rs.getDate("update_date"));
+				udb.setCreateDate(rs.getTimestamp("create_date"));
+				udb.setUpdateDate(rs.getTimestamp("update_date"));
 				udb.setPetName(rs.getString("pet_name"));
 				udb.setPetType(rs.getString("pet_type"));
 				udb.setPetBirthDate(rs.getDate("pet_birth_date"));

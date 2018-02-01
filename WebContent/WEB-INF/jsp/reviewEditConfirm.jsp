@@ -3,7 +3,6 @@
 <%
 ReviewDataBeans rdb = (ReviewDataBeans)session.getAttribute("rdb");
 String imageFileName = (String)session.getAttribute("imageFileName");
-String itemName = (String)session.getAttribute("itemName");
 %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,7 +24,7 @@ String itemName = (String)session.getAttribute("itemName");
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/ReviewEditResult" enctype="multipart/form-data" method="post">
                             <ul class="InputFormsArea__formList">
-                                <h3 class="InputFormsArea__title reviewProductName"><span><%= itemName %></span>
+                                <h3 class="InputFormsArea__title reviewProductName"><span><%= rdb.getItemName() %></span>
                                     <br>についてのレビュー
                                 </h3>
                                 <li class="InputFormsArea__formItem">

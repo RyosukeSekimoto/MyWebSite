@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class UserDataBeans implements Serializable {
 
@@ -11,8 +12,8 @@ public class UserDataBeans implements Serializable {
 	private String address;
 	private String loginId;
 	private String pass;
-	private Date createDate;
-	private Date updateDate;
+	private Timestamp createDate;
+	private Timestamp updateDate;
 	private String petName;
 	private String petType;
 	private Date petBirthDate;
@@ -70,19 +71,19 @@ public class UserDataBeans implements Serializable {
 		this.pass = pass;
 	}
 
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getUpdateDate() {
+	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
 

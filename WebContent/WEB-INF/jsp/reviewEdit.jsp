@@ -2,7 +2,6 @@
 <%@ page import="model.ReviewDataBeans"%>
 <%
 ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("rdb");
-String itemName = (String)session.getAttribute("itemName");
 String errorMsg = (String)request.getAttribute("errorMsg");
 %>
 <!DOCTYPE html>
@@ -28,7 +27,7 @@ String errorMsg = (String)request.getAttribute("errorMsg");
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/ReviewEditConfirm" enctype="multipart/form-data" method="post">
                             <ul class="InputFormsArea__formList">
-                                <h3 class="InputFormsArea__title reviewProductName"><span><%= itemName %></span>
+                                <h3 class="InputFormsArea__title reviewProductName"><span><%= rdb.getItemName() %></span>
                                     <br>についてのレビュー
                                 </h3>
                                 <li class="InputFormsArea__formItem">

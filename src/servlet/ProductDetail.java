@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDAO;
 import dao.ReviewDAO;
-import dao.UserDAO;
 import model.ItemDataBeans;
 import model.ReviewDataBeans;
-import model.ReviewFullDataBeans;
 
 /**
  * Servlet implementation class ProductDetail
@@ -42,36 +40,13 @@ public class ProductDetail extends HttpServlet {
 		ReviewDAO reviewDao = new ReviewDAO();
 		ArrayList<ReviewDataBeans> reviewList = reviewDao.getReviewsByItemId(itemId);
 
-		//レビュワー情報込みのbeansが入るArrayListを用意
-		ArrayList<ReviewFullDataBeans> rfdbList = new ArrayList<ReviewFullDataBeans>();
-		UserDAO userDao = new UserDAO();
-
-		//レビュー情報にユーザー名とアイコン画像を追加したbeansを用意する
-		for(ReviewDataBeans rdb: reviewList) {
-
-			//レビュワー情報を取得
-			String reviewer = userDao.findById(rdb.getUserId()).getName();
-			String reviewerIconFileName = userDao.findById(rdb.getUserId()).getFileName();
-			//beansにデータを格納
-			ReviewFullDataBeans rsb = new ReviewFullDataBeans();
-			rsb.setRdb(rdb);
-			rsb.setReviewer(reviewer);
-			rsb.setReviewerIconFileName(reviewerIconFileName);
-			rfdbList.add(rsb);
-		}
-
 		//リクエストスコープに保存
 		request.setAttribute("idb", idb);
-		request.setAttribute("rfdbList", rfdbList);
+		request.setAttribute("reviewList", reviewList);
 
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/productDetail.jsp");
 		dispatcher.forward(request, response);
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 
 }
