@@ -53,9 +53,7 @@
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>写真へのコメント</p>
-                                    <c:if test="${rdb.getPhotoDesc() != null}">
                                     <textarea name="photoDesc" readonly="readonly"><c:out value="${rdb.getPhotoDesc()}" /></textarea>
-                                    </c:if>
                                 </li>
                             </ul>
                             <input type="hidden" name="userId" value="<c:out value="${rdb.getUserId()}" />">

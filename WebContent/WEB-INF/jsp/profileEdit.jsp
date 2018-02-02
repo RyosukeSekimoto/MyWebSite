@@ -99,10 +99,7 @@
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>紹介文</p>
-                                    <c:choose>
-                                    <c:when test="${udb.getPetDesc() != null}"><textarea name="petDesc"><c:out value="${udb.getPetDesc()}" /></textarea></c:when>
-                                    <c:when test="${udb.getPetDesc() == null}"><textarea></textarea></c:when>
-                                    </c:choose>
+                                    <textarea name="petDesc"><c:out value="${udb.getPetDesc()}" /></textarea>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>アイコン用画像</p>
