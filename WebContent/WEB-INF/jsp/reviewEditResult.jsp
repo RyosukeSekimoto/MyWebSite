@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-String itemName = (String)request.getAttribute("itemName");
-int reviewId = (int)request.getAttribute("reviewId");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,7 +18,7 @@ int reviewId = (int)request.getAttribute("reviewId");
                 <section class="Section">
                     <h2 class="pageLabel u-mb60px">レビュー編集完了</h2>
                     <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<%= reviewId %>&itemName=<%= itemName %>">レビュー詳細に戻る</a>
+                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<c:out value="${reviewId}" />&itemName=<c:out value="$itemName{}" />">レビュー詳細に戻る</a>
                         <a class="button secondary" href="/MyWebSite/Mypage">マイページへ</a>
                     </div>
                 </section>

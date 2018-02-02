@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.UserDataBeans"%>
 <%@ page import="model.ReviewDataBeans"%>
 <%@ page import="model.ItemDataBeans"%>
 <%@ page import="model.Helper"%>
 <%@ page import="java.util.ArrayList"%>
+
 <%
-UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
-ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
 ArrayList<ItemDataBeans> idbList = (ArrayList<ItemDataBeans>)request.getAttribute("idbList");
 %>
 
@@ -54,13 +55,7 @@ ArrayList<ItemDataBeans> idbList = (ArrayList<ItemDataBeans>)request.getAttribut
                     %>
                         <a href="/MyWebSite/ProductDetail?itemId=<%= idb.getId() %>" class="ProductPanel l-main-tripartitionColumn">
                             <div class="ProductPanel__sub">
-                                <div class="ProductPanel--badge
-                                <% if(i == 1) { %> first
-                                <% } else if(i == 2) { %> second
-                                <% } else if(i == 3) { %> third
-								<% } %>">
-								<%=i%>
-                                </div>
+                                <div class="ProductPanel--badge<% if(i == 1) { %> first<% } else if(i == 2) { %> second<% } else if(i == 3) { %> third<% } %>"><%=i%></div>
                                 <img class="ProductPanel__thumb" src="upload/item/<%= idb.getFirstFileName() %>" alt="">
                             </div>
                             <div class="ProductPanel__main">
@@ -74,31 +69,35 @@ ArrayList<ItemDataBeans> idbList = (ArrayList<ItemDataBeans>)request.getAttribut
                     <% if(i % 3 == 0) {%>
 					</div>
 					<div class="Section__item l-row">
-					<% } %>
-                    <% } %>
+					<%
+					}
+					%>
+                    <%
+                    }
+                    %>
                     </div>
                 </section>
                 <section class="Section">
                     <h2 class="sectionLabel">Latest　Review</h2>
                     <ul class="">
-                    <% for(ReviewDataBeans rdb: reviewList) { %>
+                    <c:forEach var="rdb" items="${reviewList}">
                         <li class="Review">
                             <div class="Review__sub">
-                                <img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt="">
-                                <p><%= rdb.getReviewerName() %></p>
+                                <img class="Review__writerImg" src="upload/profile/<c:out value="${rdb.getReviewerFileName()}" />" alt="">
+                                <p><c:out value="${rdb.getReviewerName()}" /></p>
                             </div>
                             <div class="Review__main">
                                 <div class="Review__head">
                                     <p class="Review__title">
-                                        <a href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>"><%= rdb.getTitle() %></a>
+                                        <a href="/MyWebSite/ReviewDetail?reviewId=<c:out value="${rdb.getId()}" />"><c:out value="${rdb.getTitle()}" /></a>
                                     </p>
-                                    <p class="Review__productName"><%= rdb.getItemName() %></p>
-                                    <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate())%></p>
+                                    <p class="Review__productName"><c:out value="${rdb.getItemName()}" />のレビュー</p>
+                                    <p class="Review__date">投稿日: <c:out value="${Helper.displayDate(rdb.getCreateDate())}" /></p>
                                 </div>
                                 <div class="Review__body l-row-left"></div>
                             </div>
                         </li>
-                    <% } %>
+                    </c:forEach>
                     </ul>
                 </section>
                 <div class="UnderButtons UnderButtons--rightOnly u-mb u-mb60px">

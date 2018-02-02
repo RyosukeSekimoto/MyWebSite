@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.ReviewDataBeans"%>
-<%
-ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("deleteRdb");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,12 +19,12 @@ ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("deleteRdb");
         <div class="l-content">
             <main class="l-main">
                 <section class="Section">
-                    <h2 class="pageLabel japanese u-mb60px">タイトル：<%= rdb.getTitle() %><br>このレビューを削除しますか？</h2>
+                    <h2 class="pageLabel japanese u-mb60px">タイトル：<c:out value="${deleteRdb.getTitle()}" /><br>このレビューを削除しますか？</h2>
                     <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>">レビュー詳細に戻る</a>
+                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<c:out value="${deleteRdb.getId()}" />">レビュー詳細に戻る</a>
                         <form action="/MyWebSite/ReviewDelete" method="post">
                         	<input class="button primary" type="submit" value="削除する">
-                        	<input type="hidden" name="reviewId" value="<%= rdb.getId() %>">
+                        	<input type="hidden" name="reviewId" value="<c:out value="${deleteRdb.getId()}" />">
                         </form>
                     </div>
                 </section>

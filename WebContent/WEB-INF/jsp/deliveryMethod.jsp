@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="model.CartItemBeans"%>
 <%@ page import="model.DeliveryMethodDataBeans"%>
 <%@ page import="model.Helper"%>
-<%
-ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("cart");
-ArrayList<DeliveryMethodDataBeans> dmdbList = (ArrayList<DeliveryMethodDataBeans>)request.getAttribute("dmdbList");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -35,22 +34,22 @@ ArrayList<DeliveryMethodDataBeans> dmdbList = (ArrayList<DeliveryMethodDataBeans
                             </tr>
                         </thead>
                         <tbody>
-                        <% for(CartItemBeans cib: cart) { %>
+                        <c:forEach var="cib" items="${cart}">
                             <tr>
-                                <td class="productName"><%= cib.getIdb().getName() %></td>
-                                <td class="price"><%= Helper.displayPrice(cib.getIdb().getPrice()) %></td>
-                                <td class="count"><%= cib.getQuantity() %></td>
-                                <td class="price"><%= cib.getIdb().getPrice() * cib.getQuantity() %></td>
+                                <td class="productName"><c:out value="${cib.getIdb().getName()}" /></td>
+                                <td class="price"><c:out value="${Helper.displayPrice(cib.getIdb().getPrice())}" /></td>
+                                <td class="count"><c:out value="${cib.getQuantity()}" /></td>
+                                <td class="price"><c:out value="${cib.getIdb().getPrice() * cib.getQuantity()}" /></td>
                             </tr>
-                        <% } %>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <div class="deliverySelect">
                           <label>
                               <select name="selectDeliveryMethodId">
-                              <% for(DeliveryMethodDataBeans dmdb: dmdbList) { %>
-                                  <option value="<%= dmdb.getId() %>"><%= dmdb.getName() %></option>
-                              <% } %>
+                              <c:forEach var="dmdb" items="${dmdbList}">
+                                  <option value="<c:out value="${dmdb.getId()}" />"><c:out value="${dmdb.getName()}" /></option>
+                              </c:forEach>
                               </select>
                           </label>
                     </div>

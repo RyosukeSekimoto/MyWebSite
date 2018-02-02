@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.CartItemBeans"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="model.Helper"%>
+
 <%
-String cartActionMessage = (String)request.getAttribute("cartActionMessage");
 ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("cart");
 %>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,8 +27,11 @@ ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("
 	            <form class="" action="/MyWebSite/CartAction" method="post">
 	                <section class="Section u-mb90px">
 	                    <h2 class="pageLabel japanese">カート</h2>
-	                    <p><%= cartActionMessage %></p>
-	                    <% if(cart.size() != 0) { %>
+	                    <p class="message"><c:out value="${cartActionMessage}" /></p>
+	                    <c:if test="${cart.size() == 0}">
+	                    <div><img src="./dist/images/top/none250.png" style="width: 100%; height: auto;"></div>
+	                    </c:if>
+	                    <c:if test="${cart.size() != 0}">
 	                        <table class="TableList TableList--cart">
 	                            <thead>
 	                                <tr>
@@ -57,15 +63,17 @@ ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("
 	                                        </div>
 	                                    </td>
 	                                </tr>
-	                                <% } %>
+	                                <%
+	                                }
+	                                %>
 	                            </tbody>
 	                        </table>
 	                      <div class="cartDeleteButton"><button type="submit" name="itemDelete">チェックした商品をカートから削除する</button></div>
-	                    <% } %>
+	                    </c:if>
 	                	</section>
-	                	<% if(cart.size() != 0) { %>
+	                	<c:if test="${cart.size() != 0}">
 						<div class="b-one-center u-mb90px"><button type="submit" name="purchase" class="button primary">購入手続きへ</button></div>
-              			<% } %>
+              			</c:if>
 	                </form>
                 <div class="UnderButtons u-mb60px">
                     <div class="UnderButtons__Left"><a href="/MyWebSite/Index">トップに戻る</a></div>

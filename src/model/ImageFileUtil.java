@@ -9,7 +9,7 @@ public class ImageFileUtil {
 	/**
 	 * アップロードされた画像データのファイル名を取得して、識別部をつけて返す
 	 * @param part ファイルデータ
-	 * @return ファイル名
+	 * @return long型の時刻_ファイル名
 	 */
 	public static String fileNameCreate(Part part) {
 
@@ -20,14 +20,16 @@ public class ImageFileUtil {
 		fileName = fileName.replace("filename=", "");
 		fileName = fileName.replace("\"", "");
 
-		return fileName;
+		//現在時刻を固有名詞に使う
+		String distinctionWord = String.valueOf(System.currentTimeMillis());
+		return distinctionWord + "_" + fileName;
 	}
 
 	/**
 	 * アップロードされた画像データのファイル名を取得して、識別部をつけて返す
 	 * @param part ファイルデータ
-	 * @param distinction　識別するためのワード（ログインID、レビューIDなど
-	 * @return ファイル名
+	 * @param distinction　識別するためのワード（ログインID、レビューIDなど）
+	 * @return distinction_ファイル名
 	 */
 	public static String fileNameCreate(Part part, String distinctionWord) {
 

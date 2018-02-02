@@ -2,11 +2,8 @@
   display: flex;
   align-items: top;
   margin-bottom: $space-unit;
-  @include mq-sp {
-    margin-bottom: $space-unit;
-  }
   &:last-child {
-    margin-bottom: none;
+    margin-bottom: 0;
   }
   &__sub {
     text-align: center;

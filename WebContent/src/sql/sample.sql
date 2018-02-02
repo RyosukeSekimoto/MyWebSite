@@ -53,7 +53,7 @@ INSERT INTO `m_delivery_method` (`id`, `name`, `price`) VALUES
 --
 
 CREATE TABLE `m_item` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `category_name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `detail` text COLLATE utf8_unicode_ci NOT NULL,
@@ -63,6 +63,80 @@ CREATE TABLE `m_item` (
   `third_file_name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `forth_file_name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO m_item (
+category_name,
+name,
+Detail,
+price,
+first_file_name,
+second_file_name,
+third_file_name,
+forth_file_name
+) VALUES
+('フード・おやつ',
+'ナチュラルチョイスキャット 穀物フリー アダルトサーモン (ナチュラルフード)',
+'愛猫の特別なニーズにあわせて、こだわりの製品設計で対応したスペシャルケアフード。',
+'1161',
+'1_01.jpg',
+'1_02.jpg',
+'1_03.jpg',
+''
+),
+('キャットタワー',
+'キャットスリー',
+'カナダ生まれの次世代型キャットタワー。',
+'27648',
+'2_01.jpg',
+'2_02.jpg',
+'2_03.jpg',
+'2_04.jpg'
+),
+('おもちゃ',
+'カシャカシャぶんぶん',
+'本能を刺激＆瞳がランラン！釣竿タイプ。',
+'378',
+'3_01.jpg',
+'3_02.jpg',
+'3_03.jpg',
+'3_04.jpg'
+),
+('首輪',
+'おうち首輪　プレーンカラー',
+'軽くてやわらかく、おうちの中でも負担が少ない。もしもの時も安心な「迷子札がついたおうち専用首輪」。',
+'1800',
+'5_01.jpg',
+'5_02.jpg',
+'5_03.jpg',
+'5_04.jpg',
+),
+( '爪とぎ',
+'コーナー爪とぎボード',
+'うちの子の大満足。大好きな角で爪とぎし放題。国産ダンボールで爪とぎ快適',
+'2970',
+'4_01.jpg',
+'4_02.jpg',
+'4_03.jpg',
+'4_04.jpg'
+),
+('トイレ・猫砂',
+'ワンマット (薄型トイレマット)',
+'シーツがズレない！つまづきにくいトイレマット。',
+'2700',
+'6_01.jpg',
+'6_02.jpg',
+'6_03.jpg',
+'6_04.jpg'
+),
+('猫雑貨',
+'リサ・ラーソン　チェアーパッド',
+'厚みしっかり。お尻にふわっとやさしいチェアパッド。',
+'3240',
+'7_01.jpg',
+'7_02.jpg',
+'7_03.jpg',
+'7_04.jpg'
+);
 
 -- --------------------------------------------------------
 
@@ -179,6 +253,25 @@ CREATE TABLE `t_review` (
   `photo_desc` text COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO t_review (
+user_id,
+item_id,
+title,
+review_desc,
+file_name,
+photo_desc,
+create_date,
+update_date
+) VALUES
+( 1,
+  1,
+  'これはサンプルのタイトルです。これはサンプルのタイトルです。これはサンプルのタイトルです。',
+  '植物由来の原料を主原料とした安心・安全なスペシャル低刺激な全犬種用のドッグシャンプーです。',
+  'reviewSample.jpg',
+  '植物由来の原料を主原料とした安心・安全なスペシャル低刺激な全犬種用のドッグシャンプーです。',
+  '1999-12-31 00:00:00',
+  '1999-12-31 00:00:00'
+);
 
 --
 -- Indexes for table `m_delivery_method`

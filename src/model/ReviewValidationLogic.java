@@ -15,8 +15,7 @@ public class ReviewValidationLogic {
 		}
 
 		//写真と写真コメントがセットで入力されているか
-		if(rdb.getPhotoDesc() != null) {
-			System.out.println("error-02!");
+		if(!(rdb.getPhotoDesc().isEmpty())) {
 			if(part.getSize() == 0.0 && rdb.getPhotoFileName() == null) {
 				errorMsg += "写真がアップロードされていません";
 			}

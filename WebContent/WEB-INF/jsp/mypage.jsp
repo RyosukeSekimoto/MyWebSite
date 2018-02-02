@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.UserDataBeans"%>
 <%@ page import="model.BuyDataBeans"%>
 <%@ page import="model.ReviewDataBeans"%>
 <%@ page import="model.Helper"%>
 <%@ page import="java.util.ArrayList"%>
-<%
-UserDataBeans loginUser = (UserDataBeans)session.getAttribute("loginUser");
-UserDataBeans udb = (UserDataBeans)request.getAttribute("udb");
-ArrayList<BuyDataBeans> bdbList = (ArrayList<BuyDataBeans>)request.getAttribute("bdbList");
-ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -29,68 +26,70 @@ ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getA
                     <h2 class="pageLabel">My Page</h2>
                     <div class="Profile">
                         <div class="Profile__sub">
-                            <img src="upload/<%= udb.getFileName() %>" alt="" class="Profile__image">
+                            <img src="upload/profile/<c:out value="${udb.getFileName()}" />" alt="" class="Profile__image">
                         </div>
                         <div class="Profile__main">
                             <div class="Profile__head">
-                                <h2 class="Profile__name"><%= udb.getPetName() %></h2>
+                                <h2 class="Profile__name"><c:out value="${udb.getPetName()}" /></h2>
                                 <div class="Profile__detail">
-                                    <p><%= udb.getPetType() %>（性別：<span class="Profile__sex"><%= udb.getPetSex() %></span>）
-                                        <br>生年月日：<span class="Profile__birthDate"><%= Helper.displayDate(udb.getPetBirthDate()) %></span>
-                                        <br>オーナー：<span class="Profile__ownerName"><%= udb.getNickname() %>
+                                    <p><c:out value="${udb.getPetType()}" />（性別：<span class="Profile__sex"><c:out value="${udb.getPetSex()}" /></span>）
+                                        <br>生年月日：<span class="Profile__birthDate"><c:out value="${Helper.displayDate(udb.getPetBirthDate())}" /></span>
+                                        <br>オーナー：<span class="Profile__ownerName"><c:out value="${udb.getNickname()}" />
                                     </p>
                                 </div>
                             </div>
                             <div class="Profile__body">
-                            <% if(udb.getPetDesc() != null) { %>
-                                <p class="Profile__desc"><%= udb.getPetDesc() %></p>
-                            <% } %>
+                            <c:if test="${udb.getPetDesc() != null}">
+                                <p class="Profile__desc"><c:out value="${udb.getPetDesc()}" /></p>
+                            </c:if>
                             </div>
                         </div>
                     </div>
-                    <% if(loginUser != null) { %>
-                    <% if(loginUser.getId() == udb.getId()) {%>
+                    <c:if test="${loginUser != null && loginUser.getId() == udb.getId()}">
                     <div class="OwnerDetail">
                         <h3 class="OwnerDetail__title">Owner detail</h3>
                         <div class="l-row">
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">ログインID</p>
-                                <p class="OwnerDetail__param"><%= udb.getLoginId() %></p>
+                                <p class="OwnerDetail__param"><c:out value="${udb.getLoginId()}" /></p>
                             </div>
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">ニックネーム</p>
-                                <p class="OwnerDetail__param"><%= udb.getNickname() %></p>
+                                <p class="OwnerDetail__param"><c:out value="${udb.getNickname()}" /></p>
                             </div>
                         </div>
                         <div class="l-row">
                        		<div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">名前</p>
-                                <p class="OwnerDetail__param"><%= udb.getName() %></p>
+                                <p class="OwnerDetail__param"><c:out value="${udb.getName()}" /></p>
                             </div>
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">住所</p>
-                                <p class="OwnerDetail__param"><%= udb.getAddress() %></p>
+                                <p class="OwnerDetail__param"><c:out value="${udb.getAddress()}" /></p>
                             </div>
                         </div>
                         <div class="l-row u-mb30px">
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">登録日時</p>
-                                <p class="OwnerDetail__param"><%= Helper.displayDateTime(udb.getCreateDate()) %></p>
+                                <p class="OwnerDetail__param"><c:out value="${Helper.displayDateTime(udb.getCreateDate())}" /></p>
                             </div>
                             <div class="l-main-halfColumn">
                                 <p class="OwnerDetail__label">更新日時</p>
-                                <p class="OwnerDetail__param"><%= Helper.displayDateTime(udb.getUpdateDate()) %></p>
+                                <p class="OwnerDetail__param"><c:out value="${Helper.displayDateTime(udb.getUpdateDate())}" /></p>
                             </div>
                         </div>
                         <div class="b-one-center"><a class="button secondary" href="/MyWebSite/ProfileEdit">プロフィールを編集する</a></div>
                     </div>
-                    <% } %>
-                    <% } %>
+                    </c:if>
                 </section>
-                <% if(loginUser != null) { %>
-                <% if(loginUser.getId() == udb.getId() && bdbList != null) {%>
+                <c:if test="${loginUser != null && loginUser.getId() == udb.getId()}">
                 <section class="Section u-mb100px">
                     <h2 class="sectionLabel japanese">購入履歴</h2>
+                    <c:choose>
+                    <c:when test="${bdbList.size() == 0}"><p class="message">購入履歴はまだありません。</p>
+                    <div><img src="./dist/images/top/none1.png" style="width: 100%; height: auto;"></div>
+                    </c:when>
+                    <c:when test="${bdbList.size() != 0}">
                     <div class="overflowY">
                         <table class="TableList TableList--purchaseHistory u-mb30px">
                             <thead>
@@ -102,48 +101,46 @@ ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getA
                                 </tr>
                             </thead>
                             <tbody>
-                            <% for(BuyDataBeans bdb: bdbList) { %>
+                            <c:forEach var="bdb" items="${bdbList}">
                                 <tr>
-                                    <td><%= Helper.displayDateTime(bdb.getCreateDate()) %></td>
-                                    <td><%= bdb.getDeliveryMethodName() %></td>
-                                    <td class="price"><%= Helper.displayPrice(bdb.getTotalPrice()) %></td>
-                                    <td><a href="/MyWebSite/PurchaseDetail?buyId=<%= bdb.getId() %>">詳細</a></td>
+                                    <td><c:out value="${Helper.displayDate(bdb.getCreateDate())}" /></td>
+                                    <td><c:out value="${bdb.getDeliveryMethodName()}" /></td>
+                                    <td class="price"><c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
+                                    <td><a href="/MyWebSite/PurchaseDetail?buyId=<c:out value="${bdb.getId()}" />">詳細</a></td>
                                 </tr>
-                            <% } %>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
+                    </c:when>
+                    </c:choose>
                 </section>
-                <% } %>
-                <% } %>
-       			<section class="Section Section--borderBottom">
+                </c:if>
+       			<section class="Section">
                     <h2 class="sectionLabel">Review</h2>
-                    <%
-                    if(reviewList.size() == 0) {
-                    %>
-                    <p style="font-size: 14px; text-align: center; margin-bottom: 30px;">この商品のレビューはありません。あなたの声をお聞かせください。</p>
-                    <% } %>
+                    <c:if test="${reviewList.size() == 0}">
+                    <p class="message">レビューはまだありません。</p>
+                    </c:if>
                     <ul id="entry_list_more" class="">
-						<%
-						for(ReviewDataBeans rdb: reviewList) {
-						%>
+                   		<c:forEach var="rdb" items="${reviewList}">
 							<li class="Review">
                             <div class="Review__sub">
-                                <img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt="">
-                                <p><%= rdb.getReviewerName() %></p>
+                                <img class="Review__writerImg" src="upload/profile/<c:out value="${rdb.getReviewerFileName()}" />" alt="">
+                                <p><c:out value="${rdb.getReviewerName()}" /></p>
                             </div>
                             <div class="Review__main">
                                 <div class="Review__head">
                                     <p class="Review__title">
-                                        <a href="/MyWebSite/ReviewDetail?reviewId=<%= rdb.getId() %>"><%= rdb.getTitle() %></a>
+                                        <a href="/MyWebSite/ReviewDetail?reviewId=<c:out value="${rdb.getId()}" />"><c:out value="${rdb.getTitle()}" /></a>
                                     </p>
-                                    <p class="Review__productName"><%= rdb.getItemName() %>のレビュー</p>
-                                    <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate()) %></p>
+                                    <p class="Review__productName"><c:out value="${rdb.getItemName()}" />のレビュー</p>
+                                    <p class="Review__date">投稿日: <c:out value="${Helper.displayDate(rdb.getCreateDate())}" /></p>
                                 </div>
                                 <div class="Review__body l-row-left"></div>
                             </div>
                         </li>
-						<% } %>
+						</c:forEach>
+						<div><img src="./dist/images/top/none1.png" style="width: 100%; height: auto;"></div>
                         <div id="more_btn" class="b-one-center button-noFlame">レビューをもっと見る</div>
                     </ul>
                 </section>

@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.UserDataBeans"%>
-<%
-UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
-String imageFileName = (String)session.getAttribute("imageFileName");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -27,62 +26,66 @@ String imageFileName = (String)session.getAttribute("imageFileName");
                                 <h3 class="InputFormsArea__title">ユーザー情報</h3>
                                 <li class="InputFormsArea__formItem">
                                     <p>ログインID</p>
-                                    <input type="text" name="loginId" value="<%= udb.getLoginId() %>" readonly="readonly">
+                                    <input type="text" name="loginId" value="<c:out value="${udb.getLoginId()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>ニックネーム</p>
-                                    <input type="text" name="nickname" value="<%= udb.getNickname() %>" readonly="readonly">
+                                    <input type="text" name="nickname" value="<c:out value="${udb.getNickname()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>氏名</p>
-                                    <input type="text" name="name" value="<%= udb.getName() %>" readonly="readonly">
+                                    <input type="text" name="name" value="<c:out value="${udb.getName()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>住所</p>
-                                    <input type="text" name="address" value="<%= udb.getAddress() %>" readonly="readonly">
+                                    <input type="text" name="address" value="<c:out value="${udb.getAddress()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>パスワード</p>
-                                    <input type="password" name="pass" value="<%= udb.getPass() %>" readonly="readonly">
+                                    <input type="password" name="pass" value="<c:out value="${udb.getPass()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>確認用パスワード</p>
-                                    <input type="password" name="pass" value="<%= udb.getPass() %>" readonly="readonly">
+                                    <input type="password" name="pass" value="<c:out value="${udb.getPass()}" />" readonly="readonly">
                                 </li>
                             </ul>
                             <ul class="InputFormsArea__formList .view_box">
                                 <h3 class="InputFormsArea__title">ペットプロフィール</h3>
                                 <li class="InputFormsArea__formItem">
                                     <p>名前</p>
-                                    <input type="text" name="petName" value="<%= udb.getPetName() %>" readonly="readonly">
+                                    <input type="text" name="petName" value="<c:out value="${udb.getPetName()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>種類</p>
-                                    <input type="text" name="petType" value="<%= udb.getPetType() %>" readonly="readonly">
+                                    <input type="text" name="petType" value="<c:out value="${udb.getPetType()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>性別</p>
-                                    <input type="text" name="petSex" value="<%= udb.getPetSex() %>" readonly="readonly">
+                                    <input type="text" name="petSex" value="<c:out value="${udb.getPetSex()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>生年月日</p>
-                                    <input type="date" name="petBirthDate" value="<%= udb.getPetBirthDate() %>" readonly="readonly">
+                                    <input type="date" name="petBirthDate" value="<c:out value="${udb.getPetBirthDate()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>紹介文</p>
-                                    <textarea name="petDesc" readonly="readonly"><%= udb.getPetDesc() %></textarea>
+                                    <textarea name="petDesc" readonly="readonly"><c:out value="${udb.getPetDesc()}" /></textarea>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>アイコン用画像</p>
-                                    <input type="hidden" name="petIconFile"<% if(imageFileName != null) { %>
-                                    value="<%= imageFileName %>"
-                                    <% } else { %>
-                                    value=""
-                                    <% } %>
+                                    <input type="hidden" name="petIconFile" value=
+                                    <c:choose>
+                                    <c:when test="${imageFileName != null}">
+                                    "<c:out value="${imageFileName}" />"
+                                    </c:when>
+                                    <c:otherwise>
+                                    ""
+                                    </c:otherwise>
+                                    </c:choose>
                                     readonly="readonly">
-                                    <%if(imageFileName != null) { %>
-                                    <div class="profileImage"><img src="upload/<%= imageFileName %>"></div>
-                                    <% } %>
+                                    <c:if test="${imageFileName != null}">
+                                    <div class="profileImage"><img src="upload/profile/<c:out value="${imageFileName}" />"></div>
+                                    </c:if>
                                 </li>
                             </ul>
                             <input type="hidden" name="createDate" value="<%= System.currentTimeMillis()%>" />

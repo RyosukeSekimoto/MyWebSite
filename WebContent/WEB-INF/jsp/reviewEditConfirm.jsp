@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.ReviewDataBeans"%>
-<%
-ReviewDataBeans rdb = (ReviewDataBeans)session.getAttribute("rdb");
-String imageFileName = (String)session.getAttribute("imageFileName");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,32 +23,36 @@ String imageFileName = (String)session.getAttribute("imageFileName");
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/ReviewEditResult" enctype="multipart/form-data" method="post">
                             <ul class="InputFormsArea__formList">
-                                <h3 class="InputFormsArea__title reviewProductName"><span><%= rdb.getItemName() %></span>
+                                <h3 class="InputFormsArea__title reviewProductName"><span><c:out value="${rdb.getItemName()}" /></span>
                                     <br>についてのレビュー
                                 </h3>
                                 <li class="InputFormsArea__formItem">
                                     <p>タイトル</p>
-                                    <input type="text" name="title" value="<%= rdb.getTitle() %>" readonly="readonly">
+                                    <input type="text" name="title" value="<c:out value="${rdb.getTitle()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>本文</p>
-                                    <textarea name="reviewDesc" readonly="readonly"><%= rdb.getReviewDesc() %></textarea>
+                                    <textarea name="reviewDesc" readonly="readonly"><c:out value="${rdb.getReviewDesc()}" /></textarea>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                 	<p>写真</p>
-                                    <%if(imageFileName != null) { %>
-                                    <div class="reviewImage"><img src="upload/<%= imageFileName %>"></div>
-                                    <input type="hidden" name="photoFileName" value="<%= imageFileName %>">
-                                    <% } else if(rdb.getPhotoFileName() != null) { %>
-                                    <div class="reviewImage"><img src="upload/<%= rdb.getPhotoFileName() %>"></div>
-                                    <input type="hidden" name="photoFileName" value="<%= rdb.getPhotoFileName() %>">
-                                    <% } else { %>
+                                	<c:choose>
+                                	<c:when test="${imageFileName != null}">
+                                    <div class="reviewImage"><img src="upload/review/<c:out value="${imageFileName}" />"></div>
+                                    <input type="hidden" name="photoFileName" value="<c:out value="${imageFileName}" />">
+                                    </c:when>
+                                    <c:when test="${rdb.getPhotoFileName() != null}">
+                                    <div class="reviewImage"><img src="upload/review/<c:out value="${rdb.getPhotoFileName()}" />"></div>
+                                    <input type="hidden" name="photoFileName" value="<c:out value="${rdb.getPhotoFileName()}" />">
+                                    </c:when>
+                                    <c:otherwise>
                                     <input type="hidden" name="photoFileName" value="">
-                                    <% } %>
+                                    </c:otherwise>
+                                    </c:choose>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>写真へのコメント</p>
-                                    <textarea name="photoDesc" readonly="readonly"><%= rdb.getPhotoDesc() %></textarea>
+                                    <textarea name="photoDesc" readonly="readonly"><c:out value="${rdb.getPhotoDesc()}" /></textarea>
                                 </li>
                             </ul>
                             <input type="hidden" name="updateDate" value="<%= System.currentTimeMillis()%>" />

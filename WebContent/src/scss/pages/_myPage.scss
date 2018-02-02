@@ -1,5 +1,7 @@
 .Profile {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 1.4rem;
   line-height: 2.0;
   margin-bottom: $space-unit;
@@ -18,6 +20,7 @@
   }
   &__name {
     font-size: 2.0rem;
+    text-align: center;
     font-weight: normal;
     @include mq-sp {
       font-size: 1.8rem;
@@ -25,6 +28,7 @@
   }
   &__detail {
     font-size: 1.2rem;
+    text-align: center;
     line-height: 1.8;
     margin-bottom: $space-unit;
     @include mq-sp {

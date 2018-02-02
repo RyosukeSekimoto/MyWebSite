@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.ItemDataBeans"%>
 <%@ page import="model.Helper"%>
 <%@ page import="java.util.ArrayList"%>
+
 <%
 ArrayList<ItemDataBeans> itemList = (ArrayList<ItemDataBeans>)request.getAttribute("searchCategoryItemList");
-String categoryName = (String)request.getAttribute("categoryName");
 int pageMax = (int) request.getAttribute("pageMax");
 int pageIntNum = (int) request.getAttribute("pageIntNum");
 %>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -29,11 +32,11 @@ int pageIntNum = (int) request.getAttribute("pageIntNum");
                         <a href="/MyWebSite/Index" itemprop="url">TOP</a>
                     </span>
                     <span class="Breadcrumb__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-                        <a href="category.html" itemprop="url"><%= categoryName %></a>
+                        <a href="category.html" itemprop="url"><c:out value="${categoryName}" /></a>
                     </span>
                 </div>
                 <section class="Section SearchResult u-mb60px">
-                    <h2 class="sectionLabel japanese"><%= categoryName %></h2>
+                    <h2 class="sectionLabel japanese"><c:out value="${categoryName}" /></h2>
                     <div class="Section__item l-row">
                     <%
 					int i = 0;
@@ -57,15 +60,19 @@ int pageIntNum = (int) request.getAttribute("pageIntNum");
 					%>
 						</div>
 						<div class="Section__item l-row">
-					<% } %>
-                    <% } %>
+					<%
+					}
+					%>
+                    <%
+                    }
+                    %>
                     </div>
                 </section>
                 <ul class="Paging u-mb100px">
                 	<%
                 	if(pageIntNum != 1) {
                 	%>
-                    <li class="Paging__item"><a href="/MyWebSite/Category?categoryName=<%= categoryName %>&pageNum=<%= pageIntNum - 1 %>"><</a></li>
+                    <li class="Paging__item"><a href="/MyWebSite/Category?categoryName=<c:out value="${categoryName}" />&pageNum=<%= pageIntNum - 1 %>"><</a></li>
                     <% } %>
                     <%
 					for (int j = pageIntNum - 5; j <= pageIntNum + 5; j++) {
@@ -75,18 +82,22 @@ int pageIntNum = (int) request.getAttribute("pageIntNum");
 							j = 1;
 						}
 					%>
-                    <li class="Paging__item number"><a href="/MyWebSite/Category?categoryName=<%= categoryName %>&pageNum=<%= j %>" <% if(pageIntNum == j) { %> class="active" <% } %>><%= j %></a></li>
+                    <li class="Paging__item number"><a href="/MyWebSite/Category?categoryName=<c:out value="${categoryName}" />&pageNum=<%=j%>" <% if(pageIntNum == j) { %> class="active" <% } %>><%=j%></a></li>
                     <%
 					if (pageMax <= j) {
-							break;
-						}
+						break;
+					}
 					%>
-                    <% } %>
+                    <%
+                    }
+                    %>
                     <%
 					if (pageIntNum != pageMax) {
 					%>
-                    <li class="Paging__item"><a href="/MyWebSite/Category?categoryName=<%= categoryName %>&pageNum=<%= pageIntNum + 1 %>">></a></li>
-                    <% } %>
+                    <li class="Paging__item"><a href="/MyWebSite/Category?categoryName=<c:out value="${categoryName}" />&pageNum=<%= pageIntNum + 1 %>">></a></li>
+                    <%
+                    }
+                    %>
                 </ul>
                 <div class="UnderButtons u-mb60px">
                     <div class="UnderButtons__Left"><a href="/MyWebSite/Index">トップページに戻る</a></div>

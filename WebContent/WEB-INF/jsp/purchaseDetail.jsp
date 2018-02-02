@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="model.BuyDataBeans"%>
 <%@ page import="model.BuyDetailDataBeans"%>
 <%@ page import="model.Helper"%>
-<%
-ArrayList<BuyDetailDataBeans> bddbList = (ArrayList<BuyDetailDataBeans>)request.getAttribute("bddbList");
-BuyDataBeans bdb = (BuyDataBeans)request.getAttribute("bdb");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -35,9 +34,9 @@ BuyDataBeans bdb = (BuyDataBeans)request.getAttribute("bdb");
                         </thead>
                         <tbody>
                             <tr>
-                                <td><%= Helper.displayDateTime(bdb.getCreateDate()) %></td>
-                                <td><%= bdb.getDeliveryMethodName() %></td>
-                                <td><%= Helper.displayPrice(bdb.getTotalPrice()) %></td>
+                                <td><c:out value="${Helper.displayDate(bdb.getCreateDate())}" /></td>
+                                <td><c:out value="${bdb.getDeliveryMethodName()}" /></td>
+                                <td><c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -49,12 +48,12 @@ BuyDataBeans bdb = (BuyDataBeans)request.getAttribute("bdb");
                             </tr>
                         </thead>
                         <tbody>
-                        <% for(BuyDetailDataBeans bddb: bddbList) { %>
+                        <c:forEach var="bddb" items="${bddbList}">
                             <tr>
-                                <td class="productName"><%= bddb.getItemName() %></td>
-                                <td class="price"><%= Helper.displayPrice(bddb.getItemPrice()) %></td>
+                                <td class="productName"><c:out value="${bddb.getItemName()}" /></td>
+                                <td class="price"><c:out value="${Helper.displayPrice(bddb.getItemPrice())}" /></td>
                             </tr>
-                        <% } %>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </section>

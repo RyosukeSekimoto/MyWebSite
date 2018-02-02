@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
 
 		if(loginUser != null) {//ユーザーがログインしていたら
 
-			//ユーザー一覧へリダイレクト
+			//トップへリダイレクト
 			response.sendRedirect("/MyWebSite/Index");
 
 		} else {//ログインしていなければ

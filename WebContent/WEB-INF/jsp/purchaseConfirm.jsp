@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.CartItemBeans"%>
 <%@ page import="model.BuyDataBeans"%>
 <%@ page import="model.Helper"%>
 <%@ page import="java.util.ArrayList"%>
-<%
-ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("cart");
-BuyDataBeans bdb = (BuyDataBeans)session.getAttribute("bdb");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -34,28 +33,28 @@ BuyDataBeans bdb = (BuyDataBeans)session.getAttribute("bdb");
                             </tr>
                         </thead>
                         <tbody>
-                        	<% for(CartItemBeans cib: cart) { %>
+                        	<c:forEach var="cib" items="${cart}">
                             <tr>
-                                <td class="productName"><%= cib.getIdb().getName() %></td>
-                                <td class="price"><%= Helper.displayPrice(cib.getIdb().getPrice()) %></td>
-                                <td class="count"><%= cib.getQuantity() %></td>
-                                <td class="price"><%= Helper.displayPrice(cib.getIdb().getPrice() * cib.getQuantity()) %></td>
+                                <td class="productName"><c:out value="${cib.getIdb().getName()}" />></td>
+                                <td class="price"><c:out value="${Helper.displayPrice(cib.getIdb().getPrice())}" /></td>
+                                <td class="count"><c:out value="${cib.getQuantity()}" /></td>
+                                <td class="price"><c:out value="${Helper.displayPrice(cib.getIdb().getPrice() * cib.getQuantity())}" /></td>
                             </tr>
-                            <% } %>
+                            </c:forEach>
                             <tr>
-                                <td colspan="3" class="deliveryMethod"><%= bdb.getDeliveryMethodName() %></td>
-                                <td class="price"><%= bdb.getDeliveryMethodPrice() %></td>
+                                <td colspan="3" class="deliveryMethod"><c:out value="${bdb.getDeliveryMethodName()}" /></td>
+                                <td class="price"><c:out value="${bdb.getDeliveryMethodPrice()}" /></td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="totalPrice">合計金額</td>
-                                <td class="price totalPriceNum"><%= Helper.displayPrice(bdb.getTotalPrice()) %></td>
+                                <td class="price totalPriceNum"><c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
                 <div class="b-two-center u-mb90px">
-                    <a class="button btnLeft primary" href="/MyWebSite/PurchaseResult">上記の内容で購入する</a>
-                    <a class="button secondary" href="/MyWebSite/DeliveryMethod">配送選択に戻る</a>
+                <a class="button btnLeft secondary" href="/MyWebSite/DeliveryMethod">配送選択に戻る</a>
+                    <a class="button primary" href="/MyWebSite/PurchaseResult">上記の内容で購入する</a>
                 </div>
             </main>
         </div>

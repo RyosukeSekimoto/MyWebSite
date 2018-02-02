@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-int returnItemId = (int)request.getAttribute("returnItemId");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,7 +18,7 @@ int returnItemId = (int)request.getAttribute("returnItemId");
                 <section class="Section">
                     <h2 class="pageLabel u-mb60px">レビュー投稿完了</h2>
                     <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/ProductDetail?itemId=<%= returnItemId %>">商品詳細に戻る</a>
+                        <a class="button secondary btnLeft" href="/MyWebSite/ProductDetail?itemId=<c:out value="${returnItemId}" />">商品詳細に戻る</a>
                         <a class="button secondary" href="/MyWebSite/Index">トップへ戻る</a>
                     </div>
                 </section>

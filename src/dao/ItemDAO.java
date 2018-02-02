@@ -82,10 +82,16 @@ public class ItemDAO {
 				st.setInt(2, pageMaxItemCount);
 			} else {
 				// 検索ワードで商品情報を検索
-				st = con.prepareStatement("SELECT * FROM m_item WHERE item_name like ? ORDER BY id ASC LIMIT ?,? ");
+				st = con.prepareStatement("SELECT * FROM m_item"
+						+ " WHERE item_name like ?"
+						+ " OR category_name like ?"
+						+ " OR detail like ?"
+						+ " ORDER BY id ASC LIMIT ?,?");
 				st.setString(1, "%" + searchWord + "%");
-				st.setInt(2, startiItemNum);
-				st.setInt(3, pageMaxItemCount);
+				st.setString(2, "%" + searchWord + "%");
+				st.setString(3, "%" + searchWord + "%");
+				st.setInt(4, startiItemNum);
+				st.setInt(5, pageMaxItemCount);
 			}
 
 			ResultSet rs = st.executeQuery();
@@ -107,7 +113,7 @@ public class ItemDAO {
 				itemList.add(idb);
 
 			}
-			System.out.println("get products by productName has been completed");
+			System.out.println("get items by keyword has been completed");
 			return itemList;
 
 		} catch (SQLException e) {
@@ -126,7 +132,7 @@ public class ItemDAO {
 	}
 
 	/**
-	 * 商品検索をもとに商品の総数を取得
+	 * キーワードをもとに商品の総数を取得
 	 *
 	 * @param searchWord
 	 * @return
@@ -142,8 +148,13 @@ public class ItemDAO {
 			if(searchWord.length() == 0) {
 				st = con.prepareStatement("select count(*) as cnt from m_item");
 			} else {
-				st = con.prepareStatement("select count(*) as cnt from m_item where item_name like ?");
+				st = con.prepareStatement("select count(*) as cnt from m_item"
+						+ " where item_name like ?"
+						+ " OR category_name like ?"
+						+ " OR detail like ?");
 				st.setString(1, "%" + searchWord + "%");
+				st.setString(2, "%" + searchWord + "%");
+				st.setString(3, "%" + searchWord + "%");
 			}
 
 			ResultSet rs = st.executeQuery();

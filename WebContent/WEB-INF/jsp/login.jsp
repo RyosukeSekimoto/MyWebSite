@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-//リクエストスコープからエラーメッセージを取得
-String errorMsg = (String)request.getAttribute("errorMsg");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,9 +18,7 @@ String errorMsg = (String)request.getAttribute("errorMsg");
             <main class="l-main">
                 <section class="Section">
                     <h2 class="pageLabel japanese">ログイン</h2>
-                    <%if(errorMsg != null) { %>
-					<p class="validation"><%= errorMsg %></p>
-					<% } %>
+					<p class="validation"><c:out value="${errorMsg}" /></p>
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/Login" method="post">
                             <ul class="InputFormsArea__formList">

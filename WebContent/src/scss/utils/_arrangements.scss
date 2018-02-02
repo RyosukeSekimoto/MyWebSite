@@ -53,10 +53,24 @@
   text-align: center;
 }
 
-//バリデーション
+//バリデーションメッセージ用のcss
 .validation {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-top: -10px;
   color: $color-red;
+  @include mq-sp {
+    font-size: 1.4rem;
+  }
+}
+
+//コンテンツがない場合のメッセージなどに用いるcss
+.message {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: $space-unit;
+  color: $color-main-text;
+  @include mq-sp {
+    font-size: 1.4rem;
+  }
 }

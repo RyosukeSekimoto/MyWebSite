@@ -1,12 +1,10 @@
-<%@page import="model.ReviewDataBeans"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.UserDataBeans"%>
 <%@ page import="model.ReviewDataBeans"%>
 <%@ page import="model.Helper"%>
-<%
-UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
-ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("rdb");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -26,45 +24,45 @@ ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("rdb");
                     <h2 class="pageLabel">Review Detail</h2>
                     <div class="Review Review--detail">
                         <div class="Review__sub">
-                            <a href="/MyWebSite/Mypage?userId=<%= rdb.getUserId() %>"><img class="Review__writerImg" src="upload/<%= rdb.getReviewerFileName() %>" alt=""></a>
-                            <p><a href="/MyWebSite/Mypage?userId=<%= rdb.getUserId() %>"><%= rdb.getReviewerName() %></a></p>
+                            <a href="/MyWebSite/Mypage?userId=<c:out value="${rdb.getUserId()}" />"><img class="Review__writerImg" src="upload/profile/<c:out value="${rdb.getReviewerFileName()}" />" alt=""></a>
+                            <p><a href="/MyWebSite/Mypage?userId=<c:out value="${rdb.getUserId()}" />"><c:out value="${rdb.getReviewerName()}" /></a></p>
                         </div>
                         <div class="Review__main">
                             <div class="Review__head">
                                 <p class="Review__title">
-									<%= rdb.getTitle() %>
+									<c:out value="${rdb.getTitle()}" />
                                 </p>
-                                <p class="Review__productName"><%= rdb.getItemName() %>のレビュー</p>
-                                <p class="Review__date">投稿日: <%= Helper.displayDate(rdb.getCreateDate()) %></p>
+                                <p class="Review__productName"><c:out value="${rdb.getItemName()}" />のレビュー</p>
+                                <p class="Review__date">投稿日: <c:out value="${Helper.displayDate(rdb.getCreateDate())}" /></p>
                             </div>
                         </div>
                     </div>
                     <div class="review-desc">
-                        <p><%= rdb.getReviewDesc() %></p>
+                        <p><c:out value="${rdb.getReviewDesc()}" /></p>
                     </div>
                 </section>
-                <% if(rdb.getPhotoFileName() != null) { %>
+                <c:if test="${rdb.getPhotoFileName() != null}">
                 <section class="Section">
                     <h2 class="sectionLabel">Use image</h2>
                     <ul class="photoList">
                         <li class="photoItem">
-                            <div class="photoImage"><img src="upload/review/<%= rdb.getPhotoFileName() %>" alt=""></div>
-                            <% if(rdb.getPhotoDesc() != null) { %>
-                            <p class="photoDesc"><%= rdb.getPhotoDesc() %></p>
-                            <% } %>
+                            <div class="photoImage"><img src="upload/review/<c:out value="${rdb.getPhotoFileName()}" />" alt=""></div>
+                            <c:if test="${rdb.getPhotoDesc() != null}">
+                            <p class="photoDesc"><c:out value="${rdb.getPhotoDesc()}" /></p>
+                            </c:if>
                         </li>
                     </ul>
                 </section>
-                <% } %>
+                </c:if>
                 <div class="b-one-center u-mb100px">
-                    <a class="button secondary" href="/MyWebSite/ProductDetail?itemId=<%= rdb.getItemId() %>">この商品の詳細へ</a>
+                    <a class="button secondary" href="/MyWebSite/ProductDetail?itemId=<c:out value="${rdb.getItemId()}" />">この商品の詳細へ</a>
                 </div>
-                <% if(udb != null && udb.getId() == rdb.getUserId()) { %>
+                <c:if test="${loginUser != null && loginUser.getId() == rdb.getUserId()}">
                 <div class="b-two-center u-mb100px">
-                    <a class="button secondary btnLeft" href="/MyWebSite/ReviewEdit?reviewId=<%= rdb.getId() %>">このレビューを編集する</a>
-                    <a class="button primary" href="/MyWebSite/ReviewDelete?reviewId=<%= rdb.getId() %>">このレビューを削除する</a>
+                    <a class="button secondary btnLeft" href="/MyWebSite/ReviewEdit?reviewId=<c:out value="${rdb.getId()}" />">このレビューを編集する</a>
+                    <a class="button primary" href="/MyWebSite/ReviewDelete?reviewId=<c:out value="${rdb.getId()}" />">このレビューを削除する</a>
                 </div>
-                <% } %>
+                </c:if>
                 <div class="UnderButtons UnderButtons--rightOnly u-mb60px">
                     <div id="page-top" class="UnderButtons__Right">
                         <a href="#">

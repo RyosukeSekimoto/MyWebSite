@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.ReviewDataBeans"%>
 <%@ page import="model.ItemDataBeans"%>
-<%
-ReviewDataBeans rdb = (ReviewDataBeans)session.getAttribute("rdb");
-String imageFileName = (String)session.getAttribute("imageFileName");
-ItemDataBeans idb = (ItemDataBeans)session.getAttribute("idb");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -26,38 +24,42 @@ ItemDataBeans idb = (ItemDataBeans)session.getAttribute("idb");
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/ReviewCreateResult" method="post">
                             <ul class="InputFormsArea__formList">
-                                <h3 class="InputFormsArea__title reviewProductName"><span><%= idb.getName() %></span>
+                                <h3 class="InputFormsArea__title reviewProductName"><span><c:out value="${idb.getName()}" /></span>
                                     <br>についてのレビュー
                                 </h3>
                                 <li class="InputFormsArea__formItem">
                                     <p>タイトル</p>
-                                    <input type="text" name="title" value="<%= rdb.getTitle() %>" readonly="readonly">
+                                    <input type="text" name="title" value="<c:out value="${rdb.getTitle()}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>本文</p>
-                                    <textarea name="reviewDesc" readonly="readonly"><%= rdb.getReviewDesc() %></textarea>
+                                    <textarea name="reviewDesc" readonly="readonly"><c:out value="${rdb.getReviewDesc()}" /></textarea>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                 	<p>写真</p>
-                                    <input type="hidden" name="photoFileName" <% if(imageFileName != null) { %>
-                                    value="<%= imageFileName %>"
-                                    <% } else { %>
-                                    value=""
-                                    <% } %>
+                                    <input type="hidden" name="photoFileName" value=
+                                    <c:choose>
+                                    <c:when test="${imageFileName != null}">
+                                    "<c:out value="${imageFileName}" />"
+                                    </c:when>
+                                    <c:otherwise>
+                                    ""
+                                    </c:otherwise>
+                                    </c:choose>
                                     readonly="readonly">
-                                    <%if(imageFileName != null) { %>
-                                    <div class="reviewImage"><img src="upload/<%= imageFileName %>"></div>
-                                    <% } %>
+                                    <c:if test="${imageFileName != null}">
+                                    <div class="reviewImage"><img src="upload/review/<c:out value="${imageFileName}" />"></div>
+                                    </c:if>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>写真へのコメント</p>
-                                    <% if(rdb.getPhotoDesc() != null) { %>
-                                    <textarea name="photoDesc" readonly="readonly"><%= rdb.getPhotoDesc() %></textarea>
-                                    <% } %>
+                                    <c:if test="${rdb.getPhotoDesc() != null}">
+                                    <textarea name="photoDesc" readonly="readonly"><c:out value="${rdb.getPhotoDesc()}" /></textarea>
+                                    </c:if>
                                 </li>
                             </ul>
-                            <input type="hidden" name="userId" value="<%= rdb.getUserId() %>">
-                            <input type="hidden" name="itemId" value="<%= rdb.getItemId() %>">
+                            <input type="hidden" name="userId" value="<c:out value="${rdb.getUserId()}" />">
+                            <input type="hidden" name="itemId" value="<c:out value="${rdb.getItemId()}" />">
                             <input type="hidden" name="createDate" value="<%= System.currentTimeMillis()%>" />
                         	<input type="hidden" name="updateDate" value="<%= System.currentTimeMillis()%>" />
                             <div class="b-one-center u-mb15px"><button type="submit" class="button primary">上記の内容で投稿する</button></div>

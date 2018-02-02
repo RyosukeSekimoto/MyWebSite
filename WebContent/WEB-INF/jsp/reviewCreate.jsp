@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.ItemDataBeans"%>
 <%@ page import="model.UserDataBeans"%>
 <%@ page import="model.ReviewDataBeans"%>
 
-<%
-UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
-ReviewDataBeans rdb = (ReviewDataBeans)request.getAttribute("rdb");
-ItemDataBeans idb = (ItemDataBeans)session.getAttribute("idb");
-String errorMsg = (String)request.getAttribute("errorMsg");
-%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -26,22 +22,20 @@ String errorMsg = (String)request.getAttribute("errorMsg");
             <main class="l-main">
                 <section class="Section">
                     <h2 class="pageLabel">レビューの作成</h2>
-                    <%if(errorMsg != null) { %>
-					<p class="validation"><%= errorMsg %></p>
-					<% } %>
+					<p class="validation"><c:out value="${errorMsg}" /></p>
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/ReviewCreateConfirm" enctype="multipart/form-data" method="post">
                             <ul class="InputFormsArea__formList">
-                                <h3 class="InputFormsArea__title reviewProductName"><span><%= idb.getName() %></span>
+                                <h3 class="InputFormsArea__title reviewProductName"><span><c:out value="${idb.getName()}" /></span>
                                     <br>についてのレビュー
                                 </h3>
                                 <li class="InputFormsArea__formItem">
                                     <p>タイトル（必須）</p>
-                                    <input type="text" name="title" value="<%= rdb.getTitle() %>" required>
+                                    <input type="text" name="title" value="<c:out value="${rdb.getTitle()}" />" required>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>本文（必須）</p>
-                                    <textarea name="reviewDesc" required><%= rdb.getReviewDesc() %></textarea>
+                                    <textarea name="reviewDesc" required><c:out value="${rdb.getReviewDesc()}" /></textarea>
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>写真</p>
@@ -50,11 +44,11 @@ String errorMsg = (String)request.getAttribute("errorMsg");
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>写真へのコメント</p>
-                                    <textarea name="photoDesc"><%= rdb.getPhotoDesc() %></textarea>
+                                    <textarea name="photoDesc"><c:out value="${rdb.getPhotoDesc()}" /></textarea>
                                 </li>
                             </ul>
-                            <input type="hidden" name="userId" value="<%= udb.getId() %>">
-                            <input type="hidden" name="itemId" value="<%= idb.getId() %>">
+                            <input type="hidden" name="userId" value="<c:out value="${loginUser.getId()}" />">
+                            <input type="hidden" name="itemId" value="<c:out value="${idb.getId()}" />">
                             <div class="b-one-center u-mb15px"><button type="submit" class="button secondary">レビューの確認へ</button></div>
                         </form>
                     </div>

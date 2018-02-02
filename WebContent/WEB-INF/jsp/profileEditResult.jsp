@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="model.UserDataBeans"%>
-<%
-UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
-%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,7 +22,7 @@ UserDataBeans udb = (UserDataBeans)session.getAttribute("loginUser");
                     <h2 class="pageLabel u-mb60px japanese">プロフィールの編集完了</h2>
                     <div class="b-two-center u-mb100px">
                         <a class="button secondary btnLeft" href="/MyWebSite/Index">トップに戻る</a>
-                        <a class="button secondary" href="/MyWebSite/Mypage?userId=<%= udb.getId() %>">マイページへ</a>
+                        <a class="button secondary" href="/MyWebSite/Mypage?userId=<c:out value="${loginUser.getId()}" />" >マイページへ</a>
                     </div>
                 </section>
             </main>

@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
 
-%>
 <!DOCTYPE html>
 <aside class="l-sub">
 	<div class="Search">
 		<p class="Search__title">ITEM SEARCH</p>
 		<form class="Search__searchBox" action="/MyWebSite/SearchResult" method="GET">
-			<input class="Search__searchInput" type="text" name="searchWord" value="" placeholder="商品名から探す"><input class="Search__searchSubmit" type="submit" name="" value="">
+			<input class="Search__searchInput" type="text" name="searchWord" value="" placeholder="キーワードから探す"><input class="Search__searchSubmit" type="submit" name="" value="">
 		</form>
 	</div>
 	<div class="Categorys">

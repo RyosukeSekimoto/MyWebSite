@@ -285,7 +285,8 @@ a {
   transition: .2s; }
 
 input {
-  outline: 0; }
+  outline: 0;
+  cursor: pointer; }
 
 a:hover {
   opacity: .8; }
@@ -3111,8 +3112,8 @@ a:hover {
     background-image: url("../images/top/4-6-bg.png");
     background-repeat: no-repeat;
     background-size: cover;
-    left: 15px;
-    top: 15px;
+    left: 10px;
+    top: 10px;
     width: 26px;
     height: 20px;
     font-size: 1.0rem;
@@ -3284,11 +3285,8 @@ a:hover {
       -ms-flex-align: top;
           align-items: top;
   margin-bottom: 30px; }
-  @media only screen and (max-width: 640px) {
-    .Review {
-      margin-bottom: 30px; } }
   .Review:last-child {
-    margin-bottom: none; }
+    margin-bottom: 0; }
   .Review__sub {
     text-align: center;
     margin-right: 15px; }
@@ -3810,7 +3808,16 @@ a:hover {
       display: block; } }
 
 .Profile {
-  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 1.4rem;
   line-height: 2.0;
   margin-bottom: 30px; }
@@ -3827,12 +3834,14 @@ a:hover {
     margin-bottom: 15px; }
   .Profile__name {
     font-size: 2.0rem;
+    text-align: center;
     font-weight: normal; }
     @media only screen and (max-width: 640px) {
       .Profile__name {
         font-size: 1.8rem; } }
   .Profile__detail {
     font-size: 1.2rem;
+    text-align: center;
     line-height: 1.8;
     margin-bottom: 30px; }
     @media only screen and (max-width: 640px) {
@@ -4056,9 +4065,21 @@ a:hover {
 
 .validation {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-top: -10px;
   color: #9e452d; }
+  @media only screen and (max-width: 640px) {
+    .validation {
+      font-size: 1.4rem; } }
+
+.message {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  color: #615c57; }
+  @media only screen and (max-width: 640px) {
+    .message {
+      font-size: 1.4rem; } }
 
 .reviewImage img {
   display: block;

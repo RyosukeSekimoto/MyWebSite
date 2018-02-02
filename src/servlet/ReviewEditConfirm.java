@@ -38,7 +38,7 @@ public class ReviewEditConfirm extends HttpServlet {
 		String reviewDesc = request.getParameter("reviewDesc");
 		String photoDesc = request.getParameter("photoDesc");
 		String photoFileName = request.getParameter("existedReviewPhotoFileName") != null ? request.getParameter("existedReviewPhotoFileName"): null;
-
+		String itemName = request.getParameter("itemName");
 
 		//レビュー情報をBeansに格納
 		ReviewDataBeans rdb = new ReviewDataBeans();
@@ -46,11 +46,12 @@ public class ReviewEditConfirm extends HttpServlet {
 		rdb.setReviewDesc(reviewDesc);
 		rdb.setPhotoDesc(photoDesc);
 		rdb.setPhotoFileName(photoFileName);
+		rdb.setItemName(itemName);
 
 		//ファイルデータを取得
 		Part part = request.getPart("reviewPhotoFile");
 		//保存先フォルダの絶対パス
-		String path = getServletContext().getRealPath("upload");
+		String path = getServletContext().getRealPath("upload/review");
 		//保存するファイルの絶対パスを初期化
 		String imagePath = null;
 		//保存するファイル名を初期化

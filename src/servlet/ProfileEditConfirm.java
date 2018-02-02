@@ -67,7 +67,7 @@ public class ProfileEditConfirm extends HttpServlet {
 		//ファイルデータを取得
 		Part part = request.getPart("petIconFile");
 		//保存先フォルダの絶対パス
-		String path = getServletContext().getRealPath("upload");
+		String path = getServletContext().getRealPath("upload/profile");
 		//保存するファイルの絶対パスを初期化
 		String imagePath = null;
 		//保存するファイル名を初期化

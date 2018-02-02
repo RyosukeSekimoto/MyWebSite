@@ -36,14 +36,22 @@ int itemCount = (int) request.getAttribute("itemCount");
                 <section class="Section SearchResult u-mb60px">
                     <h2 class="sectionLabel japanese">検索結果</h2>
                     <p class="SearchResult__count">
-                    <% if(searchWord == "") { %>
+                    <%
+                    if(searchWord == "") {
+                    %>
                     "全商品"（<%= itemCount %>件）
-                    <% } else if(itemCount == 0.0) { %>
-                    お探しの商品は見つかりませんでした。
-                    <div><img src="./dist/images/top/none.png" alt="" style="width: 100%; height: auto;"></div>
-                    <% } else {%>
+                    <%
+                    } else if(itemCount == 0.0) {
+                    %>
+                    <span class="validation">お探しの商品は見つかりませんでした。</span>
+                    <div><img src="./dist/images/top/none350.png" style="width: 100%; height: auto;"></div>
+                    <%
+                    } else {
+                    %>
                     "<%= searchWord %>"（<%= itemCount %>件）
-                    <% } %>
+                    <%
+                    }
+                    %>
                     </p>
                     <div class="Section__item l-row">
                     <%
@@ -68,8 +76,12 @@ int itemCount = (int) request.getAttribute("itemCount");
 					%>
 						</div>
 						<div class="Section__item l-row">
-					<% } %>
-                    <% } %>
+					<%
+					}
+					%>
+                    <%
+                    }
+                    %>
                     </div>
                 </section>
                 <%
@@ -80,7 +92,9 @@ int itemCount = (int) request.getAttribute("itemCount");
                 	if(pageIntNum != 1) {
                 	%>
                     <li class="Paging__item"><a href="/MyWebSite/SearchResult?searchWord=<%= searchWord %>&pageNum=<%= pageIntNum - 1 %>"><</a></li>
-                    <% } %>
+                    <%
+                    }
+                    %>
                     <%
 					for (int j = pageIntNum - 5; j <= pageIntNum + 5; j++) {
 					%>
@@ -95,12 +109,16 @@ int itemCount = (int) request.getAttribute("itemCount");
 							break;
 						}
 					%>
-                    <% } %>
+                    <%
+                    }
+                    %>
                     <%
 					if (pageIntNum != pageMax) {
 					%>
                     <li class="Paging__item"><a href="/MyWebSite/SearchResult?searchWord=<%= searchWord %>&pageNum=<%= pageIntNum + 1 %>">></a></li>
-                    <% } %>
+                    <%
+                    }
+                    %>
                 </ul>
                 <% } %>
                 <div class="UnderButtons u-mb60px">
