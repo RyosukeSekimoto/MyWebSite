@@ -29,7 +29,7 @@ ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("
 	                    <h2 class="pageLabel japanese">カート</h2>
 	                    <p class="message"><c:out value="${cartActionMessage}" /></p>
 	                    <c:if test="${cart.size() == 0}">
-	                    <div><img src="./dist/images/top/none250.png" style="width: 100%; height: auto;"></div>
+	                    <div><img src="./dist/images/top/none150.png" style="width: 100%; height: auto;"></div>
 	                    </c:if>
 	                    <c:if test="${cart.size() != 0}">
 	                        <table class="TableList TableList--cart">
@@ -54,7 +54,7 @@ ArrayList<CartItemBeans> cart = (ArrayList<CartItemBeans>)session.getAttribute("
 	                                            <p class="cartProductName"><a href="/MyWebSite/ProductDetail?itemId=<%= cib.getIdb().getId() %>"><%= cib.getIdb().getName() %></a></p>
 	                                        </div>
 	                                    </td>
-	                                    <td class="price"><%= Helper.displayPrice(cib.getIdb().getPrice()) %></td>
+	                                    <td class="price">¥<%= Helper.displayPrice(cib.getIdb().getPrice()) %></td>
 	                                    <td class="inputCount"><input class="" type="number" name="quantity" min=1 value="<%= cib.getQuantity() %>"></td>
 	                                    <td class="delete">
 	                                        <div class="chkbox">

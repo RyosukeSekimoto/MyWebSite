@@ -35,6 +35,7 @@ int itemCount = (int) request.getAttribute("itemCount");
                 </div>
                 <section class="Section SearchResult u-mb60px">
                     <h2 class="sectionLabel japanese">検索結果</h2>
+                    <div><img src="./dist/images/top/none1.png" style="width: 100%; height: auto;"></div>
                     <p class="SearchResult__count">
                     <%
                     if(searchWord == "") {
@@ -43,7 +44,7 @@ int itemCount = (int) request.getAttribute("itemCount");
                     <%
                     } else if(itemCount == 0.0) {
                     %>
-                    <span class="validation">お探しの商品は見つかりませんでした。</span>
+                    <span class="message">お探しの商品は見つかりませんでした。<br>他のキーワードでお試しください。</span>
                     <div><img src="./dist/images/top/none350.png" style="width: 100%; height: auto;"></div>
                     <%
                     } else {

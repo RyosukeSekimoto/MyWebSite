@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class ItemDataBeans implements Serializable {
 
@@ -13,6 +14,8 @@ public class ItemDataBeans implements Serializable {
 	private String secondFileName;
 	private String thirdFileName;
 	private String forthFileName;
+	private Timestamp createDate;
+	private Timestamp updateDate;
 
 	public ItemDataBeans() {}
 
@@ -86,6 +89,23 @@ public class ItemDataBeans implements Serializable {
 
 	public void setForthFileName(String forthFileName) {
 		this.forthFileName = forthFileName;
-	};
+	}
+
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public Timestamp getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
+
 
 }

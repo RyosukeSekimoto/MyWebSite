@@ -14,6 +14,18 @@ import javax.xml.bind.DatatypeConverter;
 public class Helper {
 
 	/**
+	 * 渡された文字列がnullまたは空文字だった場合trueを返す
+	 * @param str
+	 * @return boolean
+	 */
+	public static boolean isEmpty(String str) {
+		if (null == str || str == "") {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * 渡された文字列をMD5で暗号化して返す
 	 * @param targetPass	暗号化前の文字列
 	 * @return				暗号化後の文字列
@@ -63,7 +75,7 @@ public class Helper {
 	 */
 	public static String displayDate(Date date) {
 
-            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy年MM月dd日");
+            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
     		String displayDate = sdFormat.format(date);
 
     		return displayDate;

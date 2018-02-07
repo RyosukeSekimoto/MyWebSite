@@ -18,7 +18,7 @@
                 <section class="Section">
                     <h2 class="pageLabel u-mb60px">レビュー編集完了</h2>
                     <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<c:out value="${reviewId}" />&itemName=<c:out value="$itemName{}" />">レビュー詳細に戻る</a>
+                        <a class="button secondary btnLeft" href="/MyWebSite/ReviewDetail?reviewId=<c:out value="${reviewId}" />&itemName=<c:out value="${itemName}" />">レビュー詳細に戻る</a>
                         <a class="button secondary" href="/MyWebSite/Mypage">マイページへ</a>
                     </div>
                 </section>

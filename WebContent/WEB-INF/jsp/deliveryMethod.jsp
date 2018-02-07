@@ -37,9 +37,9 @@
                         <c:forEach var="cib" items="${cart}">
                             <tr>
                                 <td class="productName"><c:out value="${cib.getIdb().getName()}" /></td>
-                                <td class="price"><c:out value="${Helper.displayPrice(cib.getIdb().getPrice())}" /></td>
+                                <td class="price">¥<c:out value="${Helper.displayPrice(cib.getIdb().getPrice())}" /></td>
                                 <td class="count"><c:out value="${cib.getQuantity()}" /></td>
-                                <td class="price"><c:out value="${cib.getIdb().getPrice() * cib.getQuantity()}" /></td>
+                                <td class="price">¥<c:out value="${Helper.displayPrice(cib.getIdb().getPrice() * cib.getQuantity())}" /></td>
                             </tr>
                         </c:forEach>
                         </tbody>

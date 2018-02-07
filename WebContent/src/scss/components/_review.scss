@@ -31,12 +31,14 @@
   }
   &__productName {
     font-size: 1.2rem;
+    color: $color-off-text;
     & a {
       text-decoration: underline;
     }
   }
   &__date {
     font-size: 1.2rem;
+    color: $color-off-text;
   }
   &__imageThumb {
     width: 100%;
@@ -61,6 +63,7 @@
     & .Review__productName,
     & .Review__date {
       font-size: 1.4rem;
+      color: $color-off-text;
       margin-bottom: 2px;
       @include mq-sp {
         font-size: 1.2rem;

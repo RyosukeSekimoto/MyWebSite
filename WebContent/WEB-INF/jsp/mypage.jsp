@@ -38,11 +38,11 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="Profile__body">
                             <c:if test="${udb.getPetDesc() != null}">
+                            <div class="Profile__body">
                                 <p class="Profile__desc"><c:out value="${udb.getPetDesc()}" /></p>
-                            </c:if>
                             </div>
+                            </c:if>
                         </div>
                     </div>
                     <c:if test="${loginUser != null && loginUser.getId() == udb.getId()}">
@@ -105,7 +105,7 @@
                                 <tr>
                                     <td><c:out value="${Helper.displayDate(bdb.getCreateDate())}" /></td>
                                     <td><c:out value="${bdb.getDeliveryMethodName()}" /></td>
-                                    <td class="price"><c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
+                                    <td class="price">¥<c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
                                     <td><a href="/MyWebSite/PurchaseDetail?buyId=<c:out value="${bdb.getId()}" />">詳細</a></td>
                                 </tr>
                             </c:forEach>
@@ -144,9 +144,11 @@
                         <div id="more_btn" class="b-one-center button-noFlame">レビューをもっと見る</div>
                     </ul>
                 </section>
+                <c:if test="${loginUser != null && loginUser.getId() == udb.getId()}">
                 <div class="b-one-center u-mb100px">
                     <a class="button primary" href="/MyWebSite/Logout">ログアウトする</a>
                 </div>
+                </c:if>
                 <div class="UnderButtons UnderButtons--rightOnly u-mb60px">
                     <div id="page-top" class="UnderButtons__Right">
                         <a href="#">

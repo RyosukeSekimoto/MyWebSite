@@ -11,9 +11,11 @@
   }
   &__item a {
     text-decoration: underline;
+    color: $color-off-text;
   }
   &__item::after {
     display: inline-block;
+    color: $color-off-text;
     content: ">";
     padding:0 10px;
   }

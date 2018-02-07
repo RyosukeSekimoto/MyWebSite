@@ -20,7 +20,9 @@
             <main class="l-main">
                 <section class="Section">
                     <h2 class="pageLabel">新規会員登録</h2>
-					<p class="validation"><c:out value="${errorMsg}" /></p>
+                    <c:forEach var="msg" items="${errorMsgList}">
+					<p class="validation"><c:out value="${msg}" /></p>
+					</c:forEach>
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/RegisterConfirm" enctype="multipart/form-data" method="post">
                             <ul class="InputFormsArea__formList">
@@ -60,7 +62,7 @@
                                     <p>種類 ※必須</p>
                                     <select name="petType" required>
                                     <option value="" <c:if test="${udb.getPetType().isEmpty()}">selected</c:if>>選択してください</option>
-                                    <option value="日本猫" <c:if test="${udb.getPetType().equals('日本猫（雑種）')}">selected</c:if>>日本猫（雑種）</option>
+                                    <option value="日本猫" <c:if test="${udb.getPetType().equals('日本猫')}">selected</c:if>>日本猫</option>
                                     <option value="スコティッシュフォールド"<c:if test="${udb.getPetType().equals('スコティッシュフォールド')}">selected</c:if>>スコティッシュフォールド</option>
                                     <option value="アメリカンショートヘア" <c:if test="${udb.getPetType().equals('アメリカンショートヘア')}">selected</c:if>>アメリカンショートヘア</option>
                                     <option value="ラグドール" <c:if test="${udb.getPetType().equals('ラグドール')}">selected</c:if>>ラグドール</option>

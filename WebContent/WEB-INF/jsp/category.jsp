@@ -37,6 +37,7 @@ int pageIntNum = (int) request.getAttribute("pageIntNum");
                 </div>
                 <section class="Section SearchResult u-mb60px">
                     <h2 class="sectionLabel japanese"><c:out value="${categoryName}" /></h2>
+                    <div><img src="./dist/images/top/none1.png" style="width: 100%; height: auto;"></div>
                     <div class="Section__item l-row">
                     <%
 					int i = 0;

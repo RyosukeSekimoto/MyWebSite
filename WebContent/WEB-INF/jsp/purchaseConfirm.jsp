@@ -35,19 +35,19 @@
                         <tbody>
                         	<c:forEach var="cib" items="${cart}">
                             <tr>
-                                <td class="productName"><c:out value="${cib.getIdb().getName()}" />></td>
-                                <td class="price"><c:out value="${Helper.displayPrice(cib.getIdb().getPrice())}" /></td>
+                                <td class="productName"><c:out value="${cib.getIdb().getName()}" /></td>
+                                <td class="price">¥<c:out value="${Helper.displayPrice(cib.getIdb().getPrice())}" /></td>
                                 <td class="count"><c:out value="${cib.getQuantity()}" /></td>
-                                <td class="price"><c:out value="${Helper.displayPrice(cib.getIdb().getPrice() * cib.getQuantity())}" /></td>
+                                <td class="price">¥<c:out value="${Helper.displayPrice(cib.getIdb().getPrice() * cib.getQuantity())}" /></td>
                             </tr>
                             </c:forEach>
                             <tr>
                                 <td colspan="3" class="deliveryMethod"><c:out value="${bdb.getDeliveryMethodName()}" /></td>
-                                <td class="price"><c:out value="${bdb.getDeliveryMethodPrice()}" /></td>
+                                <td class="price">¥<c:out value="${bdb.getDeliveryMethodPrice()}" /></td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="totalPrice">合計金額</td>
-                                <td class="price totalPriceNum"><c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
+                                <td class="price totalPriceNum">¥<c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
                             </tr>
                         </tbody>
                     </table>

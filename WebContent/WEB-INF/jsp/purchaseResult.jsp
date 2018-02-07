@@ -41,7 +41,7 @@
                             <tr>
                                 <td><c:out value="${Helper.displayDate(bdb.getCreateDate())}" /></td>
                                 <td><c:out value="${bdb.getDeliveryMethodName()}" /></td>
-                                <td><c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
+                                <td>¥<c:out value="${Helper.displayPrice(bdb.getTotalPrice())}" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,7 +56,7 @@
                         	<c:forEach var="bddb" items="${bddbList}">
                         	<tr>
                         		<td class="productName"><c:out value="${bddb.getItemName()}" /></td>
-                                <td class="price"><c:out value="${Helper.displayPrice(bddb.getItemPrice())}" /></td>
+                                <td class="price">¥<c:out value="${Helper.displayPrice(bddb.getItemPrice())}" /></td>
                             </tr>
                         	</c:forEach>
                         </tbody>

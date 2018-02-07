@@ -45,19 +45,25 @@
                                     </a>
                                   </div>
                                   <div class="l-w360-quaterColumn">
+                                  <c:if test="${idb.getSecondFileName() != null}">
                                     <a href="upload/item/<c:out value="${idb.getSecondFileName()}" />">
                                       <img class="ProductDetail__imageThumb" src="upload/item/<c:out value="${idb.getSecondFileName()}" />" alt="">
                                     </a>
+                                  </c:if>
                                   </div>
                                   <div class="l-w360-quaterColumn">
+                                  <c:if test="${idb.getThirdFileName() != null}">
                                     <a href="upload/item/<c:out value="${idb.getThirdFileName()}" />">
                                       <img class="ProductDetail__imageThumb" src="upload/item/<c:out value="${idb.getThirdFileName()}" />" alt="">
                                     </a>
+                                  </c:if>
                                   </div>
                                   <div class="l-w360-quaterColumn">
+                                  <c:if test="${idb.getForthFileName() != null}">
                                     <a href="upload/item/<c:out value="${idb.getForthFileName()}" />">
                                       <img class="ProductDetail__imageThumb" src="upload/item/<c:out value="${idb.getForthFileName()}" />" alt="">
                                     </a>
+                                  </c:if>
                                   </div>
                               </div>
                           </div>

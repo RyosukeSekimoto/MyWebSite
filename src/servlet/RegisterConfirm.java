@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -79,9 +80,10 @@ public class RegisterConfirm extends HttpServlet {
 		}
 
 		//入力チェックをして、エラーメッセージを取得
-		String errorMsg = RegisterValidationLogic.execute(udb, confirmPass);
+		ArrayList<String> errorMsgList = new ArrayList<String>();
+		errorMsgList = RegisterValidationLogic.execute(udb, confirmPass);
 
-		if (errorMsg.isEmpty()) {// バリデーションエラーメッセージが空なら確認画面へ
+		if (errorMsgList.size() == 0) {// バリデーションエラーメッセージが空なら確認画面へ
 
 			//セッションに入力情報を取得
 			session.setAttribute("udb", udb);
@@ -100,7 +102,7 @@ public class RegisterConfirm extends HttpServlet {
 
 			//フォーム入力情報とエラーメッセージをセッションに保存
 			session.setAttribute("udb", udb);
-			session.setAttribute("errorMsg", errorMsg);
+			session.setAttribute("errorMsgList", errorMsgList);
 			response.sendRedirect("/MyWebSite/Register");
 		}
 	}
