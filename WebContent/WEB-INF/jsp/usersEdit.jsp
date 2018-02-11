@@ -112,6 +112,7 @@
                                 </li>
                             </ul>
                             <div class="b-one-center"><button type="submit" class="button secondary">編集確認へ</button></div>
+                            <input type="hidden" name="userId" value="<c:out value="${udb.getId()}" />" >
                         </form>
                     </div>
                 </section>

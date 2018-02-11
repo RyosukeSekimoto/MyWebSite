@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-]
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,13 +15,10 @@
         <div class="l-content">
             <main class="l-main">
                 <section class="Section">
-                    <h2 class="pageLabel japanese u-mb60px"><c:out value="${idb.getName()}" /> を削除しますか？</h2>
+                    <h2 class="pageLabel u-mb60px japanese">商品登録完了</h2>
                     <div class="b-two-center u-mb100px">
-                        <a class="button secondary btnLeft" href="/MyWebSite/Items">商品一覧に戻る</a>
-                        <form action="/MyWebSite/ItemsDelete" method="post">
-                        	<button type="submit" class="button primary">削除する</button>
-                        	<input name="itemId" type="hidden" value="<c:out value="${idb.getId()}" />">
-                        </form>
+                        <a class="button secondary btnLeft" href="/MyWebSite/Items">商品一覧へ</a>
+                        <a class="button secondary" href="/MyWebSite/Admin">トップに戻る</a>
                     </div>
                 </section>
             </main>

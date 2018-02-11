@@ -38,6 +38,7 @@ public class ReviewDelete extends HttpServlet {
 		request.setAttribute("deleteRdb", rdb);
 		request.setAttribute("itemName", itemName);
 
+
 		//レビュー削除画面にフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/reviewDelete.jsp");
 		dispatcher.forward(request, response);

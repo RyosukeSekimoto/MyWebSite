@@ -34,7 +34,7 @@ String createDateTo = (String)request.getAttribute("createDateTo");
                 <section class="Section">
                     <div class="adminTitleWrapper">
                         <h2>商品一覧</h2>
-                        <a class="button primary" href="productsRegister.html">商品新規登録</a>
+                        <a class="button primary" href="/MyWebSite/ItemsRegister">商品新規登録</a>
                     </div>
                     <form class="MgSearchArea u-mb30px" action="/MyWebSite/Items" method="get">
                         <div class="MgSearchArea__wrapper">

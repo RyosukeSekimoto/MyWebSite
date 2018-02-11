@@ -31,33 +31,36 @@ public class UsersEdit extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		//リクエストパラメータを取得
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		int userId = request.getParameter("userId") != null?Integer.parseInt(request.getParameter("userId")): -1;
 
-		//セッションの情報を取得
-		UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
-		String imagePath = (String)session.getAttribute("imagePath");
-		String errorMsg = (String)session.getAttribute("errorMsg");
-
-		//セッションにユーザーがなければ該当ユーザーを代入
-		if(udb == null) {
+		if(userId != -1) {
+			UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
 			UserDAO userDao = new UserDAO();
 			udb = userDao.findById(userId);
+			request.setAttribute("udb", udb);
+
+		} else {
+
+			//セッションの情報を取得
+			UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
+			String imagePath = (String)session.getAttribute("imagePath");
+			String errorMsg = (String)session.getAttribute("errorMsg");
+
+			//保存した画像を画像を消去
+			if(imagePath != null) {
+				ImageFileUtil.fileDelete(imagePath);
+			}
+
+			//リクエストスコープに保存
+			request.setAttribute("udb", udb);
+			request.setAttribute("errorMsg", errorMsg);
+
+			//セッションから消去
+			session.removeAttribute("udb");
+			session.removeAttribute("imagePath");
+			session.removeAttribute("imageFileName");
+			session.removeAttribute("errorMsg");
 		}
-
-		//保存した画像を画像を消去
-		if(imagePath != null) {
-			ImageFileUtil.fileDelete(imagePath);
-		}
-
-		//リクエストスコープに保存
-		request.setAttribute("udb", udb);
-		request.setAttribute("errorMsg", errorMsg);
-
-		//セッションから消去
-		session.removeAttribute("udb");
-		session.removeAttribute("imagePath");
-		session.removeAttribute("imageFileName");
-		session.removeAttribute("errorMsg");
 
 		//プロフィール編集画面にフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usersEdit.jsp");

@@ -10,7 +10,7 @@ public class RankingDAO {
 
 	/**
 	 * 売り上げ個数順に商品を並び替え
-	 * @return int[]
+	 * @return int[] 売り上げ個数順の商品IDリスト
 	 */
 	public ArrayList<Integer> getItemIdBySales() {
 		Connection con = null;

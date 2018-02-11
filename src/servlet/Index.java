@@ -29,6 +29,7 @@ public class Index extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//DAOを生成
 		RankingDAO rankingDao = new RankingDAO();
 		ItemDAO itemDao = new ItemDAO();
 
@@ -36,6 +37,7 @@ public class Index extends HttpServlet {
 		ArrayList<Integer> itemIdList = new ArrayList<Integer>();
 		itemIdList = rankingDao.getItemIdBySales();
 
+		//購入数順に6つ商品を取得する
 		ArrayList<ItemDataBeans> idbList = new ArrayList<ItemDataBeans>();
 		for(Integer i: itemIdList) {
 			ItemDataBeans idb = itemDao.getItemByItemId(i);

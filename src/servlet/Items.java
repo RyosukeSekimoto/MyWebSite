@@ -67,10 +67,10 @@ public class Items extends HttpServlet {
 		request.setAttribute("idbList", idbList);
 
 		//検索条件（初回表示時は空文字を入れて保存）
-		if(Helper.isEmpty(itemName)) { itemName = ""; }
-		if(Helper.isEmpty(categoryName)) { categoryName = ""; }
-		if(Helper.isEmpty(createDateFrom)) { createDateFrom = ""; }
-		if(Helper.isEmpty(createDateTo)) { createDateTo = ""; }
+		if(Helper.isEmpty(itemName)) { itemName = "";}
+		if(Helper.isEmpty(categoryName)) { categoryName = "";}
+		if(Helper.isEmpty(createDateFrom)) { createDateFrom = "";}
+		if(Helper.isEmpty(createDateTo)) { createDateTo = "";}
 
 		request.setAttribute("itemName", itemName);
 		request.setAttribute("categoryName", categoryName);

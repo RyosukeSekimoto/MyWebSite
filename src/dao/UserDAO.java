@@ -112,7 +112,7 @@ public class UserDAO extends DaoUtil {
 	/**
 	 * ログインIDをもとに該当ユーザーを検索して返す
 	 * @param targetId	探したいユーザーのログインID
-	 * @return			該当するユーザーのUser型インスタンス
+	 * @return UserDataBeans 該当するユーザーのbeans
 	 */
 	public UserDataBeans findByLoginId(String targetId) {
 
@@ -236,7 +236,7 @@ public class UserDAO extends DaoUtil {
 	/**
 	 * 全ユーザーを返す
 	 * @param targetId	探したいユーザーのユーザーID
-	 * @return			該当するユーザーのUser型インスタンス
+	 * @return			該当するユーザーのbeans
 	 */
 	public ArrayList<UserDataBeans> userAll() {
 
@@ -247,7 +247,7 @@ public class UserDAO extends DaoUtil {
 			conn = DBManager.getConnection();
 
 			//SELECT文を準備
-			String sql = "SELECT * FROM t_user";
+			String sql = "SELECT * FROM t_user ORDER BY DESC";
 
 			// SELECTを実行し、結果表を取得
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -455,6 +455,7 @@ public class UserDAO extends DaoUtil {
 			}
 
 			return coung;
+
 
 		} catch(SQLException e) {
 			e.printStackTrace();

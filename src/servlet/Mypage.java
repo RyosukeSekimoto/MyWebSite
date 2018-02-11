@@ -34,11 +34,12 @@ public class Mypage extends HttpServlet {
 		//セッションを用意
 		HttpSession session = request.getSession();
 
+		//DAOを生成
 		UserDAO userDao = new UserDAO();
 		ReviewDAO reviewDao = new ReviewDAO();
 		BuyDAO buyDao = new BuyDAO();
 
-		//レビュー詳細からアクセスでリクエストパラメータで該当ユーザーを取得
+		//レビュー詳細からのアクセスでリクエストパラメータにより該当ユーザーを取得
 		UserDataBeans udb = request.getParameter("userId") != null?userDao.findById(Integer.parseInt(request.getParameter("userId"))):
 							(UserDataBeans)session.getAttribute("loginUser");
 

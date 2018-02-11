@@ -17,7 +17,9 @@ public class ItemDataBeans implements Serializable {
 	private Timestamp createDate;
 	private Timestamp updateDate;
 
-	public ItemDataBeans() {}
+	public ItemDataBeans() {
+		this.price = -1;
+	}
 
 	public int getId() {
 		return id;

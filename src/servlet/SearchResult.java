@@ -55,17 +55,14 @@ public class SearchResult extends HttpServlet {
 		request.setAttribute("searchWord", searchWord);
 		//総アイテム数
 		request.setAttribute("itemCount", (int)itemCount);
-		// 総ページ数
+		//総ページ数
 		request.setAttribute("pageMax", pageMax);
-		// 表示ページ
+		//表示ページ
 		request.setAttribute("pageIntNum", pageIntNum);
+		//検索結果の商品リスト
 		request.setAttribute("searchWordItemList", searchWordItemList);
 
 		request.getRequestDispatcher("/WEB-INF/jsp/searchResult.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 
 }

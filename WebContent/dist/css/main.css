@@ -2629,9 +2629,9 @@ a:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin: 0 auto; }
@@ -3120,7 +3120,7 @@ a:hover {
     height: 20px;
     font-size: 1.0rem;
     text-align: center;
-    padding-top: 7px;
+    padding-top: 8px;
     color: #fafafa; }
     @media only screen and (max-width: 640px) {
       .ProductPanel--badge {
@@ -3213,12 +3213,9 @@ a:hover {
     display: none; } }
 .Categorys__listItem:last-child a {
   border-bottom: none; }
-.Categorys__image {
-  border: 2px solid #efece7;
-  margin-bottom: 4px; }
 .Categorys__title {
   position: relative;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 2px;
   pointer-events: none; }
@@ -3239,9 +3236,13 @@ a:hover {
   @media only screen and (min-width: 641px) {
     .Categorys__titleArrow {
       display: none; } }
+.Categorys__image {
+  width: 28px;
+  height: auto;
+  margin: 0 3.75px 6px 0; }
 .Categorys__text {
   display: inline-block;
-  width: 184px;
+  width: 148px;
   font-size: 1.2rem;
   letter-spacing: 1px; }
   @media only screen and (max-width: 640px) {
@@ -3597,7 +3598,7 @@ a:hover {
     .InputFormsArea__formItem p {
       font-weight: bold;
       margin-bottom: 6px; }
-    .InputFormsArea__formItem input[type="text"], .InputFormsArea__formItem input[type="password"], .InputFormsArea__formItem input[type="date"] {
+    .InputFormsArea__formItem input[type="text"], .InputFormsArea__formItem input[type="number"], .InputFormsArea__formItem input[type="password"], .InputFormsArea__formItem input[type="date"] {
       display: block;
       border: 1px solid #d6d1ca;
       background-color: #f9f8f4;
@@ -3859,7 +3860,7 @@ a:hover {
 .OwnerDetail {
   font-size: 1.4rem;
   background-color: #efece7;
-  padding: 0 60px 30px;
+  padding: 15px 60px 30px;
   margin-bottom: 30px; }
   .OwnerDetail__title {
     text-align: center;
@@ -4105,4 +4106,5 @@ a:hover {
   border: 1px solid #d6d1ca;
   border-radius: 50%;
   margin: 10px 0; }
+
 /*# sourceMappingURL=main.css.map */

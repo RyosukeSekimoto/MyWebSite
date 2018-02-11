@@ -50,8 +50,12 @@ public class UsersEditConfirm extends HttpServlet {
 		String petDesc = request.getParameter("petDesc");
 		String IconFileName = request.getParameter("existedIconFileName") != null ? request.getParameter("existedIconFileName"): null;
 
+		//ユーザー判別用
+		int userId = Integer.parseInt(request.getParameter("userId"));
+
 		//入力された値を格納
 		UserDataBeans udb = new UserDataBeans();
+		udb.setId(userId);
 		udb.setName(name);
 		udb.setNickname(nickname);
 		udb.setAddress(address);
@@ -89,9 +93,12 @@ public class UsersEditConfirm extends HttpServlet {
 
 		//パスワードの変更がなければ暗号化せずにそのまま既存のパスワードを保存
 		if(udb.getPass().isEmpty()) {
+
+			//暗号化済みの既存のパスワードをそのままbeansに格納する
 			udb.setPass(existedPass);
 		} else {//更新する場合
-			//暗号化
+
+			//暗号化して格納
 			udb.setPass(Helper.encryption(pass));
 		}
 

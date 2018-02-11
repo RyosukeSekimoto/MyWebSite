@@ -47,6 +47,7 @@ public class ReviewEdit extends HttpServlet {
 			request.setAttribute("rdb", rdb);
 
 		} else {
+
 			//セッションの情報を取得
 			ReviewDataBeans rdb = (ReviewDataBeans)session.getAttribute("rdb");
 			String imagePath = (String)session.getAttribute("imagePath");
@@ -59,7 +60,7 @@ public class ReviewEdit extends HttpServlet {
 				rdb = reviewDao.getReviewsById(editReviewId);
 			}
 
-			//保存した画像を画像を消去
+			//保存した画像を消去
 			if(imagePath != null) {
 				ImageFileUtil.fileDelete(imagePath);
 			}

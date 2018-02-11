@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -69,9 +70,10 @@ public class ReviewCreateConfirm extends HttpServlet {
 		}
 
 		//入力チェックをしてエラーメッセージを取得
-		String errorMsg = ReviewValidationLogic.execute(rdb, part);
+		ArrayList<String> errorMsgList = new ArrayList<String>();
+		errorMsgList = ReviewValidationLogic.execute(rdb, part);
 
-		if (errorMsg.isEmpty()) {// バリデーションエラーメッセージが空なら確認画面へ
+		if (errorMsgList.size() == 0) {// バリデーションエラーメッセージが空なら確認画面へ
 			session.setAttribute("rdb", rdb);
 			if(part.getSize() != 0.0) {//画像がアップロードされていたら
 				session.setAttribute("imagePath", imagePath);
@@ -81,7 +83,7 @@ public class ReviewCreateConfirm extends HttpServlet {
 
 		} else {//エラーメッセージが含まれていたら
 			session.setAttribute("rdb", rdb);
-			session.setAttribute("errorMsg", errorMsg);
+			session.setAttribute("errorMsgList", errorMsgList);
 			response.sendRedirect("/MyWebSite/ReviewCreate");
 		}
 

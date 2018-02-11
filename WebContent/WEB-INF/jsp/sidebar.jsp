@@ -13,42 +13,49 @@
 		<ul class="Categorys__list">
 			<li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=フード・おやつ">
+					<img class="Categorys__image" src="dist/images/top/sidebar_foods.jpg" alt="">
 					<p class="Categorys__text">フード・おやつ</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>
             </li>
             <li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=キャットタワー">
+					<img class="Categorys__image" src="dist/images/top/sidebar_tower.jpg" alt="">
 					<p class="Categorys__text">キャットタワー</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>
             </li>
             <li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=おもちゃ">
+					<img class="Categorys__image" src="dist/images/top/sidebar_toy.jpg" alt="">
 					<p class="Categorys__text">おもちゃ</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>
             </li>
             <li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=首輪">
+					<img class="Categorys__image" src="dist/images/top/sidebar_neck.jpg" alt="">
 					<p class="Categorys__text">首輪</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>
             </li>
             <li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=爪とぎ">
+					<img class="Categorys__image" src="dist/images/top/sidebar_arrow.jpg" alt="">
 					<p class="Categorys__text">爪とぎ</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>
             </li>
             <li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=トイレ・猫砂">
+					<img class="Categorys__image" src="dist/images/top/sidebar_toiret.jpg" alt="">
 					<p class="Categorys__text">トイレ・猫砂</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>
             </li>
             <li class="Categorys__listItem">
 				<a href="/MyWebSite/Category?categoryName=猫雑貨">
+					<img class="Categorys__image" src="dist/images/top/sidebar_goods.jpg" alt="">
 					<p class="Categorys__text">猫雑貨</p>
                     <img class="Categorys__arrow" src="dist/images/top/arrow.png" alt="" width="8" height="auto">
                 </a>

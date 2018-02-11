@@ -34,6 +34,7 @@ public class UsersEditResult extends HttpServlet {
 
 		//リクエストパラメータを取得
 		request.setCharacterEncoding("UTF-8");
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String address = request.getParameter("address");
@@ -47,12 +48,10 @@ public class UsersEditResult extends HttpServlet {
 		String petDesc = request.getParameter("petDesc").isEmpty() ? null: request.getParameter("petDesc");
 		String petIconFile = request.getParameter("petIconFile").isEmpty() ? "default.png": request.getParameter("petIconFile");
 
-		//ログインユーザーを取得
-		UserDataBeans loginUser = (UserDataBeans)session.getAttribute("loginUser");
 
 		//更新する値を格納
 		UserDataBeans udb = new UserDataBeans();
-		udb.setId(loginUser.getId());
+		udb.setId(userId);
 		udb.setName(name);
 		udb.setNickname(nickname);
 		udb.setAddress(address);

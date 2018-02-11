@@ -38,7 +38,6 @@ public class ItemsDelete extends HttpServlet {
 		//削除画面にフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemsDelete.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 

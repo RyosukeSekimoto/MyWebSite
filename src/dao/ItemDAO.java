@@ -13,8 +13,99 @@ import model.SearchConditionBeans;
 public class ItemDAO extends DaoUtil {
 
 	/**
+	 * データの更新処理を行う
+	 * @param idb 更新要素を保持しているJavaBeans
+	 */
+	public void updateItem(ItemDataBeans idb) {
+
+		Connection conn = null;
+
+		try {
+			//データベースへ接続
+			conn = DBManager.getConnection();
+
+			//UPDATE文を用意
+			String sql = "UPDATE m_item SET category_name = ?, item_name = ?, detail = ?, price = ?, "
+						+ "first_file_name = ?, second_file_name = ?, third_file_name = ?, forth_file_name = ?, update_date = ? "
+						+ "WHERE id = ?";
+
+			//UPDATEを実行
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, idb.getCategory());
+			pStmt.setString(2, idb.getName());
+			pStmt.setString(3, idb.getDetail());
+			pStmt.setInt(4, idb.getPrice());
+			pStmt.setString(5, idb.getFirstFileName());
+			pStmt.setString(6, idb.getSecondFileName());
+			pStmt.setString(7, idb.getThirdFileName());
+			pStmt.setString(8, idb.getForthFileName());
+			pStmt.setTimestamp(9, idb.getUpdateDate());
+			pStmt.setInt(10, idb.getId());
+
+			int resultNum = pStmt.executeUpdate();
+
+			//追加された行数を出力
+			System.out.println(resultNum);
+			System.out.println("updating item has completed");
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//データベース切断
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * データの新規登録処理を行う
+	 * @param idb 新規登録データを保持しているJavaBeans
+	 */
+	public void insertItem(ItemDataBeans idb) {
+
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("INSERT INTO m_item(category_name, item_name, detail, price, first_file_name, second_file_name, third_file_name, forth_file_name, create_date, update_date)"
+										+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
+
+			st.setString(1, idb.getCategory());
+			st.setString(2, idb.getName());
+			st.setString(3, idb.getDetail());
+			st.setInt(4, idb.getPrice());
+			st.setString(5, idb.getFirstFileName());
+			st.setString(6, idb.getSecondFileName());
+			st.setString(7, idb.getThirdFileName());
+			st.setString(8, idb.getForthFileName());
+			st.setTimestamp(9, idb.getCreateDate());
+			st.setTimestamp(10, idb.getUpdateDate());
+
+			st.executeUpdate();
+			System.out.println("inserting item has been completed");
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベース切断
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+	}
+
+	/**
 	 * 全商品を取得する
-	 * @return
+	 * @return ArrayList<ItemDataBeans> 全ての商品データのbeans
 	 */
 	public ArrayList<ItemDataBeans> getItemAll() {
 
@@ -25,7 +116,7 @@ public class ItemDAO extends DaoUtil {
 			conn = DBManager.getConnection();
 
 			//SELECT文を準備
-			String sql = "SELECT * FROM m_item";
+			String sql = "SELECT * FROM m_item ORDER BY DESC";
 
 			// SELECTを実行し、結果表を取得
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -75,7 +166,7 @@ public class ItemDAO extends DaoUtil {
 	/**
 	 * 商品IDによる商品検索
 	 * @param itemId
-	 * @return ProductDataBeans
+	 * @return ItemDataBeans
 	 */
 	public ItemDataBeans getItemByItemId(int itemId) {
 
@@ -105,7 +196,7 @@ public class ItemDAO extends DaoUtil {
 				idb.setUpdateDate(rs.getTimestamp("update_date"));
 			}
 
-			System.out.println("searching product by productId has been completed");
+			System.out.println("searching item by itemId has been completed");
 
 			return idb;
 
@@ -128,7 +219,7 @@ public class ItemDAO extends DaoUtil {
 	 * @param searchWord
 	 * @param pageNum
 	 * @param pageMaxItemCount
-	 * @return
+	 * @return ArrayList<ItemDataBeans 検索に該当する商品リスト
 	 */
 	public ArrayList<ItemDataBeans> getItemsBySearchWord(String searchWord, int pageNum, int pageMaxItemCount) {
 
@@ -150,7 +241,7 @@ public class ItemDAO extends DaoUtil {
 						+ " WHERE item_name like ?"
 						+ " OR category_name like ?"
 						+ " OR detail like ?"
-						+ " ORDER BY id ASC LIMIT ?,?");
+						+ " ORDER BY id DESC LIMIT ?,?");
 				st.setString(1, "%" + searchWord + "%");
 				st.setString(2, "%" + searchWord + "%");
 				st.setString(3, "%" + searchWord + "%");
@@ -201,7 +292,7 @@ public class ItemDAO extends DaoUtil {
 	 * キーワードをもとに商品の総数を取得
 	 *
 	 * @param searchWord
-	 * @return
+	 * @return double 検索に該当する商品の個数
 	 */
 	public double getItemCountByItemInfo(String searchWord) {
 
@@ -218,6 +309,7 @@ public class ItemDAO extends DaoUtil {
 						+ " where item_name like ?"
 						+ " OR category_name like ?"
 						+ " OR detail like ?");
+
 				st.setString(1, "%" + searchWord + "%");
 				st.setString(2, "%" + searchWord + "%");
 				st.setString(3, "%" + searchWord + "%");
@@ -254,7 +346,7 @@ public class ItemDAO extends DaoUtil {
 	 * @param searchCategory
 	 * @param pageNum
 	 * @param pageMaxItemCount
-	 * @return
+	 * @return ArrayList<ItemDetaBeans> カテゴリ別の商品リスト
 	 */
 	public ArrayList<ItemDataBeans> getItemsByCategory(String searchCategory, int pageNum, int pageMaxItemCount) {
 
@@ -266,7 +358,7 @@ public class ItemDAO extends DaoUtil {
 			con = DBManager.getConnection();
 
 			// 商品名検索
-			st = con.prepareStatement("SELECT * FROM m_item WHERE category_name=?  ORDER BY id ASC LIMIT ?,? ");
+			st = con.prepareStatement("SELECT * FROM m_item WHERE category_name=?  ORDER BY id DESC LIMIT ?,? ");
 			st.setString(1, searchCategory);
 			st.setInt(2, startiItemNum);
 			st.setInt(3, pageMaxItemCount);
@@ -292,7 +384,7 @@ public class ItemDAO extends DaoUtil {
 				itemList.add(idb);
 
 			}
-			System.out.println("get products by category has been completed");
+			System.out.println("get items by category has been completed");
 			return itemList;
 
 		} catch (SQLException e) {
@@ -314,7 +406,7 @@ public class ItemDAO extends DaoUtil {
 	 * カテゴリー別に商品の総数を取得
 	 *
 	 * @param searchCategory
-	 * @return
+	 * @return カテゴリ別の商品の総数
 	 */
 	public double getItemCountByCate(String searchCategory) {
 

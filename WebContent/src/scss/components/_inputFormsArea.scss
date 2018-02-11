@@ -32,6 +32,7 @@
       margin-bottom: $space-unit / 5;
     }
     & input[type="text"],
+    & input[type="number"],
     & input[type="password"],
     & input[type="date"] {
       display: block;

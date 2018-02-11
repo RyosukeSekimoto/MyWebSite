@@ -91,7 +91,7 @@ public class ReviewDAO {
 
 	/**
 	 * 最新レビューを3件取得する
-	 * @return ArrayList<ProductDataBeans> reviewList
+	 * @return ArrayList<ProductDataBeans> reviewList レビューのリスト
 	 */
 	public ArrayList<ReviewDataBeans> getLatestReviews() {
 
@@ -187,7 +187,7 @@ public class ReviewDAO {
 				reviewList.add(review);
 			}
 
-			System.out.println("searching review by productId has been completed");
+			System.out.println("searching review by itemId has been completed");
 			return reviewList;
 
 		} catch (SQLException e) {
@@ -245,7 +245,7 @@ public class ReviewDAO {
 				reviewList.add(review);
 			}
 
-			System.out.println("searching review by productId has been completed");
+			System.out.println("searching review by userId has been completed");
 			return reviewList;
 
 		} catch (SQLException e) {

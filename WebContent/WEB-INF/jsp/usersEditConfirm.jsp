@@ -87,6 +87,7 @@
                                 </li>
                             </ul>
                             <input type="hidden" name="updateDate" value="<%= System.currentTimeMillis()%>" />
+                            <input type="hidden" name="userId" value="<c:out value="${udb.getId()}" />">
                             <div class="b-one-center u-mb15px"><button type="submit" class="button primary">編集する</button></div>
                             <div class="b-one-center"><a href="/MyWebSite/UsersEdit" class="button secondary">修正する</a></div>
                         </form>

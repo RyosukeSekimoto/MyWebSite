@@ -18,7 +18,7 @@
             <main class="l-main">
                 <section class="Section">
                     <h2 class="pageLabel">新規ユーザー登録</h2>
-                     <c:forEach var="msg" items="${errorMsgList}">
+                    <c:forEach var="msg" items="${errorMsgList}">
 					<p class="validation"><c:out value="${msg}" /></p>
 					</c:forEach>
                     <div class="InputFormsArea">
