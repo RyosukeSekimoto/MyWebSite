@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,7 +45,7 @@ public class UsersEdit extends HttpServlet {
 			//セッションの情報を取得
 			UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
 			String imagePath = (String)session.getAttribute("imagePath");
-			String errorMsg = (String)session.getAttribute("errorMsg");
+			ArrayList<String> errorMsgList = (ArrayList<String>)session.getAttribute("errorMsgList");
 
 			//保存した画像を画像を消去
 			if(imagePath != null) {
@@ -53,13 +54,13 @@ public class UsersEdit extends HttpServlet {
 
 			//リクエストスコープに保存
 			request.setAttribute("udb", udb);
-			request.setAttribute("errorMsg", errorMsg);
+			request.setAttribute("errorMsgList", errorMsgList);
 
 			//セッションから消去
 			session.removeAttribute("udb");
 			session.removeAttribute("imagePath");
 			session.removeAttribute("imageFileName");
-			session.removeAttribute("errorMsg");
+			session.removeAttribute("errorMsgList");
 		}
 
 		//プロフィール編集画面にフォワード

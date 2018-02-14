@@ -40,25 +40,25 @@ String createDateTo = (String)request.getAttribute("createDateTo");
                         <div class="MgSearchArea__wrapper">
                             <div class="MgSearchArea__item">
                                 <p class="MgSearchArea__formLabel">商品名</p>
-                                <input type="text" name="itemName" value="" class="searchAreaInput">
+                                <input type="text" name="itemName" value="<c:out value="${itemName}" />" class="searchAreaInput">
                             </div>
                             <div class="MgSearchArea__item">
                                 <p class="MgSearchArea__formLabel">カテゴリ</p>
                                 <select name="categoryName">
                                     <option value="">選択してください</option>
-                                    <option value="フード・おやつ">フード・おやつ</option>
-                                    <option value="キャットタワー">キャットタワー</option>
-                                    <option value="おもちゃ">おもちゃ</option>
-                                    <option value="爪とぎ">爪とぎ</option>
-                                    <option value="首輪">首輪</option>
-                                    <option value="トイレ・猫砂">トイレ・猫砂</option>
-                                    <option value="猫雑貨">猫雑貨</option>
+                                    <option value="フード・おやつ" <c:if test="${categoryName.equals('フード・おやつ')}">selected</c:if>>フード・おやつ</option>
+                                    <option value="キャットタワー" <c:if test="${categoryName.equals('キャットタワー')}">selected</c:if>>キャットタワー</option>
+                                    <option value="おもちゃ" <c:if test="${categoryName.equals('おもちゃ')}">selected</c:if>>おもちゃ</option>
+                                    <option value="爪とぎ" <c:if test="${categoryName.equals('爪とぎ')}">selected</c:if>>爪とぎ</option>
+                                    <option value="首輪" <c:if test="${categoryName.equals('首輪')}">selected</c:if>>首輪</option>
+                                    <option value="トイレ・猫砂" <c:if test="${categoryName.equals('トイレ・猫砂')}">selected</c:if>>トイレ・猫砂</option>
+                                    <option value="猫雑貨" <c:if test="${categoryName.equals('猫雑貨')}">selected</c:if>>猫雑貨</option>
                                 </select>
                             </div>
                             <div class="MgSearchArea__item">
                                 <p class="MgSearchArea__formLabel">登録日時</p>
                                 <div class="MgSearchArea__dateInputWrapper">
-                                    <input type="date" name="createDateFrom" value="" class=""><span style="margin: 0 4px">~</span><input type="date" name="createDateTo" value="" class="">
+                                    <input type="date" name="createDateFrom" value="<c:out value="${createDateFrom}" />" class=""><span style="margin: 0 4px">~</span><input type="date" name="createDateTo" value="<c:out value="${createDateTo}" />" class="">
                                 </div>
                             </div>
                         </div>

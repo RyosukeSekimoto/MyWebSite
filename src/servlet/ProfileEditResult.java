@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import model.Helper;
 import model.UserDataBeans;
 
 /**
@@ -49,6 +50,11 @@ public class ProfileEditResult extends HttpServlet {
 
 		//ログインユーザーを取得
 		UserDataBeans loginUser = (UserDataBeans)session.getAttribute("loginUser");
+
+		//パスワードが更新される場合は暗号化
+		if(!(pass.equals(loginUser.getPass()))) {
+			pass = Helper.encryption(pass);
+		}
 
 		//更新する値を格納
 		UserDataBeans udb = new UserDataBeans();

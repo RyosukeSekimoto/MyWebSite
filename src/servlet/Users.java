@@ -72,6 +72,7 @@ public class Users extends HttpServlet {
 		if(Helper.isEmpty(createDateFrom)) { createDateFrom = ""; }
 		if(Helper.isEmpty(createDateTo)) { createDateTo = ""; }
 
+		//リクエストスコープに保存
 		request.setAttribute("loginId", loginId);
 		request.setAttribute("name", name);
 		request.setAttribute("createDateFrom", createDateFrom);

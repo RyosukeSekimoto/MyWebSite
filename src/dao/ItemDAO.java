@@ -232,7 +232,7 @@ public class ItemDAO extends DaoUtil {
 
 			if (searchWord.length() == 0) {
 				// 全検索
-				st = con.prepareStatement("SELECT * FROM m_item ORDER BY id ASC LIMIT ?,? ");
+				st = con.prepareStatement("SELECT * FROM m_item ORDER BY id DESC LIMIT ?,? ");
 				st.setInt(1, startiItemNum);
 				st.setInt(2, pageMaxItemCount);
 			} else {

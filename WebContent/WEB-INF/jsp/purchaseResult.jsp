@@ -45,11 +45,13 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="TableList TableList--purchaseResult">
+                    <table class="TableList TableList--deliveryMethod">
                         <thead>
                             <tr>
                                 <th>商品</th>
                                 <th>単価</th>
+                                <th>数量</th>
+                                <th>小計</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +59,8 @@
                         	<tr>
                         		<td class="productName"><c:out value="${bddb.getItemName()}" /></td>
                                 <td class="price">¥<c:out value="${Helper.displayPrice(bddb.getItemPrice())}" /></td>
+                                <td class="count"><c:out value="${bddb.getQuantity()}" /></td>
+                                <td class="price">¥<c:out value="${Helper.displayPrice(bddb.getItemPrice() * bddb.getQuantity())}" /></td>
                             </tr>
                         	</c:forEach>
                         </tbody>

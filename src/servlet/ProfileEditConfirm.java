@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import model.Helper;
 import model.ImageFileUtil;
 import model.ProfileEditValidationLogic;
 import model.UserDataBeans;
@@ -85,17 +85,16 @@ public class ProfileEditConfirm extends HttpServlet {
 		}
 
 		//入力チェックをして、エラーメッセージを取得
-		String errorMsg = ProfileEditValidationLogic.execute(udb, confirmPass);
+		ArrayList<String> errorMsgList = ProfileEditValidationLogic.execute(udb, confirmPass);
 
-		//パスワードの変更がなければ暗号化せずにそのまま既存のパスワードを保存
+		//パスワードの変更がなければ既存のパスワードを保存
 		if(udb.getPass().isEmpty()) {
 			udb.setPass(existedPass);
 		} else {//更新する場合
-			//暗号化
-			udb.setPass(Helper.encryption(pass));
+			udb.setPass(pass);
 		}
 
-		if (errorMsg.isEmpty()) {// バリデーションエラーメッセージが空なら確認画面へ
+		if (errorMsgList.size() == 0) {// バリデーションエラーメッセージが空なら確認画面へ
 
 			//セッションに入力情報を取得
 			session.setAttribute("udb", udb);
@@ -114,7 +113,7 @@ public class ProfileEditConfirm extends HttpServlet {
 
 			//フォーム入力情報とエラーメッセージをセッションに保存
 			session.setAttribute("udb", udb);
-			session.setAttribute("errorMsg", errorMsg);
+			session.setAttribute("errorMsgList", errorMsgList);
 			response.sendRedirect("/MyWebSite/ProfileEdit");
 		}
 	}

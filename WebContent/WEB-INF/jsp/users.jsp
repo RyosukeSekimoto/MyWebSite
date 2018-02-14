@@ -40,16 +40,16 @@ String createDateTo = (String)request.getAttribute("createDateTo");
                         <div class="MgSearchArea__wrapper">
                             <div class="MgSearchArea__item">
                                 <p class="MgSearchArea__formLabel">ログインID</p>
-                                <input type="text" name="loginId" value="" class="searchAreaInput">
+                                <input type="text" name="loginId" value="<c:out value="${loginId}" />" class="searchAreaInput">
                             </div>
                             <div class="MgSearchArea__item">
                                 <p class="MgSearchArea__formLabel">氏名</p>
-                                <input type="text" name="name" value="" class="searchAreaInput">
+                                <input type="text" name="name" value="<c:out value="${name}" />" class="searchAreaInput">
                             </div>
                             <div class="MgSearchArea__item">
                                 <p class="MgSearchArea__formLabel">登録日時</p>
                                 <div class="MgSearchArea__dateInputWrapper">
-                                    <input type="date" name="createDateFrom" value="" class=""><span style="margin: 0 4px">~</span><input type="date" name="createDateTo" value="" class="">
+                                    <input type="date" name="createDateFrom" value="<c:out value="${createDateFrom}" />" class=""><span style="margin: 0 4px">~</span><input type="date" name="createDateTo" value="<c:out value="${createDateTo}" />" class="">
                                 </div>
                             </div>
                         </div>

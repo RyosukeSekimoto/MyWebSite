@@ -42,11 +42,11 @@
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>登録日時</p>
-                                    <input type="text" name="" value="<c:out value="${Helper.displayDate(idb.getCreateDate())}" />" readonly="readonly">
+                                    <input type="text" name="" value="<c:out value="${Helper.displayDateTime(idb.getCreateDate())}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>更新日時</p>
-                                    <input type="text" name="" value="<c:out value="${Helper.displayDate(idb.getUpdateDate())}" />" readonly="readonly">
+                                    <input type="text" name="" value="<c:out value="${Helper.displayDateTime(idb.getUpdateDate())}" />" readonly="readonly">
                                 </li>
                                 <li class="InputFormsArea__formItem">
                                     <p>画像</p>

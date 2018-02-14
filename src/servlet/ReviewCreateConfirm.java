@@ -79,6 +79,7 @@ public class ReviewCreateConfirm extends HttpServlet {
 				session.setAttribute("imagePath", imagePath);
 				session.setAttribute("imageFileName", imageFileName);
 			}
+
 			request.getRequestDispatcher("/WEB-INF/jsp/reviewCreateConfirm.jsp").forward(request, response);
 
 		} else {//エラーメッセージが含まれていたら

@@ -72,6 +72,7 @@ public class Items extends HttpServlet {
 		if(Helper.isEmpty(createDateFrom)) { createDateFrom = "";}
 		if(Helper.isEmpty(createDateTo)) { createDateTo = "";}
 
+		//リクエストスコープに保存
 		request.setAttribute("itemName", itemName);
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("createDateFrom", createDateFrom);

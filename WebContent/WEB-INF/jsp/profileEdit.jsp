@@ -20,7 +20,9 @@
             <main class="l-main">
                 <section class="Section">
                     <h2 class="pageLabel">プロフィールの編集</h2>
-					<p class="validation"><c:out value="${errorMsg}" /></p>
+                    <c:forEach var="msg" items="${errorMsgList}">
+					<p class="validation"><c:out value="${msg}" /></p>
+					</c:forEach>
                     <div class="InputFormsArea">
                         <form class="" action="/MyWebSite/ProfileEditConfirm" enctype="multipart/form-data" method="post">
                             <ul class="InputFormsArea__formList">
