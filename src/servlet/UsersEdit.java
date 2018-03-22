@@ -34,6 +34,7 @@ public class UsersEdit extends HttpServlet {
 		//リクエストパラメータを取得
 		int userId = request.getParameter("userId") != null?Integer.parseInt(request.getParameter("userId")): -1;
 
+		//初回表示時はパラメータを受け取ってユーザー情報を取得
 		if(userId != -1) {
 			UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
 			UserDAO userDao = new UserDAO();

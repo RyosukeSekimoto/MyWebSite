@@ -69,7 +69,7 @@ public class ReviewCreate extends HttpServlet {
 				rdb.setUpdateDate(null);
 			}
 
-			//保存した画像を画像を消去
+			//保存した画像を消去
 			if(imagePath != null) {
 				ImageFileUtil.fileDelete(imagePath);
 			}

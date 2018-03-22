@@ -44,7 +44,7 @@ public class ProductDetail extends HttpServlet {
 		request.setAttribute("idb", idb);
 		request.setAttribute("reviewList", reviewList);
 
-		//フォワード
+		//商品詳細ページへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/productDetail.jsp");
 		dispatcher.forward(request, response);
 	}

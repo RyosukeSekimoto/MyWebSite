@@ -3124,8 +3124,8 @@ a:hover {
     color: #fafafa; }
     @media only screen and (max-width: 640px) {
       .ProductPanel--badge {
-        left: 10px;
-        top: 10px; } }
+        left: 8px;
+        top: 8px; } }
   .ProductPanel--badge.first {
     background-image: url("../images/top/1-bg.png"); }
   .ProductPanel--badge.second {
@@ -3423,11 +3423,11 @@ a:hover {
     text-decoration: underline; }
   .TableList td.price {
     font-family: "Arapey", serif;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     text-align: right; }
     @media only screen and (max-width: 640px) {
       .TableList td.price {
-        font-size: 1.2rem; } }
+        font-size: 1.4rem; } }
   .TableList td.count {
     text-align: right; }
   .TableList td.productName {

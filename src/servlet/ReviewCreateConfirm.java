@@ -80,11 +80,15 @@ public class ReviewCreateConfirm extends HttpServlet {
 				session.setAttribute("imageFileName", imageFileName);
 			}
 
+			//確認画面にフォワード
 			request.getRequestDispatcher("/WEB-INF/jsp/reviewCreateConfirm.jsp").forward(request, response);
 
 		} else {//エラーメッセージが含まれていたら
+
+			//セッションに保存
 			session.setAttribute("rdb", rdb);
 			session.setAttribute("errorMsgList", errorMsgList);
+			//レビュー作成画面にリダイレクト
 			response.sendRedirect("/MyWebSite/ReviewCreate");
 		}
 
