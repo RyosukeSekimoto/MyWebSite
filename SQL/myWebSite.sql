@@ -5,8 +5,6 @@
 CREATE DATABASE `MyWebSite`;
 USE MyWebSite;
 
--- --------------------------------------------------------
-
 --
 -- テーブルの構造 `m_delivery_method`
 --
